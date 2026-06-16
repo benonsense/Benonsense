@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beNoNseNse | Bold Prints. Zero Nonsense.</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .product-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#510000] text-gray-100 antialiased overflow-x-hidden">
+
+    <script>
+        // =========================================================================
+        // ⚡ beNoNseNse LIVE CENTRAL PRODUCT DATABASE ⚡
+        // Jab bhi naye t-shirts, colors ya designs badhane hon, bas yahan add kijiye!
+        // =========================================================================
+        const PRODUCTS_DATABASE = [
+            {
+                id: "1",
+                designKey: "loofy",
+                name: "Loofy (Oversized Tee)",
+                price: 549,
+                badge: "Best Seller",
+                sizes: ["s", "m", "l", "xl", "xxl"],
+                defaultImg: "loofy lavender front.png",
+                colorVariants: [
+                    { name: "Lavender", hex: "#B57EDC", front: "loofy lavender front.png", back: "loofy lavender back.png" },
+                    { name: "Black", hex: "#000000", front: "loofy black front.png", back: "loofy black back.png" },
+                    { name: "Maroon", hex: "#800020", front: "loofy maroon front.png", back: "loofy maroon back.png" }
+                ]
+            },
+            {
+                id: "2",
+                designKey: "caffein happy",
+                name: "caffein happy (Oversized Tee )",
+                price: 549,
+                badge: "",
+                sizes: ["s", "m", "l", "xl", "xxl"],
+                defaultImg: "caffein happy white front.png",
+                colorVariants: [
+                    { name: "White", hex: "#ffffff", front: "caffein happy white front.png", back: "caffein happy white back.png" },
+                    { name: "Off-White", hex: "#F4F0EA", front: "caffein happy off-white front.png", back: "caffein happy off-white back.png" },
+                    { name: "Lavender", hex: "#B57EDC", front: "caffein happy lavender front.png", back: "caffein happy lavender back.png" }
+                ]
+            },
+            {
+                id: "3",
+                designKey: "gojo",
+                name: "Gojo (Oversized Tee)",
+                price: 549,
+                badge: "",
+                sizes: ["s", "m", "l", "xl", "xxl"],
+                defaultImg: "gojo black front.png",
+                colorVariants: [
+                    { name: "Black", hex: "#000000", front: "gojo black front.png", back: "gojo black back.png" },
+                    { name: "Brown", hex: "#5C4033", front: "gojo brown front.png", back: "gojo brown back.png" },
+                    { name: "Maroon", hex: "#800020", front: "gojo maroon front.png", back: "gojo maroon back.png" }
+                ]
+            }
+        ];
+    </script>
+
+    <!-- 1. TOP UTILITY BAR -->
+    <div class="w-full bg-[#330000] border-b border-red-950/60 py-2 px-6 text-[10px] md:text-xs tracking-wider uppercase font-semibold text-red-200/80 text-center">
+        <span>⚡ Premium 240GSM Heavyweight Streetwear Drop ⚡</span>
+    </div>
+
+    <!-- 2. NAVIGATION BAR -->
+    <nav class="sticky top-0 z-40 bg-[#400000]/80 backdrop-blur-md border-b border-red-950 px-6 py-4 flex justify-between items-center">
+        <a href="#" class="h-10 w-auto">
+            <img src="logo.png" alt="beNoNseNse Logo" class="h-full object-contain">
+        </a>
+        <div class="hidden md:flex space-x-8 text-xs font-semibold tracking-widest uppercase text-red-200/70">
+            <a href="#shop" class="hover:text-white transition">Shop All</a>
+        </div>
+        <div class="flex space-x-4 text-sm font-medium">
+            <button id="cart-button" class="hover:text-white text-gray-100 relative text-xs uppercase font-semibold">
+                Cart (<span id="cart-count">0</span>)
+            </button>
+        </div>
+    </nav>
+
+    <!-- PHILOSOPHY QUOTE -->
+    <div class="w-full bg-black/30 border-b border-red-950/40 py-3 text-center px-4 backdrop-blur-sm">
+        <p class="text-red-300 text-xs md:text-sm font-semibold tracking-widest uppercase">
+            "Being in sense is not always practical so <span class="text-white underline decoration-red-500 underline-offset-4">beNoNseNse</span>"
+        </p>
+    </div>
+
+    <!-- 3. SHOPPING CART SIDEBAR -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full md:w-96 bg-[#330000] border-l border-red-950 p-8 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-xl font-800 tracking-tight uppercase">Your Cart</h2>
+            <button id="close-cart" class="text-gray-400 hover:text-white text-xl">&times;</button>
+        </div>
+        <div id="cart-items" class="space-y-6 max-h-[55vh] overflow-y-auto pr-2"></div>
+        <div class="absolute bottom-8 left-8 right-8 border-t border-red-950 pt-6">
+            <div class="flex justify-between text-sm mb-2">
+                <span>Subtotal:</span>
+                <span id="cart-subtotal" class="font-bold">₹0</span>
+            </div>
+            <div class="flex justify-between text-xs text-red-300/80 mb-4">
+                <span>Delivery:</span>
+                <span id="cart-shipping" class="font-semibold">₹0</span>
+            </div>
+            <button id="checkout-btn" class="w-full bg-white text-black py-4 text-xs font-semibold tracking-widest uppercase hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed">
+                Send Order via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- 4. PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-[#330000] border border-red-950 w-full max-w-3xl max-h-[90vh] overflow-y-auto md:overflow-visible flex flex-col md:flex-row relative rounded shadow-2xl">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-10">&times;</button>
+            <div class="w-full md:w-1/2 bg-[#400000] aspect-[3/4] relative overflow-hidden flex flex-col justify-between">
+                <div class="w-full h-full relative flex-grow">
+                    <img id="modal-display-img" src="" alt="Product Variant View" class="w-full h-full object-cover absolute inset-0 transition-all duration-300">
+                </div>
+                <div id="view-toggle-container" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-black/50 backdrop-blur-md p-1 rounded hidden">
+                    <button id="view-front-btn" class="text-[10px] uppercase font-bold tracking-wider px-3 py-1 bg-white text-black rounded transition">Front</button>
+                    <button id="view-back-btn" class="text-[10px] uppercase font-bold tracking-wider px-3 py-1 text-white hover:bg-white/20 rounded transition">Back</button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-8 flex flex-col justify-between relative">
+                <!-- SIZE CHART PANEL -->
+                <div id="size-chart-sheet" class="absolute inset-0 bg-[#2b0000] z-20 p-6 transform translate-y-full transition-transform duration-300 ease-in-out hidden flex flex-col justify-between overflow-y-auto">
+                    <div>
+                        <div class="flex justify-between items-center mb-5">
+                            <h3 class="text-sm font-800 tracking-widest uppercase text-white">Size Chart (Inches)</h3>
+                            <button id="hide-size-chart" class="text-xs uppercase font-bold text-red-400 hover:text-white tracking-wider">← Close</button>
+                        </div>
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="border-b border-red-950 text-red-400 font-bold uppercase tracking-wider text-[10px]">
+                                    <th class="py-2">Size</th><th class="py-2">Chest</th><th class="py-2">Length</th><th class="py-2">Shoulder</th><th class="py-2">Sleeve</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-200 divide-y divide-red-950/40 font-medium">
+                                <tr><td class="py-2.5 font-bold text-white">S</td><td>42</td><td>27.5</td><td>20</td><td>8.5</td></tr>
+                                <tr><td class="py-2.5 font-bold text-white">M</td><td>44</td><td>28</td><td>21</td><td>9</td></tr>
+                                <tr><td class="py-2.5 font-bold text-white">L</td><td>46</td><td>28.5</td><td>22</td><td>9.5</td></tr>
+                                <tr><td class="py-2.5 font-bold text-white">XL</td><td>48</td><td>29</td><td>23</td><td>10</td></tr>
+                                <tr><td class="py-2.5 font-bold text-white">XXL</td><td>50</td><td>29.5</td><td>24</td><td>10.5</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-[10px] uppercase text-red-400/40 text-center tracking-widest mt-6">beNoNseNse Heavy Oversized Template</p>
+                </div>
+                <div>
+                    <span class="text-xs font-semibold tracking-widest uppercase text-red-400">Premium Collection</span>
+                    <h2 id="modal-title" class="text-2xl font-800 tracking-tight uppercase text-white mt-1">Product Title</h2>
+                    <p id="modal-price" class="text-lg font-bold text-white mt-2">₹0</p>
+                    <div class="border-t border-red-950/50 my-4"></div>
+                    <div class="mb-5">
+                        <span class="text-xs font-semibold tracking-widest uppercase text-red-300 block mb-2">Select Colour</span>
+                        <div id="color-picker-container" class="flex space-x-3"></div>
+                        <p id="selected-color-name" class="text-[10px] uppercase font-bold text-red-400 mt-2 tracking-wider">Colour: None</p>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-semibold tracking-widest uppercase text-red-300 block">Select Size</span>
+                            <button id="show-size-chart" class="text-[10px] uppercase font-bold text-red-400 hover:text-white tracking-widest border-b border-red-400/30 pb-0.5 transition">Size Chart +</button>
+                        </div>
+                        <div class="grid grid-cols-5 gap-2">
+                            <button class="size-btn border border-red-950/60 py-3 text-xs font-bold uppercase hover:bg-white hover:text-black transition" data-size="S">S</button>
+                            <button class="size-btn border border-red-950/60 py-3 text-xs font-bold uppercase hover:bg-white hover:text-black transition" data-size="M">M</button>
+                            <button class="size-btn border border-red-950/60 py-3 text-xs font-bold uppercase hover:bg-white hover:text-black transition" data-size="L">L</button>
+                            <button class="size-btn border border-red-950/60 py-3 text-xs font-bold uppercase hover:bg-white hover:text-black transition" data-size="XL">XL</button>
+                            <button class="size-btn border border-red-950/60 py-3 text-xs font-bold uppercase hover:bg-white hover:text-black transition" data-size="XXL">XXL</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 md:mt-0">
+                    <button id="modal-add-btn" class="w-full bg-white text-black py-4 text-xs font-semibold tracking-widest uppercase hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed">Select Options</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. HERO SECTION -->
+    <section class="relative h-[85vh] flex items-center justify-center px-6 border-b border-red-950 overflow-hidden">
+        <div class="absolute inset-0 z-0 bg-[#510000]">
+            <img src="hero-bg.png" alt="Hero Background" class="w-full h-full object-cover object-center scale-105 opacity-50 filter brightness-75 contrast-125">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#510000] via-[#510000]/40 to-black/30"></div>
+        </div>
+        <div class="text-center max-w-2xl relative z-10">
+            <span class="text-xs font-semibold tracking-widest uppercase text-red-400 block mb-3">NEW SEASON DROP // Available Now</span>
+            <h1 class="text-5xl md:text-7xl font-800 tracking-tighter uppercase mb-6 leading-none text-white drop-shadow-lg">HEAVYWEIGHT <br>GRAPHIC TEES</h1>
+            <a href="#shop" class="bg-white text-black px-8 py-4 text-xs font-semibold tracking-widest uppercase hover:bg-gray-100 shadow-xl transition inline-block">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- 6. PREMIUM FILTER & PRODUCTS SECTION -->
+    <section id="shop" class="max-w-7xl mx-auto px-6 py-16">
+        <!-- FILTER ENGINE HUB -->
+        <div class="bg-[#400000]/60 border border-red-950 p-6 rounded mb-12 backdrop-blur-sm">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-[10px] uppercase font-bold tracking-wider text-red-300 mb-1.5">Design Name</label>
+                    <select id="filter-design" class="w-full bg-[#330000] border border-red-950 py-2.5 px-3 text-xs uppercase tracking-wider font-semibold rounded text-white focus:outline-none focus:border-red-800 transition">
+                        <option value="all">All Drops</option>
+                        <option value="loofy">Loofy</option>
+                        <option value="caffein happy">Caffein Happy</option>
+                        <option value="gojo">Gojo</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase font-bold tracking-wider text-red-300 mb-1.5">Size Silhouette</label>
+                    <select id="filter-size" class="w-full bg-[#330000] border border-red-950 py-2.5 px-3 text-xs uppercase tracking-wider font-semibold rounded text-white focus:outline-none focus:border-red-800 transition">
+                        <option value="all">All Sizes</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
+                        <option value="xxl">XXL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-2xl font-800 tracking-tight uppercase text-white">Catalog Grid</h2>
+            </div>
+            <button id="reset-all-filters-link" class="text-xs font-bold tracking-wider uppercase border-b border-white pb-1 hover:text-gray-300 transition text-gray-100 hidden">Clear Filters</button>
+        </div>
+
+        <!-- EMPTY STATE Container -->
+        <div id="catalog-empty-state" class="w-full text-center py-16 border border-dashed border-red-950 rounded bg-[#400000]/20 hidden">
+            <p class="text-red-200/50 text-sm mb-4">No drops match your filters.</p>
+            <button id="clear-filters-btn" class="bg-white text-black px-6 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-gray-100 transition">Reset Filtering</button>
+        </div>
+
+        <!-- ENGINE GENERATED DOM MAIN GRID -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- JavaScript automatic rendering targets injection loop -->
+        </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer class="bg-[#330000] border-t border-red-950 px-6 py-12">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-red-950/40 pb-10 mb-8">
+            <div class="space-y-2 border-l-2 border-red-800 pl-4">
+                <h4 class="text-xs uppercase tracking-widest text-red-400 font-bold">Prabhat Mehta</h4>
+                <p class="text-xs text-gray-300">WhatsApp/Call: <a href="tel:+919131062231">+91 91310 62231</a></p>
+            </div>
+            <div class="space-y-2 border-l-2 border-red-800 pl-4">
+                <h4 class="text-xs uppercase tracking-widest text-red-400 font-bold">Bhupendra Gorana</h4>
+                <p class="text-xs text-gray-300">WhatsApp/Call: <a href="https://wa.me/918462003505" target="_blank">+91 84620 03505</a></p>
+            </div>
+            <div class="space-y-2 border-l-2 border-red-800 pl-4">
+                <h4 class="text-xs uppercase tracking-widest text-red-400 font-bold">Official Channels</h4>
+                <div class="text-xs space-y-1 text-gray-300 font-bold">
+                    <p>IG: <a href="https://instagram.com/benonsense__" target="_blank" class="text-red-300">@benonsense__</a></p>
+                    <p>FB: <a href="https://facebook.com/Be Non Sense" target="_blank" class="text-red-300">Be Non Sense</a></p>
+                    <p>Email: <a href="mailto:benonsense3003@gmail.com" class="text-red-300 lowercase">benonsense3003@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <div class="flex justify-center space-x-6 mb-6 text-sm font-bold text-red-200/70">
+                <a href="https://instagram.com/benonsense__" target="_blank">IG</a>
+                <a href="https://facebook.com/Be Non Sense" target="_blank">FB</a>
+            </div>
+            <p class="text-[10px] text-red-500 uppercase tracking-widest">© 2026 beNoNseNse. Powered by beNoNseNse.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE ENGINE LOGIC SCRIPTS -->
+    <script>
+        const productsGrid = document.getElementById('products-grid');
+        const cartButton = document.getElementById('cart-button');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCartButton = document.getElementById('close-cart');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartCountElement = document.getElementById('cart-count');
+        const subtotalElement = document.getElementById('cart-subtotal');
+        const shippingElement = document.getElementById('cart-shipping');
+        const checkoutButton = document.getElementById('checkout-btn');
+
+        const productModal = document.getElementById('product-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        const modalDisplayImg = document.getElementById('modal-display-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalPrice = document.getElementById('modal-price');
+        const modalAddBtn = document.getElementById('modal-add-btn');
+        const sizeButtons = document.querySelectorAll('.size-btn');
+        const colorPickerContainer = document.getElementById('color-picker-container');
+        const selectedColorName = document.getElementById('selected-color-name');
+        
+        const viewToggleContainer = document.getElementById('view-toggle-container');
+        const viewFrontBtn = document.getElementById('view-front-btn');
+        const viewBackBtn = document.getElementById('view-back-btn');
+
+        const sizeChartSheet = document.getElementById('size-chart-sheet');
+        const showSizeChartBtn = document.getElementById('show-size-chart');
+        const hideSizeChartBtn = document.getElementById('hide-size-chart');
+
+        const filterDesign = document.getElementById('filter-design');
+        const filterSize = document.getElementById('filter-size');
+        const catalogEmptyState = document.getElementById('catalog-empty-state');
+        const resetFiltersLink = document.getElementById('reset-all-filters-link');
+        const clearFiltersBtn = document.getElementById('clear-filters-btn');
+
+        let cart = [];
+        let selectedProduct = null;
+        let selectedSize = null;
+        let selectedColor = null;
+        
+        let activeFrontImgUrl = "";
+        let activeBackImgUrl = "";
+        let currentActiveSide = "front";
+
+        // DYNAMIC CATALOG GENERATION ENGINE
+        function renderCatalogHTML() {
+            productsGrid.innerHTML = "";
+            PRODUCTS_DATABASE.forEach(prod => {
+                const colorsRawStr = prod.colorVariants.map(v => `${v.name}:${prod.colorVariants.indexOf(v)}`).join(',');
+                const badgeHTML = prod.badge ? `<span class="absolute top-3 left-3 z-10 bg-white text-black text-[10px] font-bold uppercase tracking-widest px-2 py-1">${prod.badge}</span>` : '';
+                
+                const firstVar = prod.colorVariants[0];
+
+                const card = document.createElement('div');
+                card.className = "group cursor-pointer product-card";
+                card.setAttribute('data-id', prod.id);
+                card.setAttribute('data-design', prod.designKey);
+                card.setAttribute('data-sizes', prod.sizes.join(','));
+                
+                card.innerHTML = `
+                    <div class="bg-[#400000] border border-red-950 aspect-[3/4] w-full relative mb-4 overflow-hidden">
+                        <img src="${firstVar.front}" alt="${prod.name} Front" class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 ease-in-out group-hover:opacity-0">
+                        <img src="${firstVar.back}" alt="${prod.name} Back" class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100">
+                        ${badgeHTML}
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-sm font-semibold uppercase tracking-tight text-white">${prod.name}</h3>
+                            <p class="text-xs text-red-400 mt-1">240 GSM Luxury Cotton</p>
+                        </div>
+                        <p class="text-sm font-bold">₹${prod.price}</p>
+                    </div>
+                    <button class="w-full mt-4 bg-white text-black py-3 text-xs font-semibold tracking-widest uppercase hover:bg-gray-100 transition">View Options</button>
+                `;
+
+                card.addEventListener('click', () => openModal(prod));
+                productsGrid.appendChild(card);
+            });
+        }
+
+        function executeCatalogFilter() {
+            const chosenDesign = filterDesign.value;
+            const chosenSize = filterSize.value;
+            const cards = document.querySelectorAll('.product-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const cardDesign = card.getAttribute('data-design');
+                const cardSizes = card.getAttribute('data-sizes').split(',');
+
+                const matchDesign = (chosenDesign === 'all' || cardDesign === chosenDesign);
+                const matchSize = (chosenSize === 'all' || cardSizes.includes(chosenSize));
+
+                if(matchDesign && matchSize) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            resetFiltersLink.classList.toggle('hidden', chosenDesign === 'all' && chosenSize === 'all');
+            productsGrid.classList.toggle('hidden', visibleCount === 0);
+            catalogEmptyState.classList.toggle('hidden', visibleCount > 0);
+        }
+
+        function clearAllFilters() {
+            filterDesign.value = 'all';
+            filterSize.value = 'all';
+            executeCatalogFilter();
+        }
+
+        filterDesign.addEventListener('change', executeCatalogFilter);
+        filterSize.addEventListener('change', executeCatalogFilter);
+        clearFiltersBtn.addEventListener('click', clearAllFilters);
+        resetFiltersLink.addEventListener('click', clearAllFilters);
+
+        function openCart() { cartSidebar.classList.remove('translate-x-full'); document.body.classList.add('overflow-y-hidden'); }
+        function closeCart() { cartSidebar.classList.add('translate-x-full'); document.body.classList.remove('overflow-y-hidden'); }
+        cartButton.addEventListener('click', (e) => { e.stopPropagation(); openCart(); });
+        closeCartButton.addEventListener('click', closeCart);
+
+        showSizeChartBtn.addEventListener('click', () => {
+            sizeChartSheet.classList.remove('hidden');
+            setTimeout(() => { sizeChartSheet.classList.remove('translate-y-full'); }, 10);
+        });
+        hideSizeChartBtn.addEventListener('click', () => {
+            sizeChartSheet.classList.add('translate-y-full');
+            setTimeout(() => { sizeChartSheet.classList.add('hidden'); }, 300);
+        });
+
+        function openModal(product) {
+            selectedProduct = product;
+            selectedSize = null; selectedColor = null; currentActiveSide = "front";
+            modalTitle.innerText = product.name;
+            modalPrice.innerText = `₹${product.price}`;
+            modalDisplayImg.src = product.defaultImg;
+            selectedColorName.innerText = "Colour: None";
+            viewToggleContainer.classList.add('hidden');
+            modalAddBtn.innerText = "Select options";
+            modalAddBtn.disabled = true;
+            sizeButtons.forEach(btn => btn.classList.remove('bg-white', 'text-black'));
+
+            colorPickerContainer.innerHTML = '';
+            product.colorVariants.forEach(variant => {
+                const btn = document.createElement('button');
+                btn.className = `w-8 h-8 rounded-full border-2 border-transparent hover:scale-110 transition color-selector-btn`;
+                btn.style.backgroundColor = variant.hex;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.color-selector-btn').forEach(b => b.classList.remove('border-white', 'scale-110'));
+                    btn.classList.add('border-white', 'scale-110');
+                    selectedColor = variant.name;
+                    selectedColorName.innerText = `Colour: ${variant.name}`;
+                    activeFrontImgUrl = variant.front; activeBackImgUrl = variant.back;
+                    modalDisplayImg.src = (currentActiveSide === 'front') ? activeFrontImgUrl : activeBackImgUrl;
+                    viewToggleContainer.classList.remove('hidden');
+                    validateModalInputs();
+                });
+                colorPickerContainer.appendChild(btn);
+            });
+            productModal.classList.remove('hidden');
+            document.body.classList.add('overflow-y-hidden');
+        }
+
+        function closeModal() { productModal.classList.add('hidden'); document.body.classList.remove('overflow-y-hidden'); }
+        closeModalButton.addEventListener('click', closeModal);
+
+        function toggleModalImageAngle(side) {
+            currentActiveSide = side;
+            modalDisplayImg.src = (side === 'front') ? activeFrontImgUrl : activeBackImgUrl;
+            viewFrontBtn.classList.toggle('bg-white', side === 'front'); viewFrontBtn.classList.toggle('text-black', side === 'front');
+            viewBackBtn.classList.toggle('bg-white', side === 'back'); viewBackBtn.classList.toggle('text-black', side === 'back');
+        }
+        viewFrontBtn.addEventListener('click', () => toggleModalImageAngle('front'));
+        viewBackBtn.addEventListener('click', () => toggleModalImageAngle('back'));
+
+        sizeButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                sizeButtons.forEach(btn => btn.classList.remove('bg-white', 'text-black'));
+                e.target.classList.add('bg-white', 'text-black');
+                selectedSize = e.target.getAttribute('data-size');
+                validateModalInputs();
+            });
+        });
+
+        function validateModalInputs() {
+            if (selectedSize && selectedColor) {
+                modalAddBtn.innerText = `Add ${selectedColor} / Size ${selectedSize} to Cart`;
+                modalAddBtn.disabled = false;
+            } else {
+                modalAddBtn.innerText = !selectedColor ? "Select a colour" : "Select a size";
+                modalAddBtn.disabled = true;
+            }
+        }
+
+        function updateCartUI() {
+            let totalQty = 0;
+            cart.forEach(i => totalQty += i.quantity);
+            cartCountElement.innerText = totalQty;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-red-200/50 text-sm">Your cart is empty.</p>';
+                subtotalElement.innerText = '₹0'; shippingElement.innerText = '₹0';
+                checkoutButton.disabled = true; return;
+            }
+            checkoutButton.disabled = false;
+            let cartHTML = '', subtotal = 0;
+            cart.forEach(item => {
+                subtotal += (item.price * item.quantity);
+                cartHTML += `
+                    <div class="flex items-center justify-between border-b border-red-950/50 pb-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-20 bg-[#400000] border border-red-950 flex-shrink-0 overflow-hidden"><img src="${item.image}" class="w-full h-full object-cover"></div>
+                            <div>
+                                <h4 class="text-xs font-semibold uppercase text-white">${item.name}</h4>
+                                <p class="text-[10px] uppercase font-bold text-red-400">Variant: ${item.color} / ${item.size}</p>
+                                <p class="text-xs text-white">₹${item.price} x ${item.quantity}</p>
+                            </div>
+                        </div>
+                        <button class="remove-item-btn text-xs text-red-400 font-bold" data-cart-id="${item.cartId}">&times;</button>
+                    </div>`;
+            });
+            cartItemsContainer.innerHTML = cartHTML; subtotalElement.innerText = `₹${subtotal}`;
+            const devCharge = (subtotal < 1300) ? 60 : 0;
+            shippingElement.innerText = devCharge === 0 ? 'FREE' : `₹${devCharge}`;
+
+            document.querySelectorAll('.remove-item-btn').forEach(b => b.addEventListener('click', (e) => removeFromCart(e.target.getAttribute('data-cart-id'))));
+        }
+
+        modalAddBtn.addEventListener('click', () => {
+            const currentImg = selectedProduct.colorVariants.find(v => v.name === selectedColor).front;
+            const cartId = `${selectedProduct.id}-${selectedColor}-${selectedSize}`;
+            const item = cart.find(i => i.cartId === cartId);
+            if (item) item.quantity++; 
+            else cart.push({ cartId, id: selectedProduct.id, name: selectedProduct.name, price: selectedProduct.price, image: currentImg, color: selectedColor, size: selectedSize, quantity: 1 });
+            updateCartUI(); closeModal(); openCart();
+        });
+
+        function removeFromCart(cartId) { cart = cart.filter(i => i.cartId !== cartId); updateCartUI(); }
+
+        checkoutButton.addEventListener('click', () => {
+            const targetPhone = "918462003505"; let message = `⚡ NEW ORDER - beNoNseNse ⚡\n\n`, subtotal = 0;
+            cart.forEach((item, idx) => {
+                subtotal += (item.price * item.quantity);
+                message += `${idx + 1}. ${item.name}\n   Attributes: [${item.color} // Size ${item.size}]\n   Quantity: ${item.quantity} x ₹${item.price}\n\n`;
+            });
+            const ship = (subtotal < 1300) ? 60 : 0;
+            message += `---------------------------\n📦 Subtotal: ₹${subtotal}\n🚚 Delivery: ${ship === 0 ? 'FREE' : '₹'+ship}\n💰 TOTAL: ₹${subtotal+ship}\n\n📋 DELIVERY FORM:\n - Name: ____________________\n - Shipping Address: ____________________\n - Pincode: ______\n\nConfirming order with Bhupendra!`;
+            window.open(`https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(message)}`, '_blank');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!cartSidebar.contains(e.target) && e.target !== cartButton && !e.target.classList.contains('remove-item-btn')) closeCart();
+        });
+
+        renderCatalogHTML();
+        updateCartUI();
+    </script>
+</body>
+</html>

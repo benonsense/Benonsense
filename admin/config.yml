@@ -1,0 +1,30 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "" # Photos seedhe main folder me jayengi jaise pehle thand thi
+public_folder: ""
+
+collections:
+  - name: "products"
+    label: "T-Shirt Drops"
+    folder: ""
+    extension: "json"
+    create: true
+    slug: "{{fields.designKey}}"
+    fields:
+      - { label: "Product ID", name: "id", widget: "string" }
+      - { label: "Design Key (lowercase)", name: "designKey", widget: "string" }
+      - { label: "T-Shirt Name", name: "name", widget: "string" }
+      - { label: "Price (INR)", name: "price", widget: "number", value_type: "int" }
+      - { label: "Badge (e.g. Best Seller)", name: "badge", widget: "string", required: false }
+      - { label: "Available Sizes", name: "sizes", widget: "list", default: ["s", "m", "l", "xl", "xxl"] }
+      - { label: "Default Display Image", name: "defaultImg", widget: "image" }
+      - label: "Color Variants"
+        name: "colorVariants"
+        widget: "list"
+        fields:
+          - { label: "Color Name (e.g. Lavender)", name: "name", widget: "string" }
+          - { label: "Color Hex Code (e.g. #B57EDC)", name: "hex", widget: "string" }
+          - { label: "Front Image", name: "front", widget: "image" }
+          - { label: "Back Image", name: "back", widget: "image" }
