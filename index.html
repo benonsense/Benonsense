@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
-    body { font-family: 'Space Grotesk', sans-serif; background-color: #0d0d0d; color: #ffffff; scroll-behavior: smooth; }
+    body { font-family: 'Space Grotesk', sans-serif; background-color: #0d0d0d; color: #ffffff; scroll-behavior: smooth; overflow-x: hidden; }
     .smooth-transition { transition: all 0.2s ease-in-out; }
     
     /* Gunmetal Premium Stroke Property */
@@ -20,6 +20,11 @@
         -webkit-text-stroke: 1px #3a3d40;
       }
     }
+    /* Custom Scrollbar for sleek look */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0d0d0d; }
+    ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ff0000; }
   </style>
 </head>
 <body>
@@ -29,9 +34,17 @@
       <a href="#">
         <img src="assets/logo.webp" alt="beNoNseNse" class="h-8 md:h-10 object-contain smooth-transition hover:scale-105">
       </a>
-      <nav class="space-x-6 text-xs md:text-sm uppercase tracking-widest">
-        <a href="#catalog" class="hover:text-red-500 smooth-transition font-bold tracking-widest text-white">Shop Drops</a>
-      </nav>
+      <div class="flex items-center space-x-6">
+        <nav class="space-x-6 text-xs md:text-sm uppercase tracking-widest">
+          <a href="#catalog" class="hover:text-red-500 smooth-transition font-bold tracking-widest text-white">Shop Drops</a>
+        </nav>
+        <button onclick="toggleCartDrawer()" class="relative bg-white text-black p-2 rounded-full hover:bg-red-600 hover:text-white smooth-transition flex items-center justify-center w-9 h-9">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+          </svg>
+          <span id="cart-badge-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[9px] font-bold w-4 h-4 rounded-full hidden items-center justify-center">0</span>
+        </button>
+      </div>
     </div>
     
     <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-64 md:pt-80">
@@ -88,6 +101,40 @@
     </div>
   </div>
 
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] bg-[#0d0d0d] border-l border-gray-900 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between shadow-2xl">
+    <div class="p-4 border-b border-gray-900 flex justify-between items-center bg-[#141414]">
+      <div class="flex items-center space-x-2">
+        <h3 class="text-md font-bold uppercase tracking-widest text-white">Your Cart Drop</h3>
+        <span id="cart-drawer-count" class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
+      </div>
+      <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl font-bold p-2">&times; Close</button>
+    </div>
+
+    <div id="cart-items-container" class="flex-1 p-4 space-y-4 overflow-y-auto">
+      </div>
+
+    <div class="p-4 border-t border-gray-900 bg-[#141414] space-y-4">
+      <div class="space-y-1.5 text-xs uppercase tracking-wider text-gray-400">
+        <div class="flex justify-between">
+          <span>Items Subtotal:</span>
+          <span id="cart-subtotal" class="text-white font-bold">₹0</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Delivery Charges:</span>
+          <span id="cart-shipping" class="text-red-500 font-bold">₹0</span>
+        </div>
+        <div class="flex justify-between text-sm text-white font-bold border-t border-gray-900 pt-3 mt-1">
+          <span class="text-red-500">Estimated Total:</span>
+          <span id="cart-total" class="text-red-500">₹0</span>
+        </div>
+      </div>
+      
+      <button onclick="checkoutCartToWhatsApp()" id="checkout-btn" disabled class="w-full bg-white text-black font-bold uppercase tracking-widest py-3 text-xs hover:bg-red-600 hover:text-white smooth-transition disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-black">
+        Checkout Drop via WhatsApp
+      </button>
+    </div>
+  </div>
+
   <footer class="bg-[#141414] border-t border-gray-900 px-6 py-12 mt-20">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-900 pb-10 mb-8">
         <div class="space-y-2 border-l-2 border-red-600 pl-4">
@@ -113,14 +160,14 @@
   </footer>
 
   <script>
-    // ⚡ DATABASE ENGINE ORDER: PLAIN OVERSIZE & POLO ARE ALWAYS ON TOP ⚡
+    // ⚡ CONFIGURATIONS: DYNAMIC UPDATED PRICE STRUCTURING ⚡
     const PRODUCTS_DATABASE = [
       {
         id: "4",
         category: "plain-oversize",
         name: "Plain Oversize T-shirts",
-        price: 499,
-        badge: "Premium Oversize", // Updated from New Drop
+        price: 399, // Updated from 499 to 399
+        badge: "Premium Oversize",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: false,
@@ -141,7 +188,7 @@
         id: "5",
         category: "plain-polo",
         name: "Plain Polo T-shirts",
-        price: 599,
+        price: 349, // Updated from 599 to 349
         badge: "Premium Polo",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "polo",
@@ -161,7 +208,7 @@
         category: "loofy",
         name: "Loofy (Oversized Tee)",
         price: 549,
-        badge: "", // Removed Best Seller Badge
+        badge: "",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
@@ -205,6 +252,7 @@
 
     let currentFilter = 'all';
     const activeSelections = {};
+    let CART_STORAGE = []; // In-memory dynamic e-com cart storage array
 
     window.filterCatalog = function(category) {
       currentFilter = category;
@@ -265,6 +313,11 @@
         `;
       }
       modal.classList.remove('hidden');
+    };
+
+    window.toggleCartDrawer = function() {
+      const drawer = document.getElementById('cart-drawer');
+      drawer.classList.toggle('translate-x-full');
     };
 
     function renderCatalog() {
@@ -336,9 +389,9 @@
             </div>
           </div>
 
-          <button onclick="redirectToWhatsApp('${product.id}')" 
+          <button onclick="addItemToCart('${product.id}')" 
             class="w-full bg-white text-black font-bold uppercase tracking-widest py-3 text-xs hover:bg-red-600 hover:text-white smooth-transition mt-2">
-            Buy Drop via WhatsApp
+            Add to Cart
           </button>
         `;
         grid.appendChild(card);
@@ -349,14 +402,153 @@
     window.toggleView = function(productId) { const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderCatalog(); };
     window.selectSize = function(productId, size) { activeSelections[productId].selectedSize = size; renderCatalog(); };
 
-    window.redirectToWhatsApp = function(productId) {
+    // ⚡ CART SYSTEM CORE ARCHITECTURE LOGIC ⚡
+    window.addItemToCart = function(productId) {
       const product = PRODUCTS_DATABASE.find(p => p.id === productId);
       const state = activeSelections[productId];
       const variant = product.colorVariants[state.colorIndex];
-      if (!state.selectedSize) { alert("Please select a Size before checking out!"); return; }
-      const targetPhone = "918462003505"; 
-      const message = `⚡ NEW DROPS ORDER | beNoNseNse ⚡\n\nProduct: ${product.name}\nColor Variant: [ ${variant.name} ]\nSize Selected: [ Size ${state.selectedSize} ]\nPrice: ₹${product.price}\n\nPlease verify availability parameters for fulfillment!`;
-      window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
+      
+      if (!state.selectedSize) { 
+        alert("Please select a Size before adding to cart!"); 
+        return; 
+      }
+
+      // Generate accurate composite unique configuration signature id
+      const cartItemSignature = `${productId}-${variant.name}-${state.selectedSize}`;
+      const existingItem = CART_STORAGE.find(item => item.signature === cartItemSignature);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        CART_STORAGE.push({
+          signature: cartItemSignature,
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          color: variant.name,
+          size: state.selectedSize,
+          image: variant.front,
+          quantity: 1
+        });
+      }
+
+      // Flash feedback animation, update system calculations & slide open panel
+      updateCartUiState();
+      document.getElementById('cart-drawer').classList.remove('translate-x-full');
+    };
+
+    window.updateCartQuantity = function(signature, change) {
+      const item = CART_STORAGE.find(i => i.signature === signature);
+      if (!item) return;
+      item.quantity += change;
+      if (item.quantity <= 0) {
+        CART_STORAGE = CART_STORAGE.filter(i => i.signature !== signature);
+      }
+      updateCartUiState();
+    };
+
+    function updateCartUiState() {
+      const container = document.getElementById('cart-items-container');
+      const badge = document.getElementById('cart-badge-count');
+      const drawerCount = document.getElementById('cart-drawer-count');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const shippingEl = document.getElementById('cart-shipping');
+      const totalEl = document.getElementById('cart-total');
+      const checkoutBtn = document.getElementById('checkout-btn');
+
+      container.innerHTML = '';
+      
+      let totalQty = 0;
+      let subtotalPrice = 0;
+
+      if (CART_STORAGE.length === 0) {
+        container.innerHTML = `
+          <div class="h-64 flex flex-col items-center justify-center text-center space-y-3 opacity-40">
+            <p class="text-xs uppercase tracking-widest font-bold">Your cart layout is completely empty.</p>
+            <p class="text-[10px] uppercase tracking-wider">Select product parameters and load drops.</p>
+          </div>
+        `;
+        badge.style.display = 'none';
+        drawerCount.innerText = '0';
+        subtotalEl.innerText = '₹0';
+        shippingEl.innerText = '₹0';
+        totalEl.innerText = '₹0';
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      CART_STORAGE.forEach(item => {
+        totalQty += item.quantity;
+        subtotalPrice += (item.price * item.quantity);
+
+        const itemRow = document.createElement('div');
+        itemRow.className = "flex items-center justify-between border-b border-gray-900 pb-4 text-xs bg-[#111] p-3 rounded border border-gray-900";
+        itemRow.innerHTML = `
+          <div class="flex items-center space-x-3">
+            <img src="${item.image}" alt="" class="w-12 h-16 object-contain bg-black/40 rounded p-1">
+            <div class="space-y-1">
+              <h4 class="font-bold text-white uppercase tracking-tight">${item.name}</h4>
+              <p class="text-[10px] text-gray-400 uppercase">Size: <span class="text-white">${item.size}</span> | Color: <span class="text-white">${item.color}</span></p>
+              <p class="text-red-500 font-bold">₹${item.price} × ${item.quantity}</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 border border-gray-800 bg-black rounded overflow-hidden">
+            <button onclick="updateCartQuantity('${item.signature}', -1)" class="px-2 py-1 text-gray-400 hover:text-white font-bold bg-[#141414]">-</button>
+            <span class="px-2 font-bold text-white text-[11px]">${item.quantity}</span>
+            <button onclick="updateCartQuantity('${item.signature}', 1)" class="px-2 py-1 text-gray-400 hover:text-white font-bold bg-[#141414]">+</button>
+          </div>
+        `;
+        container.appendChild(itemRow);
+      });
+
+      // Fixed Delivery Parameter logic configuration requested by user
+      const fixedShippingCharge = 80; 
+      const finalEstimatedTotal = subtotalPrice + fixedShippingCharge;
+
+      badge.innerText = totalQty;
+      badge.style.display = 'flex';
+      drawerCount.innerText = totalQty;
+      
+      subtotalEl.innerText = `₹${subtotalPrice}`;
+      shippingEl.innerText = `₹${fixedShippingCharge}`;
+      totalEl.innerText = `₹${finalEstimatedTotal}`;
+      checkoutBtn.disabled = false;
+    }
+
+    // ⚡ HIGH CONTEXT CHECKOUT PIPELINE FOR WHATSAPP DISPATCH ⚡
+    window.checkoutCartToWhatsApp = function() {
+      if(CART_STORAGE.length === 0) return;
+
+      const targetPhone = "918462003505";
+      let subtotalPrice = 0;
+      let itemsListText = '';
+
+      CART_STORAGE.forEach((item, idx) => {
+        subtotalPrice += (item.price * item.quantity);
+        itemsListText += `${idx + 1}. ${item.name}\n   - Variant: [ ${item.color} ]\n   - Size: [ Size ${item.size} ]\n   - Qty: [ ${item.quantity} Nos ]\n   - Price: ₹${item.price * item.quantity}\n\n`;
+      });
+
+      const deliveryFee = 80;
+      const absoluteFinalTotal = subtotalPrice + deliveryFee;
+
+      // Master Text Construction featuring Address placeholders & Availability validations
+      const whatsappMessage = `⚡ NEW DROPS COMPOSITE ORDER | beNoNseNse ⚡\n\n` +
+                              `--- ITEMS LISTED ---\n${itemsListText}` +
+                              `--- BILLING SUMMARY ---\n` +
+                              `Subtotal Amount: ₹${subtotalPrice}\n` +
+                              `Fixed Delivery Fee: ₹${deliveryFee}\n` +
+                              `Total Final Amount: ₹${absoluteFinalTotal}\n\n` +
+                              `--- MANDATORY CUSTOMER DATA PARAMS ---\n` +
+                              `🏠 Delivery Address:\n` +
+                              `   [ Full Name: ]\n` +
+                              `   [ House No / Colony / Area: ]\n` +
+                              `   [ City & State: ]\n` +
+                              `   [ Pincode: ]\n` +
+                              `   [ Phone Number: ]\n\n` +
+                              `🔍 Pipeline Check:\n` +
+                              `Kindly verify fabric pipeline availability and confirm checkout parameters for swift fulfillment!`;
+
+      window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
     };
 
     renderCatalog();
