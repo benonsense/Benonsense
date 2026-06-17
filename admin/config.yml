@@ -3,6 +3,8 @@ backend:
   repo: benonsense3003-2113s/Benonsense
   branch: main
 
+local_backend: true
+
 media_folder: "" # Photos seedhe main folder me jayengi jaise pehle thand thi
 public_folder: ""
 
