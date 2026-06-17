@@ -20,7 +20,7 @@
         -webkit-text-stroke: 1px #3a3d40;
       }
     }
-    /* Custom Scrollbar for sleek look */
+    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0d0d0d; }
     ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
@@ -34,12 +34,12 @@
       <a href="#">
         <img src="assets/logo.webp" alt="beNoNseNse" class="h-8 md:h-10 object-contain smooth-transition hover:scale-105">
       </a>
-      <div class="flex items-center space-x-6">
-        <nav class="space-x-6 text-xs md:text-sm uppercase tracking-widest">
+      <div class="flex items-center space-x-4 md:space-x-6">
+        <nav class="space-x-4 md:space-x-6 text-xs md:text-sm uppercase tracking-widest">
           <a href="#catalog" class="hover:text-red-500 smooth-transition font-bold tracking-widest text-white">Shop Drops</a>
         </nav>
-        <button onclick="toggleCartDrawer()" class="relative bg-white text-black p-2 rounded-full hover:bg-red-600 hover:text-white smooth-transition flex items-center justify-center w-9 h-9">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+        <button onclick="toggleCartDrawer()" class="relative bg-white text-black p-2 rounded-full hover:bg-red-600 hover:text-white smooth-transition flex items-center justify-center w-8 h-8 md:w-9 md:h-9">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 md:w-5 md:h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
           </svg>
           <span id="cart-badge-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[9px] font-bold w-4 h-4 rounded-full hidden items-center justify-center">0</span>
@@ -58,27 +58,27 @@
     <div></div>
   </header>
 
-  <main id="catalog" class="max-w-7xl mx-auto px-4 py-12 md:py-16">
-    <div class="w-full bg-[#141414] border border-gray-900 py-3 text-center px-4 rounded mb-12">
-        <p class="text-red-500 text-xs md:text-sm font-bold tracking-widest uppercase">
+  <main id="catalog" class="max-w-7xl mx-auto px-2 md:px-4 py-8 md:py-16">
+    <div class="w-full bg-[#141414] border border-gray-900 py-2.5 text-center px-4 rounded mb-8 md:mb-12">
+        <p class="text-red-500 text-[11px] md:text-sm font-bold tracking-widest uppercase">
             ⚡ Premium Heavyweight Streetwear & Casuals Drop ⚡
         </p>
     </div>
 
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-gray-900 pb-4 mb-12 gap-4">
-      <h2 class="text-xl md:text-2xl font-bold uppercase tracking-wider text-center md:text-left">Catalog Grid</h2>
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-gray-900 pb-4 mb-8 md:mb-12 gap-4">
+      <h2 class="text-lg md:text-2xl font-bold uppercase tracking-wider text-center md:text-left">Catalog Grid</h2>
       
-      <div id="filter-bar" class="flex flex-wrap justify-center gap-2 text-xs uppercase tracking-widest font-bold">
-        <button onclick="filterCatalog('all')" id="btn-all" class="px-4 py-2 rounded bg-white text-black smooth-transition">All</button>
-        <button onclick="filterCatalog('plain-oversize')" id="btn-plain-oversize" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
-        <button onclick="filterCatalog('plain-polo')" id="btn-plain-polo" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Polo</button>
-        <button onclick="filterCatalog('loofy')" id="btn-loofy" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Loofy</button>
-        <button onclick="filterCatalog('caffein-happy')" id="btn-caffein-happy" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Caffein Happy</button>
-        <button onclick="filterCatalog('gojo')" id="btn-gojo" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Gojo</button>
+      <div id="filter-bar" class="flex flex-wrap justify-center gap-1.5 md:gap-2 text-[10px] md:text-xs uppercase tracking-widest font-bold">
+        <button onclick="filterCatalog('all')" id="btn-all" class="px-3 py-1.5 md:px-4 md:py-2 rounded bg-white text-black smooth-transition">All</button>
+        <button onclick="filterCatalog('plain-oversize')" id="btn-plain-oversize" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
+        <button onclick="filterCatalog('plain-polo')" id="btn-plain-polo" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Polo</button>
+        <button onclick="filterCatalog('loofy')" id="btn-loofy" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Loofy</button>
+        <button onclick="filterCatalog('caffein-happy')" id="btn-caffein-happy" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Caffein Happy</button>
+        <button onclick="filterCatalog('gojo')" id="btn-gojo" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Gojo</button>
       </div>
     </div>
     
-    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+    <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-12">
       </div>
   </main>
 
@@ -135,7 +135,7 @@
     </div>
   </div>
 
-  <footer class="bg-[#141414] border-t border-gray-900 px-6 py-12 mt-20">
+  <footer class="bg-[#141414] border-t border-gray-900 px-4 py-12 mt-20">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-900 pb-10 mb-8">
         <div class="space-y-2 border-l-2 border-red-600 pl-4">
             <h4 class="text-xs uppercase tracking-widest text-gray-400 font-bold">Prabhat Mehta</h4>
@@ -160,13 +160,12 @@
   </footer>
 
   <script>
-    // ⚡ CONFIGURATIONS: DYNAMIC UPDATED PRICE STRUCTURING ⚡
     const PRODUCTS_DATABASE = [
       {
         id: "4",
         category: "plain-oversize",
         name: "Plain Oversize T-shirts",
-        price: 399, // Updated from 499 to 399
+        price: 399,
         badge: "Premium Oversize",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
@@ -188,7 +187,7 @@
         id: "5",
         category: "plain-polo",
         name: "Plain Polo T-shirts",
-        price: 349, // Updated from 599 to 349
+        price: 349,
         badge: "Premium Polo",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "polo",
@@ -252,16 +251,16 @@
 
     let currentFilter = 'all';
     const activeSelections = {};
-    let CART_STORAGE = []; // In-memory dynamic e-com cart storage array
+    let CART_STORAGE = [];
 
     window.filterCatalog = function(category) {
       currentFilter = category;
       const buttons = document.querySelectorAll('#filter-bar button');
       buttons.forEach(btn => {
         if(btn.id === `btn-${category}`) {
-          btn.className = "px-4 py-2 rounded bg-white text-black smooth-transition";
+          btn.className = "px-3 py-1.5 md:px-4 md:py-2 rounded bg-white text-black smooth-transition";
         } else {
-          btn.className = "px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition";
+          btn.className = "px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition";
         }
       });
       renderCatalog();
@@ -320,6 +319,23 @@
       drawer.classList.toggle('translate-x-full');
     };
 
+    // New Function: Card toggle settings to show/expand variants & buttons on click
+    window.toggleProductPanel = function(productId, event) {
+      // Prevent expand trigger if customer clicks inside options container or flip view button
+      if (event.target.closest('.options-panel-container') || event.target.closest('.flip-btn')) return;
+      
+      const panel = document.getElementById(`panel-${productId}`);
+      const indicator = document.getElementById(`indicator-${productId}`);
+      
+      if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        if(indicator) indicator.innerText = "Collapse Options ▴";
+      } else {
+        panel.classList.add('hidden');
+        if(indicator) indicator.innerText = "Tap for Sizes & Colors ▾";
+      }
+    };
+
     function renderCatalog() {
       const grid = document.getElementById('product-grid');
       grid.innerHTML = '';
@@ -338,72 +354,84 @@
         const displayImage = (product.hasBackView && state.view === 'back') ? currentVariant.back : currentVariant.front;
 
         const card = document.createElement('div');
-        card.className = "bg-[#141414] border border-gray-900 rounded p-4 md:p-6 flex flex-col justify-between smooth-transition hover:border-gray-800 shadow-2xl";
+        // Compact styles applied below for mobile friendly design
+        card.className = "bg-[#141414] border border-gray-900 rounded p-2 md:p-5 flex flex-col justify-between smooth-transition hover:border-gray-800 shadow-2xl cursor-pointer";
+        card.setAttribute('onclick', `toggleProductPanel('${product.id}', event)`);
         
         card.innerHTML = `
           <div>
-            <div class="relative overflow-hidden bg-[#1a1a1a] mb-6 group cursor-pointer border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-2" 
-                 onclick="${product.hasBackView ? `toggleView('${product.id}')` : ''}">
+            <div class="relative overflow-hidden bg-[#1a1a1a] mb-3 group border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-1">
               
-              ${product.badge ? `<span class="absolute top-3 left-3 bg-red-600 text-white text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded z-10">${product.badge}</span>` : ''}
+              ${product.badge ? `<span class="absolute top-1.5 left-1.5 bg-red-600 text-white text-[8px] uppercase tracking-widest font-bold px-1.5 py-0.5 rounded z-10 scale-90 md:scale-100">${product.badge}</span>` : ''}
               
               <img id="img-${product.id}" src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition group-hover:scale-102">
               
-              ${product.hasBackView ? `<div class="absolute bottom-2 right-2 bg-black/80 text-gray-400 text-[8px] md:text-[9px] px-2 py-1 rounded uppercase tracking-widest border border-gray-800">Flip View ↺</div>` : ''}
+              ${product.hasBackView ? `
+                <button onclick="toggleView('${product.id}', event)" class="flip-btn absolute bottom-1.5 right-1.5 bg-black/85 text-gray-400 text-[8px] md:text-[9px] px-1.5 py-0.5 md:px-2 md:py-1 rounded uppercase tracking-widest border border-gray-800 hover:text-white smooth-transition">
+                  Flip ↺
+                </button>
+              ` : ''}
             </div>
 
-            <div class="flex justify-between items-baseline mb-3">
-              <h3 class="text-md md:text-lg font-bold uppercase tracking-tight text-white">${product.name}</h3>
-              <p class="text-md font-bold text-red-500">₹${product.price}</p>
-            </div>
-            <p class="text-[10px] md:text-[11px] text-gray-500 uppercase tracking-widest mb-4">
-              ${product.category === 'plain-polo' ? 'Premium Heavy Pique Soft Luxury Cotton' : 'Premium 240GSM Heavyweight Luxury Blend'}
-            </p>
-
-            <div class="mb-5">
-              <p class="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-wider mb-2">Color: <span class="text-white font-bold uppercase">${currentVariant.name}</span></p>
-              <div class="flex flex-wrap gap-2">
-                ${product.colorVariants.map((v, idx) => `
-                  <button onclick="changeColor('${product.id}', ${idx})" 
-                    class="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 smooth-transition ${state.colorIndex === idx ? 'border-white scale-110 shadow-lg' : 'border-gray-900 hover:scale-105'}" 
-                    style="background-color: ${v.hex};" title="${v.name}">
-                  </button>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <p class="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-wider mb-2">Select Size</p>
-              <div class="grid grid-cols-5 gap-1">
-                ${product.sizes.map(s => `
-                  <button onclick="selectSize('${product.id}', '${s}')" 
-                    class="border py-1.5 md:py-2 text-[11px] md:text-xs font-bold rounded smooth-transition ${state.selectedSize === s ? 'bg-white text-black border-white' : 'border-gray-800 text-gray-400 bg-[#0d0d0d] hover:border-gray-500 hover:text-white'}">
-                    ${s}
-                  </button>
-                `).join('')}
-              </div>
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-baseline mb-1 gap-0.5">
+              <h3 class="text-xs md:text-base font-bold uppercase tracking-tight text-white line-clamp-1">${product.name}</h3>
+              <p class="text-xs md:text-base font-bold text-red-500">₹${product.price}</p>
             </div>
             
-            <div class="text-right mb-4">
-               <button onclick="toggleSizeModal('${product.sizeChartType}')" class="text-[10px] uppercase text-gray-400 hover:text-red-400 underline tracking-widest font-bold smooth-transition">View Size Guide 📏</button>
+            <p id="indicator-${product.id}" class="text-[8px] md:text-[10px] text-red-400 uppercase tracking-widest font-bold mb-2">Tap for Sizes & Colors ▾</p>
+
+            <div id="panel-${product.id}" class="options-panel-container hidden border-t border-gray-900 pt-3 mt-2 smooth-transition">
+              
+              <p class="text-[9px] md:text-[11px] text-gray-500 uppercase tracking-widest mb-3">
+                ${product.category === 'plain-polo' ? 'Premium Pique Soft Cotton' : 'Premium 240GSM Heavyweight Knit'}
+              </p>
+
+              <div class="mb-4">
+                <p class="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-wider mb-1.5">Color: <span class="text-white font-bold uppercase">${currentVariant.name}</span></p>
+                <div class="flex flex-wrap gap-1.5">
+                  ${product.colorVariants.map((v, idx) => `
+                    <button onclick="changeColor('${product.id}', ${idx}, event)" 
+                      class="w-5 h-5 md:w-6 md:h-6 rounded-full border smooth-transition ${state.colorIndex === idx ? 'border-white scale-110 shadow-lg' : 'border-gray-900 hover:scale-105'}" 
+                      style="background-color: ${v.hex};" title="${v.name}">
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <p class="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-wider mb-1.5">Select Size</p>
+                <div class="grid grid-cols-5 gap-1">
+                  ${product.sizes.map(s => `
+                    <button onclick="selectSize('${product.id}', '${s}', event)" 
+                      class="border py-1 text-[9px] md:text-xs font-bold rounded smooth-transition ${state.selectedSize === s ? 'bg-white text-black border-white' : 'border-gray-800 text-gray-400 bg-[#0d0d0d] hover:border-gray-500 hover:text-white'}">
+                      ${s}
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+              
+              <div class="text-left mb-4">
+                 <button onclick="toggleSizeModal('${product.sizeChartType}')" class="text-[8px] md:text-[10px] uppercase text-gray-400 hover:text-red-400 underline tracking-widest font-bold smooth-transition">Size Guide 📏</button>
+              </div>
+
+              <button onclick="addItemToCart('${product.id}', event)" 
+                class="w-full bg-white text-black font-bold uppercase tracking-widest py-2 md:py-3 text-[10px] md:text-xs hover:bg-red-600 hover:text-white smooth-transition mt-1">
+                Add to Cart
+              </button>
             </div>
           </div>
-
-          <button onclick="addItemToCart('${product.id}')" 
-            class="w-full bg-white text-black font-bold uppercase tracking-widest py-3 text-xs hover:bg-red-600 hover:text-white smooth-transition mt-2">
-            Add to Cart
-          </button>
         `;
         grid.appendChild(card);
       });
     }
 
-    window.changeColor = function(productId, index) { activeSelections[productId].colorIndex = index; renderCatalog(); };
-    window.toggleView = function(productId) { const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderCatalog(); };
-    window.selectSize = function(productId, size) { activeSelections[productId].selectedSize = size; renderCatalog(); };
+    window.changeColor = function(productId, index, event) { if(event) event.stopPropagation(); activeSelections[productId].colorIndex = index; renderCatalog(); document.getElementById(`panel-${productId}`).classList.remove('hidden'); };
+    window.toggleView = function(productId, event) { if(event) event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderCatalog(); };
+    window.selectSize = function(productId, size, event) { if(event) event.stopPropagation(); activeSelections[productId].selectedSize = size; renderCatalog(); document.getElementById(`panel-${productId}`).classList.remove('hidden'); };
 
-    // ⚡ CART SYSTEM CORE ARCHITECTURE LOGIC ⚡
-    window.addItemToCart = function(productId) {
+    // CART SYSTEM PIPELINE LOGIC
+    window.addItemToCart = function(productId, event) {
+      if(event) event.stopPropagation();
       const product = PRODUCTS_DATABASE.find(p => p.id === productId);
       const state = activeSelections[productId];
       const variant = product.colorVariants[state.colorIndex];
@@ -413,7 +441,6 @@
         return; 
       }
 
-      // Generate accurate composite unique configuration signature id
       const cartItemSignature = `${productId}-${variant.name}-${state.selectedSize}`;
       const existingItem = CART_STORAGE.find(item => item.signature === cartItemSignature);
 
@@ -432,7 +459,6 @@
         });
       }
 
-      // Flash feedback animation, update system calculations & slide open panel
       updateCartUiState();
       document.getElementById('cart-drawer').classList.remove('translate-x-full');
     };
@@ -501,7 +527,6 @@
         container.appendChild(itemRow);
       });
 
-      // Fixed Delivery Parameter logic configuration requested by user
       const fixedShippingCharge = 80; 
       const finalEstimatedTotal = subtotalPrice + fixedShippingCharge;
 
@@ -515,7 +540,6 @@
       checkoutBtn.disabled = false;
     }
 
-    // ⚡ HIGH CONTEXT CHECKOUT PIPELINE FOR WHATSAPP DISPATCH ⚡
     window.checkoutCartToWhatsApp = function() {
       if(CART_STORAGE.length === 0) return;
 
@@ -531,7 +555,6 @@
       const deliveryFee = 80;
       const absoluteFinalTotal = subtotalPrice + deliveryFee;
 
-      // Master Text Construction featuring Address placeholders & Availability validations
       const whatsappMessage = `⚡ NEW DROPS COMPOSITE ORDER | beNoNseNse ⚡\n\n` +
                               `--- ITEMS LISTED ---\n${itemsListText}` +
                               `--- BILLING SUMMARY ---\n` +
