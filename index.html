@@ -61,11 +61,11 @@
       <!-- Expanded Filter Controls Row -->
       <div id="filter-bar" class="flex flex-wrap justify-center gap-2 text-xs uppercase tracking-widest font-bold">
         <button onclick="filterCatalog('all')" id="btn-all" class="px-4 py-2 rounded bg-white text-black smooth-transition">All</button>
+        <button onclick="filterCatalog('plain-oversize')" id="btn-plain-oversize" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
+        <button onclick="filterCatalog('plain-polo')" id="btn-plain-polo" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Polo</button>
         <button onclick="filterCatalog('loofy')" id="btn-loofy" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Loofy</button>
         <button onclick="filterCatalog('caffein-happy')" id="btn-caffein-happy" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Caffein Happy</button>
         <button onclick="filterCatalog('gojo')" id="btn-gojo" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Gojo</button>
-        <button onclick="filterCatalog('plain-oversize')" id="btn-plain-oversize" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
-        <button onclick="filterCatalog('plain-polo')" id="btn-plain-polo" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Polo</button>
       </div>
     </div>
     
@@ -124,7 +124,49 @@
 
   <!-- DYNAMIC CENTRAL INTELLIGENT DATABASE ENGINE -->
   <script>
+    // ⚡ ARRAY ORDER STRICTLY CONFIGURED: PLAIN ITEMS ARE FIXED ON TOP ⚡
     const PRODUCTS_DATABASE = [
+      {
+        id: "4",
+        category: "plain-oversize",
+        name: "Plain Oversize T-shirts",
+        price: 499,
+        badge: "New Drop",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: false,
+        colorVariants: [
+          { name: "Army Green", hex: "#4B5320", front: "assets/plain-oversize/army green.webp" },
+          { name: "Beige", hex: "#F5F5DC", front: "assets/plain-oversize/beige.webp" },
+          { name: "Black", hex: "#000000", front: "assets/plain-oversize/black.webp" },
+          { name: "Brown", hex: "#5C4033", front: "assets/plain-oversize/brown.webp" },
+          { name: "Lavender", hex: "#B57EDC", front: "assets/plain-oversize/lavender.webp" },
+          { name: "Maroon", hex: "#800020", front: "assets/plain-oversize/maroon.webp" },
+          { name: "Off-White", hex: "#F4F0EA", front: "assets/plain-oversize/off-white.webp" },
+          { name: "Powder Blue", hex: "#B0E0E6", front: "assets/plain-oversize/powder blue.webp" },
+          { name: "Rose Pink", hex: "#FF007F", front: "assets/plain-oversize/rose pink.webp" },
+          { name: "White", hex: "#ffffff", front: "assets/plain-oversize/white.webp" }
+        ]
+      },
+      {
+        id: "5",
+        category: "plain-polo",
+        name: "Plain Polo T-shirts",
+        price: 599,
+        badge: "Premium Polo",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "polo",
+        hasBackView: false,
+        colorVariants: [
+          { name: "Black", hex: "#000000", front: "assets/plain-polo/black.webp" },
+          { name: "Grey", hex: "#808080", front: "assets/plain-polo/grey.webp" },
+          { name: "White", hex: "#ffffff", front: "assets/plain-polo/white.webp" },
+          { name: "Maroon", hex: "#800020", front: "assets/plain-polo/maroon.webp" },
+          { name: "Red", hex: "#FF0000", front: "assets/plain-polo/red.webp" },
+          { name: "Navy Blue", hex: "#000080", front: "assets/plain-polo/navy blue.webp" },
+          { name: "Charcoal", hex: "#36454F", front: "assets/plain-polo/charcoal.webp" }
+        ]
+      },
       {
         id: "1",
         category: "loofy",
@@ -169,63 +211,12 @@
           { name: "Brown", hex: "#5C4033", front: "assets/gojo/gojo brown front.webp", back: "assets/gojo/gojo brown back.webp" },
           { name: "Maroon", hex: "#800020", front: "assets/gojo/gojo maroon front.webp", back: "assets/gojo/gojo maroon back.webp" }
         ]
-      },
-      {
-        id: "4",
-        category: "plain-oversize",
-        name: "Plain Oversize T-shirts",
-        price: 499,
-        badge: "New Drop",
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        sizeChartType: "oversized",
-        hasBackView: false, // Disables back swapping configuration
-        colorVariants: [
-          { name: "Army Green", hex: "#4B5320", front: "assets/plain-oversize/army green.webp" },
-          { name: "Beige", hex: "#F5F5DC", front: "assets/plain-oversize/beige.webp" },
-          { name: "Black", hex: "#000000", front: "assets/plain-oversize/black.webp" },
-          { name: "Brown", hex: "#5C4033", front: "assets/plain-oversize/brown.webp" },
-          { name: "Lavender", hex: "#B57EDC", front: "assets/plain-oversize/lavender.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/plain-oversize/maroon.webp" },
-          { name: "Off-White", hex: "#F4F0EA", front: "assets/plain-oversize/off-white.webp" },
-          { name: "Powder Blue", hex: "#B0E0E6", front: "assets/plain-oversize/powder blue.webp" },
-          { name: "Rose Pink", hex: "#FF007F", front: "assets/plain-oversize/rose pink.webp" },
-          { name: "White", hex: "#ffffff", front: "assets/plain-oversize/white.webp" }
-        ]
-      },
-      {
-        id: "5",
-        category: "plain-polo",
-        name: "Plain Polo T-shirts",
-        price: 599,
-        badge: "Premium Polo",
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        sizeChartType: "polo",
-        hasBackView: false, // Disables back swapping configuration
-        colorVariants: [
-          { name: "Black", hex: "#000000", front: "assets/plain-polo/black.webp" },
-          { name: "Grey", hex: "#808080", front: "assets/plain-polo/grey.webp" },
-          { name: "White", hex: "#ffffff", front: "assets/plain-polo/white.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/plain-polo/maroon.webp" },
-          { name: "Red", hex: "#FF0000", front: "assets/plain-polo/red.webp" },
-          { name: "Navy Blue", hex: "#000080", front: "assets/plain-polo/navy blue.webp" },
-          { name: "Charcoal", hex: "#36454F", front: "assets/plain-polo/charcoal.webp" }
-        ]
       }
+      // 📝 AGAR AAP NAYE TEES JODENGE TOH BAS IS LINE KE NEECHE ADD KARTE JANA, WOH AUTOMATIC INKE NEECHE HI AAYENGE.
     ];
 
     let currentFilter = 'all';
     const activeSelections = {};
-
-    function preloadAllImages() {
-      PRODUCTS_DATABASE.forEach(product => {
-        product.colorVariants.forEach(variant => {
-          const imgF = new Image(); imgF.src = variant.front;
-          if (product.hasBackView) {
-            const imgB = new Image(); imgB.src = variant.back;
-          }
-        });
-      });
-    }
 
     window.filterCatalog = function(category) {
       currentFilter = category;
@@ -303,8 +294,6 @@
 
         const state = activeSelections[product.id];
         const currentVariant = product.colorVariants[state.colorIndex];
-        
-        // Conditional asset binding dependent on drop tracking logic
         const displayImage = (product.hasBackView && state.view === 'back') ? currentVariant.back : currentVariant.front;
 
         const card = document.createElement('div');
@@ -312,7 +301,6 @@
         
         card.innerHTML = `
           <div>
-            <!-- Image Contain Frame -->
             <div class="relative overflow-hidden bg-[#1a1a1a] mb-6 group cursor-pointer border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-2" 
                  onclick="${product.hasBackView ? `toggleView('${product.id}')` : ''}">
               
@@ -383,7 +371,7 @@
       window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
     };
 
-    preloadAllImages();
+    // Lazy load execution context
     renderCatalog();
   </script>
 </body>
