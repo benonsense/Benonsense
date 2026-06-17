@@ -9,11 +9,22 @@
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
     body { font-family: 'Space Grotesk', sans-serif; background-color: #0d0d0d; color: #ffffff; }
     .smooth-transition { transition: all 0.2s ease-in-out; }
+    
+    /* Gunmetal Premium Stroke Property */
+    .gunmetal-stroke {
+      -webkit-text-stroke: 1.5px #3a3d40;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    @media (max-width: 768px) {
+      .gunmetal-stroke {
+        -webkit-text-stroke: 1px #3a3d40; /* Slightly thinner stroke for smaller screens */
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- HERO HEADER LAYER (Optimized Layout for Visual Balance) -->
+  <!-- HERO HEADER LAYER -->
   <header class="relative h-screen flex flex-col justify-between p-4 md:p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.1), #0d0d0d), url('assets/hero-bg.png');">
     <!-- Top Brand Navbar Layer -->
     <div class="flex justify-between items-center w-full z-10">
@@ -25,8 +36,8 @@
     
     <!-- Aligned Content Directly Anchored Under Background Graphics Layout -->
     <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-24 md:pt-32">
-      <!-- Big branding text removed to utilize background artwork properly -->
-      <p class="text-sm md:text-xl lg:text-2xl uppercase tracking-widest text-gray-300 font-bold max-w-2xl mx-auto leading-relaxed drop-shadow-2xl">
+      <!-- Quote With Gunmetal Stroke Applied Cleanly -->
+      <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed">
         "Being in sense is not always practical so beNoNseNse"
       </p>
       <a href="#catalog" class="mt-8 inline-block bg-white text-black px-8 py-3.5 uppercase tracking-widest font-bold text-xs md:text-sm hover:bg-red-600 hover:text-white smooth-transition shadow-2xl">
@@ -46,7 +57,7 @@
 
     <h2 class="text-xl md:text-2xl font-bold uppercase tracking-wider border-b border-gray-900 pb-4 mb-12 text-center md:text-left">Catalog Grid</h2>
     
-    <!-- Dynamic Clean Mobile-Responsive Image Preservation Grid Layout -->
+    <!-- Dynamic Clean Mobile-Responsive Image Grid Layout -->
     <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
       <!-- Generated dynamic product layout target block -->
     </div>
@@ -77,9 +88,8 @@
     </div>
   </footer>
 
-  <!-- ULTIMATE HIGH-SPEED INSTANT MEMORY CACHE DATABASE LOGIC -->
+  <!-- DYNAMIC HIGH-SPEED SCRIPT REGISTRY -->
   <script>
-    // ⚡ 1. GLOBAL CENTRAL DESIGN REGISTERED DROPS DATABASE ⚡
     const PRODUCTS_DATABASE = [
       {
         id: "1",
@@ -119,7 +129,6 @@
       }
     ];
 
-    // ⚡ 2. PRE-LOADING SPEED ENGINE (Eliminates color-switch latency completely)
     function preloadAllImages() {
       PRODUCTS_DATABASE.forEach(product => {
         product.colorVariants.forEach(variant => {
@@ -131,7 +140,6 @@
 
     const activeSelections = {};
 
-    // ⚡ 3. DYNAMIC DOM RENDER GENERATOR
     function renderCatalog() {
       const grid = document.getElementById('product-grid');
       grid.innerHTML = '';
@@ -150,21 +158,18 @@
         
         card.innerHTML = `
           <div>
-            <!-- Image Frame - Enforcing max object contain scaling ratio across mobile sizes -->
             <div class="relative overflow-hidden bg-[#1a1a1a] mb-6 group cursor-pointer border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-2" onclick="toggleView('${product.id}')">
               ${product.badge ? `<span class="absolute top-3 left-3 bg-red-600 text-white text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded z-10">${product.badge}</span>` : ''}
               <img id="img-${product.id}" src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition group-hover:scale-102">
               <div class="absolute bottom-2 right-2 bg-black/80 text-gray-400 text-[8px] md:text-[9px] px-2 py-1 rounded uppercase tracking-widest border border-gray-800">Flip View ↺</div>
             </div>
 
-            <!-- Product Header Info -->
             <div class="flex justify-between items-baseline mb-3">
               <h3 class="text-md md:text-lg font-bold uppercase tracking-tight text-white">${product.name}</h3>
               <p class="text-md font-bold text-red-500">₹${product.price}</p>
             </div>
             <p class="text-[10px] md:text-[11px] text-gray-500 uppercase tracking-widest mb-4">Premium 240GSM Heavyweight Luxury Blend</p>
 
-            <!-- Color Options Selection Grid -->
             <div class="mb-5">
               <p class="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-wider mb-2">Color: <span class="text-white font-bold uppercase">${currentVariant.name}</span></p>
               <div class="flex space-x-2.5">
@@ -177,7 +182,6 @@
               </div>
             </div>
 
-            <!-- Interactive Size Layout Grid -->
             <div class="mb-6">
               <p class="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-wider mb-2">Select Size</p>
               <div class="grid grid-cols-5 gap-1">
@@ -191,7 +195,6 @@
             </div>
           </div>
 
-          <!-- Checkout Pipeline Execution Action Button -->
           <button onclick="redirectToWhatsApp('${product.id}')" 
             class="w-full bg-white text-black font-bold uppercase tracking-widest py-3 text-xs hover:bg-red-600 hover:text-white smooth-transition mt-2">
             Buy Drop via WhatsApp
@@ -201,39 +204,20 @@
       });
     }
 
-    // ⚡ 4. HANDLERS SYSTEM (Instant Local Memory Response)
-    window.changeColor = function(productId, index) {
-      activeSelections[productId].colorIndex = index;
-      renderCatalog();
-    };
-
-    window.toggleView = function(productId) {
-      const state = activeSelections[productId];
-      state.view = state.view === 'front' ? 'back' : 'front';
-      renderCatalog();
-    };
-
-    window.selectSize = function(productId, size) {
-      activeSelections[productId].selectedSize = size;
-      renderCatalog();
-    };
+    window.changeColor = function(productId, index) { activeSelections[productId].colorIndex = index; renderCatalog(); };
+    window.toggleView = function(productId) { const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderCatalog(); };
+    window.selectSize = function(productId, size) { activeSelections[productId].selectedSize = size; renderCatalog(); };
 
     window.redirectToWhatsApp = function(productId) {
       const product = PRODUCTS_DATABASE.find(p => p.id === productId);
       const state = activeSelections[productId];
       const variant = product.colorVariants[state.colorIndex];
-      
-      if (!state.selectedSize) {
-        alert("Please select a Size before checking out!");
-        return;
-      }
-      
+      if (!state.selectedSize) { alert("Please select a Size before checking out!"); return; }
       const targetPhone = "918462003505"; 
       const message = `⚡ NEW DROPS ORDER | beNoNseNse ⚡\n\nProduct: ${product.name}\nColor Variant: [ ${variant.name} ]\nSize Selected: [ Size ${state.selectedSize} ]\nPrice: ₹${product.price}\n\nPlease verify availability parameters for fulfillment!`;
       window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
     };
 
-    // Execution Context Ignition
     preloadAllImages();
     renderCatalog();
   </script>
