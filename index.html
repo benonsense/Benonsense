@@ -160,6 +160,7 @@
   </footer>
 
   <script>
+    // ⚡ CONFIGURATIONS: DYNAMIC FABRIC DESCRIPTIONS FIXED HERE ⚡
     const PRODUCTS_DATABASE = [
       {
         id: "4",
@@ -167,6 +168,7 @@
         name: "Plain Oversize T-shirts",
         price: 399,
         badge: "Premium Oversize",
+        description: "Premium 240gsm Pure Cotton T", // Updated Description
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: false,
@@ -189,6 +191,7 @@
         name: "Plain Polo T-shirts",
         price: 349,
         badge: "Premium Polo",
+        description: "Premium Cotton Polo T", // Updated Description
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "polo",
         hasBackView: false,
@@ -208,6 +211,7 @@
         name: "Loofy (Oversized Tee)",
         price: 549,
         badge: "",
+        description: "Premium 240gsm Pure Cotton T", // Updated Graphic Description
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
@@ -223,6 +227,7 @@
         name: "Caffein Happy (Oversized Tee)",
         price: 549,
         badge: "",
+        description: "Premium 240gsm Pure Cotton T", // Updated Graphic Description
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
@@ -238,6 +243,7 @@
         name: "Gojo (Oversized Tee)",
         price: 549,
         badge: "",
+        description: "Premium 240gsm Pure Cotton T", // Updated Graphic Description
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
@@ -319,9 +325,7 @@
       drawer.classList.toggle('translate-x-full');
     };
 
-    // New Function: Card toggle settings to show/expand variants & buttons on click
     window.toggleProductPanel = function(productId, event) {
-      // Prevent expand trigger if customer clicks inside options container or flip view button
       if (event.target.closest('.options-panel-container') || event.target.closest('.flip-btn')) return;
       
       const panel = document.getElementById(`panel-${productId}`);
@@ -354,18 +358,14 @@
         const displayImage = (product.hasBackView && state.view === 'back') ? currentVariant.back : currentVariant.front;
 
         const card = document.createElement('div');
-        // Compact styles applied below for mobile friendly design
         card.className = "bg-[#141414] border border-gray-900 rounded p-2 md:p-5 flex flex-col justify-between smooth-transition hover:border-gray-800 shadow-2xl cursor-pointer";
         card.setAttribute('onclick', `toggleProductPanel('${product.id}', event)`);
         
         card.innerHTML = `
           <div>
             <div class="relative overflow-hidden bg-[#1a1a1a] mb-3 group border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-1">
-              
               ${product.badge ? `<span class="absolute top-1.5 left-1.5 bg-red-600 text-white text-[8px] uppercase tracking-widest font-bold px-1.5 py-0.5 rounded z-10 scale-90 md:scale-100">${product.badge}</span>` : ''}
-              
               <img id="img-${product.id}" src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition group-hover:scale-102">
-              
               ${product.hasBackView ? `
                 <button onclick="toggleView('${product.id}', event)" class="flip-btn absolute bottom-1.5 right-1.5 bg-black/85 text-gray-400 text-[8px] md:text-[9px] px-1.5 py-0.5 md:px-2 md:py-1 rounded uppercase tracking-widest border border-gray-800 hover:text-white smooth-transition">
                   Flip ↺
@@ -382,8 +382,8 @@
 
             <div id="panel-${product.id}" class="options-panel-container hidden border-t border-gray-900 pt-3 mt-2 smooth-transition">
               
-              <p class="text-[9px] md:text-[11px] text-gray-500 uppercase tracking-widest mb-3">
-                ${product.category === 'plain-polo' ? 'Premium Pique Soft Cotton' : 'Premium 240GSM Heavyweight Knit'}
+              <p class="text-[9px] md:text-[11px] text-gray-400 font-bold uppercase tracking-widest mb-3 border-b border-gray-900 pb-1.5">
+                ✨ ${product.description}
               </p>
 
               <div class="mb-4">
@@ -429,7 +429,6 @@
     window.toggleView = function(productId, event) { if(event) event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderCatalog(); };
     window.selectSize = function(productId, size, event) { if(event) event.stopPropagation(); activeSelections[productId].selectedSize = size; renderCatalog(); document.getElementById(`panel-${productId}`).classList.remove('hidden'); };
 
-    // CART SYSTEM PIPELINE LOGIC
     window.addItemToCart = function(productId, event) {
       if(event) event.stopPropagation();
       const product = PRODUCTS_DATABASE.find(p => p.id === productId);
@@ -483,7 +482,6 @@
       const checkoutBtn = document.getElementById('checkout-btn');
 
       container.innerHTML = '';
-      
       let totalQty = 0;
       let subtotalPrice = 0;
 
