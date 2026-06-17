@@ -24,9 +24,7 @@
 </head>
 <body>
 
-  <!-- HERO HEADER LAYER -->
   <header class="relative h-screen flex flex-col justify-between p-4 md:p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.2), #0d0d0d), url('assets/hero-bg.webp');">
-    <!-- Top Brand Navbar Layer (Linked to logo.webp) -->
     <div class="flex justify-between items-center w-full z-10">
       <a href="#">
         <img src="assets/logo.webp" alt="beNoNseNse" class="h-8 md:h-10 object-contain smooth-transition hover:scale-105">
@@ -36,7 +34,6 @@
       </nav>
     </div>
     
-    <!-- Aligned Content Block -->
     <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-64 md:pt-80">
       <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed">
         "Being in sense is not always practical so beNoNseNse"
@@ -48,7 +45,6 @@
     <div></div>
   </header>
 
-  <!-- PRODUCT CATALOG SECTION -->
   <main id="catalog" class="max-w-7xl mx-auto px-4 py-12 md:py-16">
     <div class="w-full bg-[#141414] border border-gray-900 py-3 text-center px-4 rounded mb-12">
         <p class="text-red-500 text-xs md:text-sm font-bold tracking-widest uppercase">
@@ -56,11 +52,9 @@
         </p>
     </div>
 
-    <!-- FILTER ENGINE INTERFACE NAVIGATION BAR -->
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-gray-900 pb-4 mb-12 gap-4">
       <h2 class="text-xl md:text-2xl font-bold uppercase tracking-wider text-center md:text-left">Catalog Grid</h2>
       
-      <!-- Expanded Filter Controls Row -->
       <div id="filter-bar" class="flex flex-wrap justify-center gap-2 text-xs uppercase tracking-widest font-bold">
         <button onclick="filterCatalog('all')" id="btn-all" class="px-4 py-2 rounded bg-white text-black smooth-transition">All</button>
         <button onclick="filterCatalog('plain-oversize')" id="btn-plain-oversize" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
@@ -71,13 +65,10 @@
       </div>
     </div>
     
-    <!-- Dynamic Clean Mobile-Responsive Image Grid Layout -->
     <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-      <!-- Generated dynamic product layout target block -->
-    </div>
+      </div>
   </main>
 
-  <!-- MULTI-SIZE CHART POPUP MODAL -->
   <div id="size-modal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-[#141414] border border-gray-800 max-w-md w-full rounded p-6 relative smooth-transition shadow-2xl">
       <button onclick="toggleSizeModal(null)" class="absolute top-4 right-4 text-gray-500 hover:text-white text-lg font-bold p-1">&times;</button>
@@ -88,18 +79,15 @@
       <div class="overflow-x-auto">
         <table class="w-full text-left text-xs uppercase tracking-wider border-collapse">
           <thead id="modal-table-head">
-            <!-- Dynamic Headers Load via Javascript -->
-          </thead>
+            </thead>
           <tbody id="modal-table-body" class="divide-y divide-gray-900 text-gray-200">
-            <!-- Dynamic Spec Rows Load via Javascript -->
-          </tbody>
+            </tbody>
         </table>
       </div>
       <p id="modal-footer-tag" class="text-[10px] text-gray-500 uppercase tracking-widest mt-6 text-center">⚡ Luxury Fabrics Pipeline ⚡</p>
     </div>
   </div>
 
-  <!-- FOOTER CHANNEL CONNECTOR -->
   <footer class="bg-[#141414] border-t border-gray-900 px-6 py-12 mt-20">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-900 pb-10 mb-8">
         <div class="space-y-2 border-l-2 border-red-600 pl-4">
@@ -124,15 +112,15 @@
     </div>
   </footer>
 
-  <!-- DYNAMIC CENTRAL INTELLIGENT DATABASE ENGINE -->
   <script>
+    // ⚡ DATABASE ENGINE ORDER: PLAIN OVERSIZE & POLO ARE ALWAYS ON TOP ⚡
     const PRODUCTS_DATABASE = [
       {
         id: "4",
         category: "plain-oversize",
         name: "Plain Oversize T-shirts",
         price: 499,
-        badge: "New Drop",
+        badge: "Premium Oversize", // Updated from New Drop
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: false,
@@ -173,7 +161,7 @@
         category: "loofy",
         name: "Loofy (Oversized Tee)",
         price: 549,
-        badge: "Best Seller",
+        badge: "", // Removed Best Seller Badge
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
