@@ -24,7 +24,9 @@
 </head>
 <body>
 
+  <!-- HERO HEADER LAYER -->
   <header class="relative h-screen flex flex-col justify-between p-4 md:p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.2), #0d0d0d), url('assets/hero-bg.webp');">
+    <!-- Top Brand Navbar Layer -->
     <div class="flex justify-between items-center w-full z-10">
       <img src="assets/logo.png" alt="beNoNseNse" class="h-10 md:h-12 object-contain">
       <nav class="space-x-6 text-xs md:text-sm uppercase tracking-widest">
@@ -32,6 +34,7 @@
       </nav>
     </div>
     
+    <!-- Aligned Content Block -->
     <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-64 md:pt-80">
       <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed">
         "Being in sense is not always practical so beNoNseNse"
@@ -43,57 +46,58 @@
     <div></div>
   </header>
 
+  <!-- PRODUCT CATALOG SECTION -->
   <main id="catalog" class="max-w-7xl mx-auto px-4 py-12 md:py-16">
     <div class="w-full bg-[#141414] border border-gray-900 py-3 text-center px-4 rounded mb-12">
         <p class="text-red-500 text-xs md:text-sm font-bold tracking-widest uppercase">
-            ⚡ Premium 240GSM Heavyweight Streetwear Drop ⚡
+            ⚡ Premium Heavyweight Streetwear & Casuals Drop ⚡
         </p>
     </div>
 
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between border-b border-gray-900 pb-4 mb-12 gap-4">
+    <!-- FILTER ENGINE INTERFACE NAVIGATION BAR -->
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-gray-900 pb-4 mb-12 gap-4">
       <h2 class="text-xl md:text-2xl font-bold uppercase tracking-wider text-center md:text-left">Catalog Grid</h2>
       
+      <!-- Expanded Filter Controls Row -->
       <div id="filter-bar" class="flex flex-wrap justify-center gap-2 text-xs uppercase tracking-widest font-bold">
         <button onclick="filterCatalog('all')" id="btn-all" class="px-4 py-2 rounded bg-white text-black smooth-transition">All</button>
         <button onclick="filterCatalog('loofy')" id="btn-loofy" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Loofy</button>
         <button onclick="filterCatalog('caffein-happy')" id="btn-caffein-happy" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Caffein Happy</button>
         <button onclick="filterCatalog('gojo')" id="btn-gojo" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Gojo</button>
+        <button onclick="filterCatalog('plain-oversize')" id="btn-plain-oversize" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
+        <button onclick="filterCatalog('plain-polo')" id="btn-plain-polo" class="px-4 py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Polo</button>
       </div>
     </div>
     
+    <!-- Dynamic Clean Mobile-Responsive Image Grid Layout -->
     <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-      </div>
+      <!-- Generated dynamic product layout target block -->
+    </div>
   </main>
 
+  <!-- MULTI-SIZE CHART POPUP MODAL -->
   <div id="size-modal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-[#141414] border border-gray-800 max-w-md w-full rounded p-6 relative smooth-transition shadow-2xl">
-      <button onclick="toggleSizeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white text-lg font-bold p-1">&times;</button>
+      <button onclick="toggleSizeModal(null)" class="absolute top-4 right-4 text-gray-500 hover:text-white text-lg font-bold p-1">&times;</button>
       
-      <h3 class="text-lg font-bold uppercase tracking-widest text-red-500 mb-2">Oversized Silhouette Guide</h3>
-      <p class="text-[11px] text-gray-400 uppercase tracking-wider mb-6">Measurements configured in inches for perfect drops fit.</p>
+      <h3 id="modal-title" class="text-lg font-bold uppercase tracking-widest text-red-500 mb-2">Silhouette Guide</h3>
+      <p class="text-[11px] text-gray-400 uppercase tracking-wider mb-6">Measurements configured in inches for perfect drop fit.</p>
       
       <div class="overflow-x-auto">
         <table class="w-full text-left text-xs uppercase tracking-wider border-collapse">
-          <thead>
-            <tr class="border-b border-gray-800 text-gray-400 font-bold bg-[#0d0d0d]">
-              <th class="py-3 px-2">Size</th>
-              <th class="py-3 px-2">Chest (Inches)</th>
-              <th class="py-3 px-2">Length (Inches)</th>
-            </tr>
+          <thead id="modal-table-head">
+            <!-- Dynamic Headers Load via Javascript -->
           </thead>
-          <tbody class="divide-y divide-gray-900 text-gray-200">
-            <tr><td class="py-3 px-2 font-bold text-white">S</td><td class="py-3 px-2">42</td><td class="py-3 px-2">28</td></tr>
-            <tr><td class="py-3 px-2 font-bold text-white">M</td><td class="py-3 px-2">44</td><td class="py-3 px-2">29</td></tr>
-            <tr><td class="py-3 px-2 font-bold text-white">L</td><td class="py-3 px-2">46</td><td class="py-3 px-2">30</td></tr>
-            <tr><td class="py-3 px-2 font-bold text-white">XL</td><td class="py-3 px-2">48</td><td class="py-3 px-2">31</td></tr>
-            <tr><td class="py-3 px-2 font-bold text-white">XXL</td><td class="py-3 px-2">50</td><td class="py-3 px-2">32</td></tr>
+          <tbody id="modal-table-body" class="divide-y divide-gray-900 text-gray-200">
+            <!-- Dynamic Spec Rows Load via Javascript -->
           </tbody>
         </table>
       </div>
-      <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-6 text-center">⚡ 240GSM Heavyweight Luxury Terry Loop Knit ⚡</p>
+      <p id="modal-footer-tag" class="text-[10px] text-gray-500 uppercase tracking-widest mt-6 text-center">⚡ Luxury Fabrics Pipeline ⚡</p>
     </div>
   </div>
 
+  <!-- FOOTER CHANNEL CONNECTOR -->
   <footer class="bg-[#141414] border-t border-gray-900 px-6 py-12 mt-20">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-900 pb-10 mb-8">
         <div class="space-y-2 border-l-2 border-red-600 pl-4">
@@ -118,6 +122,7 @@
     </div>
   </footer>
 
+  <!-- DYNAMIC CENTRAL INTELLIGENT DATABASE ENGINE -->
   <script>
     const PRODUCTS_DATABASE = [
       {
@@ -127,6 +132,8 @@
         price: 549,
         badge: "Best Seller",
         sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
         colorVariants: [
           { name: "Lavender", hex: "#B57EDC", front: "assets/loofy/loofy lavender front.webp", back: "assets/loofy/loofy lavender back.webp" },
           { name: "Black", hex: "#000000", front: "assets/loofy/loofy black front.webp", back: "assets/loofy/loofy black back.webp" },
@@ -140,6 +147,8 @@
         price: 549,
         badge: "",
         sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
         colorVariants: [
           { name: "White", hex: "#ffffff", front: "assets/caffein-happy/caffein happy white front.webp", back: "assets/caffein-happy/caffein happy white back.webp" },
           { name: "Off-White", hex: "#F4F0EA", front: "assets/caffein-happy/caffein happy off-white front.webp", back: "assets/caffein-happy/caffein happy off-white back.webp" },
@@ -153,10 +162,53 @@
         price: 549,
         badge: "",
         sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
         colorVariants: [
           { name: "Black", hex: "#000000", front: "assets/gojo/gojo black front.webp", back: "assets/gojo/gojo black back.webp" },
           { name: "Brown", hex: "#5C4033", front: "assets/gojo/gojo brown front.webp", back: "assets/gojo/gojo brown back.webp" },
           { name: "Maroon", hex: "#800020", front: "assets/gojo/gojo maroon front.webp", back: "assets/gojo/gojo maroon back.webp" }
+        ]
+      },
+      {
+        id: "4",
+        category: "plain-oversize",
+        name: "Plain Oversize T-shirts",
+        price: 499,
+        badge: "New Drop",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: false, // Disables back swapping configuration
+        colorVariants: [
+          { name: "Army Green", hex: "#4B5320", front: "assets/plain-oversize/army green.webp" },
+          { name: "Beige", hex: "#F5F5DC", front: "assets/plain-oversize/beige.webp" },
+          { name: "Black", hex: "#000000", front: "assets/plain-oversize/black.webp" },
+          { name: "Brown", hex: "#5C4033", front: "assets/plain-oversize/brown.webp" },
+          { name: "Lavender", hex: "#B57EDC", front: "assets/plain-oversize/lavender.webp" },
+          { name: "Maroon", hex: "#800020", front: "assets/plain-oversize/maroon.webp" },
+          { name: "Off-White", hex: "#F4F0EA", front: "assets/plain-oversize/off-white.webp" },
+          { name: "Powder Blue", hex: "#B0E0E6", front: "assets/plain-oversize/powder blue.webp" },
+          { name: "Rose Pink", hex: "#FF007F", front: "assets/plain-oversize/rose pink.webp" },
+          { name: "White", hex: "#ffffff", front: "assets/plain-oversize/white.webp" }
+        ]
+      },
+      {
+        id: "5",
+        category: "plain-polo",
+        name: "Plain Polo T-shirts",
+        price: 599,
+        badge: "Premium Polo",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "polo",
+        hasBackView: false, // Disables back swapping configuration
+        colorVariants: [
+          { name: "Black", hex: "#000000", front: "assets/plain-polo/black.webp" },
+          { name: "Grey", hex: "#808080", front: "assets/plain-polo/grey.webp" },
+          { name: "White", hex: "#ffffff", front: "assets/plain-polo/white.webp" },
+          { name: "Maroon", hex: "#800020", front: "assets/plain-polo/maroon.webp" },
+          { name: "Red", hex: "#FF0000", front: "assets/plain-polo/red.webp" },
+          { name: "Navy Blue", hex: "#000080", front: "assets/plain-polo/navy blue.webp" },
+          { name: "Charcoal", hex: "#36454F", front: "assets/plain-polo/charcoal.webp" }
         ]
       }
     ];
@@ -168,7 +220,9 @@
       PRODUCTS_DATABASE.forEach(product => {
         product.colorVariants.forEach(variant => {
           const imgF = new Image(); imgF.src = variant.front;
-          const imgB = new Image(); imgB.src = variant.back;
+          if (product.hasBackView) {
+            const imgB = new Image(); imgB.src = variant.back;
+          }
         });
       });
     }
@@ -186,9 +240,52 @@
       renderCatalog();
     };
 
-    window.toggleSizeModal = function() {
+    window.toggleSizeModal = function(chartType) {
       const modal = document.getElementById('size-modal');
-      modal.classList.toggle('hidden');
+      if (!chartType) { modal.classList.add('hidden'); return; }
+      
+      const title = document.getElementById('modal-title');
+      const head = document.getElementById('modal-table-head');
+      const body = document.getElementById('modal-table-body');
+      const footer = document.getElementById('modal-footer-tag');
+
+      if (chartType === 'polo') {
+        title.innerText = "Plain Polo Guide";
+        footer.innerText = "⚡ Premium Pique Cotton Classic Fit ⚡";
+        head.innerHTML = `
+          <tr class="border-b border-gray-800 text-gray-400 font-bold bg-[#0d0d0d]">
+            <th class="py-3 px-2">Size</th>
+            <th class="py-3 px-2">Chest</th>
+            <th class="py-3 px-2">Length</th>
+            <th class="py-3 px-2">Shoulder</th>
+          </tr>
+        `;
+        body.innerHTML = `
+          <tr><td class="py-3 px-2 font-bold text-white">S</td><td class="py-3 px-2">36</td><td class="py-3 px-2">26</td><td class="py-3 px-2">16</td></tr>
+          <tr><td class="py-3 px-2 font-bold text-white">M</td><td class="py-3 px-2">38</td><td class="py-3 px-2">27</td><td class="py-3 px-2">17</td></tr>
+          <tr><td class="py-3 px-2 font-bold text-white">L</td><td class="py-3 px-2">40</td><td class="py-3 px-2">28</td><td class="py-3 px-2">17.5</td></tr>
+          <tr><td class="py-3 px-2 font-bold text-white">XL</td><td class="py-3 px-2">42</td><td class="py-3 px-2">29</td><td class="py-3 px-2">18</td></tr>
+          <tr><td class="py-3 px-2 font-bold text-white">XXL</td><td class="py-3 px-2">44</td><td class="py-3 px-2">30</td><td class="py-3 px-2">18.5</td></tr>
+        `;
+      } else {
+        title.innerText = "Oversized Silhouette Guide";
+        footer.innerText = "⚡ 240GSM Heavyweight Luxury Terry Loop Knit ⚡";
+        head.innerHTML = `
+          <tr class="border-b border-gray-800 text-gray-400 font-bold bg-[#0d0d0d]">
+            <th class="py-3 px-2">Size</th>
+            <th class="py-3 px-2">Chest (Inches)</th>
+            <th class="py-3 px-2">Length (Inches)</th>
+          </tr>
+        `;
+        body.innerHTML = `
+          <tr><td class="py-3 px-2 font-bold text-white">S</td><td class="py-3 px-2">42</td><td class="py-3 px-2">28</td></tr>
+          <tr><td class="py-3 px-2 font-bold text-white">M</td><td class="py-3 px-2">44</td><td class="py-3 px-2">29</td></tr>
+          <tr><td class="py-3 px-2 font-bold text-white">L</td><td class="py-3 px-2">46</td><td class="py-3 px-2">30</td></tr>
+          <tr><td class="py-3 px-2 font-bold text-white">XL</td><td class="py-3 px-2">48</td><td class="py-3 px-2">31</td></tr>
+          <tr><td class="py-3 px-2 font-bold text-white">XXL</td><td class="py-3 px-2">50</td><td class="py-3 px-2">32</td></tr>
+        `;
+      }
+      modal.classList.remove('hidden');
     };
 
     function renderCatalog() {
@@ -206,31 +303,40 @@
 
         const state = activeSelections[product.id];
         const currentVariant = product.colorVariants[state.colorIndex];
-        const displayImage = state.view === 'front' ? currentVariant.front : currentVariant.back;
+        
+        // Conditional asset binding dependent on drop tracking logic
+        const displayImage = (product.hasBackView && state.view === 'back') ? currentVariant.back : currentVariant.front;
 
         const card = document.createElement('div');
         card.className = "bg-[#141414] border border-gray-900 rounded p-4 md:p-6 flex flex-col justify-between smooth-transition hover:border-gray-800 shadow-2xl";
         
         card.innerHTML = `
           <div>
-            <div class="relative overflow-hidden bg-[#1a1a1a] mb-6 group cursor-pointer border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-2" onclick="toggleView('${product.id}')">
+            <!-- Image Contain Frame -->
+            <div class="relative overflow-hidden bg-[#1a1a1a] mb-6 group cursor-pointer border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-2" 
+                 onclick="${product.hasBackView ? `toggleView('${product.id}')` : ''}">
+              
               ${product.badge ? `<span class="absolute top-3 left-3 bg-red-600 text-white text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded z-10">${product.badge}</span>` : ''}
+              
               <img id="img-${product.id}" src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition group-hover:scale-102">
-              <div class="absolute bottom-2 right-2 bg-black/80 text-gray-400 text-[8px] md:text-[9px] px-2 py-1 rounded uppercase tracking-widest border border-gray-800">Flip View ↺</div>
+              
+              ${product.hasBackView ? `<div class="absolute bottom-2 right-2 bg-black/80 text-gray-400 text-[8px] md:text-[9px] px-2 py-1 rounded uppercase tracking-widest border border-gray-800">Flip View ↺</div>` : ''}
             </div>
 
             <div class="flex justify-between items-baseline mb-3">
               <h3 class="text-md md:text-lg font-bold uppercase tracking-tight text-white">${product.name}</h3>
               <p class="text-md font-bold text-red-500">₹${product.price}</p>
             </div>
-            <p class="text-[10px] md:text-[11px] text-gray-500 uppercase tracking-widest mb-4">Premium 240GSM Heavyweight Luxury Blend</p>
+            <p class="text-[10px] md:text-[11px] text-gray-500 uppercase tracking-widest mb-4">
+              ${product.category === 'plain-polo' ? 'Premium Heavy Pique Soft Luxury Cotton' : 'Premium 240GSM Heavyweight Luxury Blend'}
+            </p>
 
             <div class="mb-5">
               <p class="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-wider mb-2">Color: <span class="text-white font-bold uppercase">${currentVariant.name}</span></p>
-              <div class="flex space-x-2.5">
+              <div class="flex flex-wrap gap-2">
                 ${product.colorVariants.map((v, idx) => `
                   <button onclick="changeColor('${product.id}', ${idx})" 
-                    class="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 smooth-transition ${state.colorIndex === idx ? 'border-white scale-110' : 'border-gray-900 hover:scale-105'}" 
+                    class="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 smooth-transition ${state.colorIndex === idx ? 'border-white scale-110 shadow-lg' : 'border-gray-900 hover:scale-105'}" 
                     style="background-color: ${v.hex};" title="${v.name}">
                   </button>
                 `).join('')}
@@ -250,7 +356,7 @@
             </div>
             
             <div class="text-right mb-4">
-               <button onclick="toggleSizeModal()" class="text-[10px] uppercase text-gray-400 hover:text-red-400 underline tracking-widest font-bold smooth-transition">View Size Guide 📏</button>
+               <button onclick="toggleSizeModal('${product.sizeChartType}')" class="text-[10px] uppercase text-gray-400 hover:text-red-400 underline tracking-widest font-bold smooth-transition">View Size Guide 📏</button>
             </div>
           </div>
 
