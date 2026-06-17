@@ -4,11 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>beNoNseNse | Admin Dashboard</title>
-  <!-- Stylesheet required for rendering Decap UI component layout panels -->
-  <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" />
 </head>
-<body class="bg-gray-50">
-  <!-- Include the global Decap script bundle setup directly -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<body>
+  <!-- Specific config path link context template -->
+  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+  
+  <!-- Decap Framework Core App Platform Bundle Injection -->
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
