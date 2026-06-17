@@ -13,35 +13,46 @@
 </head>
 <body>
 
-  <header class="relative h-[80vh] flex flex-col justify-between p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.3), #0d0d0d), url('assets/hero-bg.png');">
-    <div class="flex justify-between items-center w-full">
-      <img src="assets/logo.png" alt="beNoNseNse" class="h-12 object-contain">
-      <nav class="space-x-6 text-sm uppercase tracking-widest hidden md:flex">
-        <a href="#catalog" class="hover:text-red-500 smooth-transition font-bold">Shop Drops</a>
+  <!-- HERO HEADER LAYER (Optimized Layout for Visual Balance) -->
+  <header class="relative h-screen flex flex-col justify-between p-4 md:p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.1), #0d0d0d), url('assets/hero-bg.png');">
+    <!-- Top Brand Navbar Layer -->
+    <div class="flex justify-between items-center w-full z-10">
+      <img src="assets/logo.png" alt="beNoNseNse" class="h-10 md:h-12 object-contain">
+      <nav class="space-x-6 text-xs md:text-sm uppercase tracking-widest">
+        <a href="#catalog" class="hover:text-red-500 smooth-transition font-bold tracking-widest text-white">Shop Drops</a>
       </nav>
     </div>
     
-    <div class="text-center my-auto">
-      <h1 class="text-5xl md:text-8xl font-bold tracking-tighter text-red-600 mb-4">beNoNseNse</h1>
-      <p class="text-sm md:text-xl uppercase tracking-widest text-gray-400 font-medium">"Being in sense is not always practical so beNoNseNse"</p>
-      <a href="#catalog" class="mt-8 inline-block bg-white text-black px-8 py-3 uppercase tracking-wider font-bold text-sm hover:bg-red-600 hover:text-white smooth-transition">Explore Drops</a>
+    <!-- Aligned Content Directly Anchored Under Background Graphics Layout -->
+    <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-24 md:pt-32">
+      <!-- Big branding text removed to utilize background artwork properly -->
+      <p class="text-sm md:text-xl lg:text-2xl uppercase tracking-widest text-gray-300 font-bold max-w-2xl mx-auto leading-relaxed drop-shadow-2xl">
+        "Being in sense is not always practical so beNoNseNse"
+      </p>
+      <a href="#catalog" class="mt-8 inline-block bg-white text-black px-8 py-3.5 uppercase tracking-widest font-bold text-xs md:text-sm hover:bg-red-600 hover:text-white smooth-transition shadow-2xl">
+        Explore Drops
+      </a>
     </div>
     <div></div>
   </header>
 
-  <main id="catalog" class="max-w-7xl mx-auto px-4 py-16">
+  <!-- PRODUCT CATALOG SECTION -->
+  <main id="catalog" class="max-w-7xl mx-auto px-4 py-12 md:py-16">
     <div class="w-full bg-[#141414] border border-gray-900 py-3 text-center px-4 rounded mb-12">
         <p class="text-red-500 text-xs md:text-sm font-bold tracking-widest uppercase">
             ⚡ Premium 240GSM Heavyweight Streetwear Drop ⚡
         </p>
     </div>
 
-    <h2 class="text-2xl font-bold uppercase tracking-wider border-b border-gray-900 pb-4 mb-12 text-center md:text-left">Catalog Grid</h2>
+    <h2 class="text-xl md:text-2xl font-bold uppercase tracking-wider border-b border-gray-900 pb-4 mb-12 text-center md:text-left">Catalog Grid</h2>
     
-    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-      </div>
+    <!-- Dynamic Clean Mobile-Responsive Image Preservation Grid Layout -->
+    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+      <!-- Generated dynamic product layout target block -->
+    </div>
   </main>
 
+  <!-- FOOTER CHANNEL CONNECTOR -->
   <footer class="bg-[#141414] border-t border-gray-900 px-6 py-12 mt-20">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-900 pb-10 mb-8">
         <div class="space-y-2 border-l-2 border-red-600 pl-4">
@@ -66,6 +77,7 @@
     </div>
   </footer>
 
+  <!-- ULTIMATE HIGH-SPEED INSTANT MEMORY CACHE DATABASE LOGIC -->
   <script>
     // ⚡ 1. GLOBAL CENTRAL DESIGN REGISTERED DROPS DATABASE ⚡
     const PRODUCTS_DATABASE = [
@@ -117,7 +129,6 @@
       });
     }
 
-    // State cache repository tracking loops
     const activeSelections = {};
 
     // ⚡ 3. DYNAMIC DOM RENDER GENERATOR
@@ -135,40 +146,44 @@
         const displayImage = state.view === 'front' ? currentVariant.front : currentVariant.back;
 
         const card = document.createElement('div');
-        card.className = "bg-[#141414] border border-gray-900 rounded p-6 flex flex-col justify-between smooth-transition hover:border-gray-800 shadow-2xl";
+        card.className = "bg-[#141414] border border-gray-900 rounded p-4 md:p-6 flex flex-col justify-between smooth-transition hover:border-gray-800 shadow-2xl";
         
         card.innerHTML = `
           <div>
-            <div class="relative overflow-hidden bg-[#1a1a1a] mb-6 group cursor-pointer border border-gray-900" onclick="toggleView('${product.id}')">
-              ${product.badge ? `<span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] uppercase tracking-widest font-bold px-2 py-1 rounded z-10">${product.badge}</span>` : ''}
-              <img id="img-${product.id}" src="${displayImage}" alt="${product.name}" class="w-full aspect-[3/4] object-contain smooth-transition group-hover:scale-102">
-              <div class="absolute bottom-3 right-3 bg-black/80 text-gray-400 text-[9px] px-2 py-1 uppercase tracking-widest border border-gray-800">Click to Flip Angle ↺</div>
+            <!-- Image Frame - Enforcing max object contain scaling ratio across mobile sizes -->
+            <div class="relative overflow-hidden bg-[#1a1a1a] mb-6 group cursor-pointer border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-2" onclick="toggleView('${product.id}')">
+              ${product.badge ? `<span class="absolute top-3 left-3 bg-red-600 text-white text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded z-10">${product.badge}</span>` : ''}
+              <img id="img-${product.id}" src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition group-hover:scale-102">
+              <div class="absolute bottom-2 right-2 bg-black/80 text-gray-400 text-[8px] md:text-[9px] px-2 py-1 rounded uppercase tracking-widest border border-gray-800">Flip View ↺</div>
             </div>
 
-            <div class="flex justify-between items-baseline mb-4">
-              <h3 class="text-lg font-bold uppercase tracking-tight text-white">${product.name}</h3>
+            <!-- Product Header Info -->
+            <div class="flex justify-between items-baseline mb-3">
+              <h3 class="text-md md:text-lg font-bold uppercase tracking-tight text-white">${product.name}</h3>
               <p class="text-md font-bold text-red-500">₹${product.price}</p>
             </div>
-            <p class="text-[11px] text-gray-500 uppercase tracking-widest mb-4">Premium 240GSM Heavyweight Luxury Blend</p>
+            <p class="text-[10px] md:text-[11px] text-gray-500 uppercase tracking-widest mb-4">Premium 240GSM Heavyweight Luxury Blend</p>
 
+            <!-- Color Options Selection Grid -->
             <div class="mb-5">
-              <p class="text-[11px] text-gray-400 uppercase tracking-wider mb-2">Selected Color: <span class="text-white font-bold uppercase">${currentVariant.name}</span></p>
+              <p class="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-wider mb-2">Color: <span class="text-white font-bold uppercase">${currentVariant.name}</span></p>
               <div class="flex space-x-2.5">
                 ${product.colorVariants.map((v, idx) => `
                   <button onclick="changeColor('${product.id}', ${idx})" 
-                    class="w-7 h-7 rounded-full border-2 smooth-transition ${state.colorIndex === idx ? 'border-white scale-110' : 'border-gray-900 hover:scale-105'}" 
+                    class="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 smooth-transition ${state.colorIndex === idx ? 'border-white scale-110' : 'border-gray-900 hover:scale-105'}" 
                     style="background-color: ${v.hex};" title="${v.name}">
                   </button>
                 `).join('')}
               </div>
             </div>
 
+            <!-- Interactive Size Layout Grid -->
             <div class="mb-6">
-              <p class="text-[11px] text-gray-400 uppercase tracking-wider mb-2">Select Size Silhouette</p>
-              <div class="grid grid-cols-5 gap-1.5">
+              <p class="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-wider mb-2">Select Size</p>
+              <div class="grid grid-cols-5 gap-1">
                 ${product.sizes.map(s => `
                   <button onclick="selectSize('${product.id}', '${s}')" 
-                    class="border py-2 text-xs font-bold rounded smooth-transition ${state.selectedSize === s ? 'bg-white text-black border-white' : 'border-gray-800 text-gray-400 bg-[#0d0d0d] hover:border-gray-500 hover:text-white'}">
+                    class="border py-1.5 md:py-2 text-[11px] md:text-xs font-bold rounded smooth-transition ${state.selectedSize === s ? 'bg-white text-black border-white' : 'border-gray-800 text-gray-400 bg-[#0d0d0d] hover:border-gray-500 hover:text-white'}">
                     ${s}
                   </button>
                 `).join('')}
@@ -176,8 +191,9 @@
             </div>
           </div>
 
+          <!-- Checkout Pipeline Execution Action Button -->
           <button onclick="redirectToWhatsApp('${product.id}')" 
-            class="w-full bg-white text-black font-bold uppercase tracking-widest py-3.5 text-xs hover:bg-red-600 hover:text-white smooth-transition mt-2 tracking-widest">
+            class="w-full bg-white text-black font-bold uppercase tracking-widest py-3 text-xs hover:bg-red-600 hover:text-white smooth-transition mt-2">
             Buy Drop via WhatsApp
           </button>
         `;
@@ -208,11 +224,11 @@
       const variant = product.colorVariants[state.colorIndex];
       
       if (!state.selectedSize) {
-        alert("Please select a Size silhouette before checking out!");
+        alert("Please select a Size before checking out!");
         return;
       }
       
-      const targetPhone = "918462003505"; // Bhupendra's official WhatsApp business handle
+      const targetPhone = "918462003505"; 
       const message = `⚡ NEW DROPS ORDER | beNoNseNse ⚡\n\nProduct: ${product.name}\nColor Variant: [ ${variant.name} ]\nSize Selected: [ Size ${state.selectedSize} ]\nPrice: ₹${product.price}\n\nPlease verify availability parameters for fulfillment!`;
       window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
     };
