@@ -26,9 +26,11 @@
 
   <!-- HERO HEADER LAYER -->
   <header class="relative h-screen flex flex-col justify-between p-4 md:p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.2), #0d0d0d), url('assets/hero-bg.webp');">
-    <!-- Top Brand Navbar Layer -->
+    <!-- Top Brand Navbar Layer (Linked to logo.webp) -->
     <div class="flex justify-between items-center w-full z-10">
-      <img src="assets/logo.png" alt="beNoNseNse" class="h-10 md:h-12 object-contain">
+      <a href="#">
+        <img src="assets/logo.webp" alt="beNoNseNse" class="h-8 md:h-10 object-contain smooth-transition hover:scale-105">
+      </a>
       <nav class="space-x-6 text-xs md:text-sm uppercase tracking-widest">
         <a href="#catalog" class="hover:text-red-500 smooth-transition font-bold tracking-widest text-white">Shop Drops</a>
       </nav>
@@ -124,7 +126,6 @@
 
   <!-- DYNAMIC CENTRAL INTELLIGENT DATABASE ENGINE -->
   <script>
-    // ⚡ ARRAY ORDER STRICTLY CONFIGURED: PLAIN ITEMS ARE FIXED ON TOP ⚡
     const PRODUCTS_DATABASE = [
       {
         id: "4",
@@ -212,7 +213,6 @@
           { name: "Maroon", hex: "#800020", front: "assets/gojo/gojo maroon front.webp", back: "assets/gojo/gojo maroon back.webp" }
         ]
       }
-      // 📝 AGAR AAP NAYE TEES JODENGE TOH BAS IS LINE KE NEECHE ADD KARTE JANA, WOH AUTOMATIC INKE NEECHE HI AAYENGE.
     ];
 
     let currentFilter = 'all';
@@ -371,7 +371,6 @@
       window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
     };
 
-    // Lazy load execution context
     renderCatalog();
   </script>
 </body>
