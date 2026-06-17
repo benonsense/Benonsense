@@ -168,7 +168,7 @@
   </footer>
 
   <script>
-    // ⚡ CENTRAL DATABASE: Separate Gender-wise configuration enabled ⚡
+    // ⚡ CENTRAL DATABASE: Both Gender-wise configuration fully synchronized ⚡
     const PRODUCTS_DATABASE = [
       // ---------------- MALE PRODUCTS ----------------
       {
@@ -276,22 +276,28 @@
         name: "Plain Oversize T-shirts (Female)",
         price: 399,
         badge: "Premium Oversize",
-        description: "Premium 240gsm Pure Cotton T",
+        description: "Premium 240gsm Pure Cotton T", // Same description as Male
         sizes: ["S", "M", "L", "XL"],
         sizeChartType: "oversized",
         hasBackView: false,
         colorVariants: [
-          // Yahan female folder ka link kiya hua hai, bas photos daal dena!
-          { name: "Black", hex: "#000000", front: "assets/female/plain-oversize/black.webp" },
-          { name: "Lavender", hex: "#B57EDC", front: "assets/female/plain-oversize/lavender.webp" },
+          // All 10 synchronized premium colors mapped to assets/female/...
+          { name: "Army Green", hex: "#4B5320", front: "assets/female/plain-oversize/army green.webp" },
           { name: "Beige", hex: "#F5F5DC", front: "assets/female/plain-oversize/beige.webp" },
+          { name: "Black", hex: "#000000", front: "assets/female/plain-oversize/black.webp" },
+          { name: "Brown", hex: "#5C4033", front: "assets/female/plain-oversize/brown.webp" },
+          { name: "Lavender", hex: "#B57EDC", front: "assets/female/plain-oversize/lavender.webp" },
+          { name: "Maroon", hex: "#800020", front: "assets/female/plain-oversize/maroon.webp" },
+          { name: "Off-White", hex: "#F4F0EA", front: "assets/female/plain-oversize/off-white.webp" },
+          { name: "Powder Blue", hex: "#B0E0E6", front: "assets/female/plain-oversize/powder blue.webp" },
+          { name: "Rose Pink", hex: "#FF007F", front: "assets/female/plain-oversize/rose pink.webp" },
           { name: "White", hex: "#ffffff", front: "assets/female/plain-oversize/white.webp" }
         ]
       }
     ];
 
-    let currentGender = 'male'; // Default Selected
-    let currentCategory = 'all'; // Default Selected
+    let currentGender = 'male'; 
+    let currentCategory = 'all'; 
     const activeSelections = {};
     let CART_STORAGE = [];
 
@@ -397,7 +403,6 @@
       const grid = document.getElementById('product-grid');
       grid.innerHTML = '';
 
-      // Combined Advanced Filter Strategy (Gender + Category)
       let filteredProducts = PRODUCTS_DATABASE.filter(p => p.gender === currentGender);
       
       if (currentCategory !== 'all') {
