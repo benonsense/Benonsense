@@ -65,16 +65,24 @@
         </p>
     </div>
 
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-gray-900 pb-4 mb-8 md:mb-12 gap-4">
-      <h2 class="text-lg md:text-2xl font-bold uppercase tracking-wider text-center md:text-left">Catalog Grid</h2>
+    <div class="flex flex-col items-center border-b border-gray-900 pb-6 mb-8 md:mb-12 gap-6">
       
+      <div class="flex bg-[#141414] p-1 rounded-full border border-gray-800 w-full max-w-[280px] sm:max-w-[320px]">
+        <button onclick="filterGender('male')" id="gender-male" class="flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full bg-white text-black smooth-transition">
+          Male
+        </button>
+        <button onclick="filterGender('female')" id="gender-female" class="flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full text-gray-400 hover:text-white smooth-transition">
+          Female
+        </button>
+      </div>
+
       <div id="filter-bar" class="flex flex-wrap justify-center gap-1.5 md:gap-2 text-[10px] md:text-xs uppercase tracking-widest font-bold">
-        <button onclick="filterCatalog('all')" id="btn-all" class="px-3 py-1.5 md:px-4 md:py-2 rounded bg-white text-black smooth-transition">All</button>
-        <button onclick="filterCatalog('plain-oversize')" id="btn-plain-oversize" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
-        <button onclick="filterCatalog('plain-polo')" id="btn-plain-polo" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Polo</button>
-        <button onclick="filterCatalog('loofy')" id="btn-loofy" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Loofy</button>
-        <button onclick="filterCatalog('caffein-happy')" id="btn-caffein-happy" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Caffein Happy</button>
-        <button onclick="filterCatalog('gojo')" id="btn-gojo" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Gojo</button>
+        <button onclick="filterCategory('all')" id="btn-all" class="px-3 py-1.5 md:px-4 md:py-2 rounded bg-white text-black smooth-transition">All</button>
+        <button onclick="filterCategory('plain-oversize')" id="btn-plain-oversize" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
+        <button onclick="filterCategory('plain-polo')" id="btn-plain-polo" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Polo</button>
+        <button onclick="filterCategory('loofy')" id="btn-loofy" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Loofy</button>
+        <button onclick="filterCategory('caffein-happy')" id="btn-caffein-happy" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Caffein Happy</button>
+        <button onclick="filterCategory('gojo')" id="btn-gojo" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Gojo</button>
       </div>
     </div>
     
@@ -160,107 +168,152 @@
   </footer>
 
   <script>
-    // ⚡ CONFIGURATIONS: DYNAMIC FABRIC DESCRIPTIONS FIXED HERE ⚡
+    // ⚡ CENTRAL DATABASE: Separate Gender-wise configuration enabled ⚡
     const PRODUCTS_DATABASE = [
+      // ---------------- MALE PRODUCTS ----------------
       {
-        id: "4",
+        id: "m4",
+        gender: "male",
         category: "plain-oversize",
-        name: "Plain Oversize T-shirts",
+        name: "Plain Oversize T-shirts (Male)",
         price: 399,
         badge: "Premium Oversize",
-        description: "Premium 240gsm Pure Cotton T", // Updated Description
+        description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: false,
         colorVariants: [
-          { name: "Army Green", hex: "#4B5320", front: "assets/plain-oversize/army green.webp" },
-          { name: "Beige", hex: "#F5F5DC", front: "assets/plain-oversize/beige.webp" },
-          { name: "Black", hex: "#000000", front: "assets/plain-oversize/black.webp" },
-          { name: "Brown", hex: "#5C4033", front: "assets/plain-oversize/brown.webp" },
-          { name: "Lavender", hex: "#B57EDC", front: "assets/plain-oversize/lavender.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/plain-oversize/maroon.webp" },
-          { name: "Off-White", hex: "#F4F0EA", front: "assets/plain-oversize/off-white.webp" },
-          { name: "Powder Blue", hex: "#B0E0E6", front: "assets/plain-oversize/powder blue.webp" },
-          { name: "Rose Pink", hex: "#FF007F", front: "assets/plain-oversize/rose pink.webp" },
-          { name: "White", hex: "#ffffff", front: "assets/plain-oversize/white.webp" }
+          { name: "Army Green", hex: "#4B5320", front: "assets/male/plain-oversize/army green.webp" },
+          { name: "Beige", hex: "#F5F5DC", front: "assets/male/plain-oversize/beige.webp" },
+          { name: "Black", hex: "#000000", front: "assets/male/plain-oversize/black.webp" },
+          { name: "Brown", hex: "#5C4033", front: "assets/male/plain-oversize/brown.webp" },
+          { name: "Lavender", hex: "#B57EDC", front: "assets/male/plain-oversize/lavender.webp" },
+          { name: "Maroon", hex: "#800020", front: "assets/male/plain-oversize/maroon.webp" },
+          { name: "Off-White", hex: "#F4F0EA", front: "assets/male/plain-oversize/off-white.webp" },
+          { name: "Powder Blue", hex: "#B0E0E6", front: "assets/male/plain-oversize/powder blue.webp" },
+          { name: "Rose Pink", hex: "#FF007F", front: "assets/male/plain-oversize/rose pink.webp" },
+          { name: "White", hex: "#ffffff", front: "assets/male/plain-oversize/white.webp" }
         ]
       },
       {
-        id: "5",
+        id: "m5",
+        gender: "male",
         category: "plain-polo",
-        name: "Plain Polo T-shirts",
+        name: "Plain Polo T-shirts (Male)",
         price: 349,
         badge: "Premium Polo",
-        description: "Premium Cotton Polo T", // Updated Description
+        description: "Premium Cotton Polo T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "polo",
         hasBackView: false,
         colorVariants: [
-          { name: "Black", hex: "#000000", front: "assets/plain-polo/black.webp" },
-          { name: "Grey", hex: "#808080", front: "assets/plain-polo/grey.webp" },
-          { name: "White", hex: "#ffffff", front: "assets/plain-polo/white.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/plain-polo/maroon.webp" },
-          { name: "Red", hex: "#FF0000", front: "assets/plain-polo/red.webp" },
-          { name: "Navy Blue", hex: "#000080", front: "assets/plain-polo/navy blue.webp" },
-          { name: "Charcoal", hex: "#36454F", front: "assets/plain-polo/charcoal.webp" }
+          { name: "Black", hex: "#000000", front: "assets/male/plain-polo/black.webp" },
+          { name: "Grey", hex: "#808080", front: "assets/male/plain-polo/grey.webp" },
+          { name: "White", hex: "#ffffff", front: "assets/male/plain-polo/white.webp" },
+          { name: "Maroon", hex: "#800020", front: "assets/male/plain-polo/maroon.webp" },
+          { name: "Red", hex: "#FF0000", front: "assets/male/plain-polo/red.webp" },
+          { name: "Navy Blue", hex: "#000080", front: "assets/male/plain-polo/navy blue.webp" },
+          { name: "Charcoal", hex: "#36454F", front: "assets/male/plain-polo/charcoal.webp" }
         ]
       },
       {
-        id: "1",
+        id: "m1",
+        gender: "male",
         category: "loofy",
         name: "Loofy (Oversized Tee)",
         price: 549,
         badge: "",
-        description: "Premium 240gsm Pure Cotton T", // Updated Graphic Description
+        description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
         colorVariants: [
-          { name: "Lavender", hex: "#B57EDC", front: "assets/loofy/loofy lavender front.webp", back: "assets/loofy/loofy lavender back.webp" },
-          { name: "Black", hex: "#000000", front: "assets/loofy/loofy black front.webp", back: "assets/loofy/loofy black back.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/loofy/loofy maroon front.webp", back: "assets/loofy/loofy maroon back.webp" }
+          { name: "Lavender", hex: "#B57EDC", front: "assets/male/loofy/loofy lavender front.webp", back: "assets/male/loofy/loofy lavender back.webp" },
+          { name: "Black", hex: "#000000", front: "assets/male/loofy/loofy black front.webp", back: "assets/male/loofy/loofy black back.webp" },
+          { name: "Maroon", hex: "#800020", front: "assets/male/loofy/loofy maroon front.webp", back: "assets/male/loofy/loofy maroon back.webp" }
         ]
       },
       {
-        id: "2",
+        id: "m2",
+        gender: "male",
         category: "caffein-happy",
         name: "Caffein Happy (Oversized Tee)",
         price: 549,
         badge: "",
-        description: "Premium 240gsm Pure Cotton T", // Updated Graphic Description
+        description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
         colorVariants: [
-          { name: "White", hex: "#ffffff", front: "assets/caffein-happy/caffein happy white front.webp", back: "assets/caffein-happy/caffein happy white back.webp" },
-          { name: "Off-White", hex: "#F4F0EA", front: "assets/caffein-happy/caffein happy off-white front.webp", back: "assets/caffein-happy/caffein happy off-white back.webp" },
-          { name: "Lavender", hex: "#B57EDC", front: "assets/caffein-happy/caffein happy lavender front.webp", back: "assets/caffein-happy/caffein happy lavender back.webp" }
+          { name: "White", hex: "#ffffff", front: "assets/male/caffein-happy/caffein happy white front.webp", back: "assets/male/caffein-happy/caffein happy white back.webp" },
+          { name: "Off-White", hex: "#F4F0EA", front: "assets/male/caffein-happy/caffein happy off-white front.webp", back: "assets/male/caffein-happy/caffein happy off-white back.webp" },
+          { name: "Lavender", hex: "#B57EDC", front: "assets/male/caffein-happy/caffein happy lavender front.webp", back: "assets/male/caffein-happy/caffein happy lavender back.webp" }
         ]
       },
       {
-        id: "3",
+        id: "m3",
+        gender: "male",
         category: "gojo",
         name: "Gojo (Oversized Tee)",
         price: 549,
         badge: "",
-        description: "Premium 240gsm Pure Cotton T", // Updated Graphic Description
+        description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
         colorVariants: [
-          { name: "Black", hex: "#000000", front: "assets/gojo/gojo black front.webp", back: "assets/gojo/gojo black back.webp" },
-          { name: "Brown", hex: "#5C4033", front: "assets/gojo/gojo brown front.webp", back: "assets/gojo/gojo brown back.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/gojo/gojo maroon front.webp", back: "assets/gojo/gojo maroon back.webp" }
+          { name: "Black", hex: "#000000", front: "assets/male/gojo/gojo black front.webp", back: "assets/male/gojo/gojo black back.webp" },
+          { name: "Brown", hex: "#5C4033", front: "assets/male/gojo/gojo brown front.webp", back: "assets/male/gojo/gojo brown back.webp" },
+          { name: "Maroon", hex: "#800020", front: "assets/male/gojo/gojo maroon front.webp", back: "assets/male/gojo/gojo maroon back.webp" }
+        ]
+      },
+
+      // ---------------- FEMALE PRODUCTS ----------------
+      {
+        id: "f4",
+        gender: "female",
+        category: "plain-oversize",
+        name: "Plain Oversize T-shirts (Female)",
+        price: 399,
+        badge: "Premium Oversize",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL"],
+        sizeChartType: "oversized",
+        hasBackView: false,
+        colorVariants: [
+          // Yahan female folder ka link kiya hua hai, bas photos daal dena!
+          { name: "Black", hex: "#000000", front: "assets/female/plain-oversize/black.webp" },
+          { name: "Lavender", hex: "#B57EDC", front: "assets/female/plain-oversize/lavender.webp" },
+          { name: "Beige", hex: "#F5F5DC", front: "assets/female/plain-oversize/beige.webp" },
+          { name: "White", hex: "#ffffff", front: "assets/female/plain-oversize/white.webp" }
         ]
       }
     ];
 
-    let currentFilter = 'all';
+    let currentGender = 'male'; // Default Selected
+    let currentCategory = 'all'; // Default Selected
     const activeSelections = {};
     let CART_STORAGE = [];
 
-    window.filterCatalog = function(category) {
-      currentFilter = category;
+    // GENDER TRIGGER PIPELINE
+    window.filterGender = function(gender) {
+      currentGender = gender;
+      const maleBtn = document.getElementById('gender-male');
+      const femaleBtn = document.getElementById('gender-female');
+      
+      if(gender === 'male') {
+        maleBtn.className = "flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full bg-white text-black smooth-transition";
+        femaleBtn.className = "flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full text-gray-400 hover:text-white smooth-transition";
+      } else {
+        femaleBtn.className = "flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full bg-white text-black smooth-transition";
+        maleBtn.className = "flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full text-gray-400 hover:text-white smooth-transition";
+      }
+      renderCatalog();
+    };
+
+    // CATEGORY TRIGGER PIPELINE
+    window.filterCategory = function(category) {
+      currentCategory = category;
       const buttons = document.querySelectorAll('#filter-bar button');
       buttons.forEach(btn => {
         if(btn.id === `btn-${category}`) {
@@ -344,9 +397,21 @@
       const grid = document.getElementById('product-grid');
       grid.innerHTML = '';
 
-      const filteredProducts = currentFilter === 'all' 
-        ? PRODUCTS_DATABASE 
-        : PRODUCTS_DATABASE.filter(p => p.category === currentFilter);
+      // Combined Advanced Filter Strategy (Gender + Category)
+      let filteredProducts = PRODUCTS_DATABASE.filter(p => p.gender === currentGender);
+      
+      if (currentCategory !== 'all') {
+        filteredProducts = filteredProducts.filter(p => p.category === currentCategory);
+      }
+
+      if(filteredProducts.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-2 lg:col-span-3 text-center py-12 opacity-50">
+            <p class="text-xs uppercase tracking-widest font-bold">No products dropped in this category yet.</p>
+          </div>
+        `;
+        return;
+      }
 
       filteredProducts.forEach(product => {
         if (!activeSelections[product.id]) {
