@@ -90,7 +90,16 @@
       </div>
   </main>
 
-  <div id="size-modal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+  <div id="product-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-2 md:p-4 backdrop-blur-md overflow-y-auto">
+    <div class="bg-[#141414] border border-gray-800 max-w-xl w-full rounded p-4 md:p-6 relative smooth-transition shadow-2xl my-auto">
+      <button onclick="closeProductModal()" class="absolute top-3 right-3 bg-black/60 text-gray-400 hover:text-white text-xl font-bold w-8 h-8 rounded-full flex items-center justify-center z-10">&times;</button>
+      
+      <div id="modal-product-content" class="space-y-4">
+        </div>
+    </div>
+  </div>
+
+  <div id="size-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-[#141414] border border-gray-800 max-w-md w-full rounded p-6 relative smooth-transition shadow-2xl">
       <button onclick="toggleSizeModal(null)" class="absolute top-4 right-4 text-gray-500 hover:text-white text-lg font-bold p-1">&times;</button>
       
@@ -168,7 +177,6 @@
   </footer>
 
   <script>
-    // ⚡ CENTRAL DATABASE: Both Gender-wise configuration fully synchronized ⚡
     const PRODUCTS_DATABASE = [
       // ---------------- MALE PRODUCTS ----------------
       {
@@ -276,12 +284,11 @@
         name: "Plain Oversize T-shirts (Female)",
         price: 399,
         badge: "Premium Oversize",
-        description: "Premium 240gsm Pure Cotton T", // Same description as Male
+        description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL"],
         sizeChartType: "oversized",
         hasBackView: false,
         colorVariants: [
-          // All 10 synchronized premium colors mapped to assets/female/...
           { name: "Army Green", hex: "#4B5320", front: "assets/female/plain-oversize/army green.webp" },
           { name: "Beige", hex: "#F5F5DC", front: "assets/female/plain-oversize/beige.webp" },
           { name: "Black", hex: "#000000", front: "assets/female/plain-oversize/black.webp" },
@@ -300,6 +307,7 @@
     let currentCategory = 'all'; 
     const activeSelections = {};
     let CART_STORAGE = [];
+    let currentModalProductId = null; // Track modal context
 
     // GENDER TRIGGER PIPELINE
     window.filterGender = function(gender) {
@@ -330,6 +338,98 @@
       });
       renderCatalog();
     };
+
+    // OPEN PRODUCT OVERLAY MODAL (BADA HOKE DIKHNA)
+    window.openProductModal = function(productId) {
+      currentModalProductId = productId;
+      const modal = document.getElementById('product-modal');
+      renderModalContent();
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Lock background scroll
+    };
+
+    window.closeProductModal = function() {
+      const modal = document.getElementById('product-modal');
+      modal.classList.add('hidden');
+      currentModalProductId = null;
+      document.body.style.overflow = ''; // Unlock scroll
+      renderCatalog(); // Refresh background grid view synchronization
+    };
+
+    function renderModalContent() {
+      if (!currentModalProductId) return;
+      const contentContainer = document.getElementById('modal-product-content');
+      const product = PRODUCTS_DATABASE.find(p => p.id === currentModalProductId);
+      const state = activeSelections[product.id];
+      const currentVariant = product.colorVariants[state.colorIndex];
+      const displayImage = (product.hasBackView && state.view === 'back') ? currentVariant.back : currentVariant.front;
+
+      contentContainer.innerHTML = `
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="relative overflow-hidden bg-[#1a1a1a] border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-2 w-full md:w-1/2 max-h-[400px] md:max-h-none">
+            ${product.badge ? `<span class="absolute top-2 left-2 bg-red-600 text-white text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded z-10">${product.badge}</span>` : ''}
+            <img src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition">
+            ${product.hasBackView ? `
+              <button onclick="toggleModalView('${product.id}', event)" class="absolute bottom-2 right-2 bg-black/85 text-gray-400 text-[10px] px-2.5 py-1 rounded uppercase tracking-widest border border-gray-800 hover:text-white smooth-transition">
+                Flip View ↺
+              </button>
+            ` : ''}
+          </div>
+
+          <div class="w-full md:w-1/2 flex flex-col justify-between">
+            <div>
+              <div class="border-b border-gray-900 pb-3 mb-3">
+                <h3 class="text-base md:text-xl font-bold uppercase tracking-wide text-white mb-1">${product.name}</h3>
+                <p class="text-lg md:text-xl font-bold text-red-500">₹${product.price}</p>
+              </div>
+
+              <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-4">
+                ✨ ${product.description}
+              </p>
+
+              <div class="mb-4">
+                <p class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider mb-2">Color: <span class="text-white font-bold uppercase">${currentVariant.name}</span></p>
+                <div class="flex flex-wrap gap-2">
+                  ${product.colorVariants.map((v, idx) => `
+                    <button onclick="changeModalColor('${product.id}', ${idx}, event)" 
+                      class="w-6 h-6 md:w-7 md:h-7 rounded-full border smooth-transition ${state.colorIndex === idx ? 'border-white scale-110 shadow-lg' : 'border-gray-900 hover:scale-105'}" 
+                      style="background-color: ${v.hex};" title="${v.name}">
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <p class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider mb-2">Select Size</p>
+                <div class="grid grid-cols-5 gap-1.5">
+                  ${product.sizes.map(s => `
+                    <button onclick="selectModalSize('${product.id}', '${s}', event)" 
+                      class="border py-1.5 text-xs font-bold rounded smooth-transition ${state.selectedSize === s ? 'bg-white text-black border-white' : 'border-gray-800 text-gray-400 bg-[#0d0d0d] hover:border-gray-500 hover:text-white'}">
+                      ${s}
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+              
+              <div class="text-left mb-6">
+                 <button onclick="toggleSizeModal('${product.sizeChartType}')" class="text-[10px] uppercase text-gray-400 hover:text-red-400 underline tracking-widest font-bold smooth-transition">Size Guide 📏</button>
+              </div>
+            </div>
+
+            <button onclick="addModalItemToCart('${product.id}', event)" 
+              class="w-full bg-white text-black font-bold uppercase tracking-widest py-3 text-xs hover:bg-red-600 hover:text-white smooth-transition mt-2">
+              Add Drop to Cart
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // MODAL TARGET SPECIFIC ENGINE SUBPROCESSORS
+    window.changeModalColor = function(productId, index, event) { event.stopPropagation(); activeSelections[productId].colorIndex = index; renderModalContent(); };
+    window.toggleModalView = function(productId, event) { event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderModalContent(); };
+    window.selectModalSize = function(productId, size, event) { event.stopPropagation(); activeSelections[productId].selectedSize = size; renderModalContent(); };
+    window.addModalItemToCart = function(productId, event) { event.stopPropagation(); addItemToCart(productId, event); closeProductModal(); };
 
     window.toggleSizeModal = function(chartType) {
       const modal = document.getElementById('size-modal');
@@ -384,21 +484,6 @@
       drawer.classList.toggle('translate-x-full');
     };
 
-    window.toggleProductPanel = function(productId, event) {
-      if (event.target.closest('.options-panel-container') || event.target.closest('.flip-btn')) return;
-      
-      const panel = document.getElementById(`panel-${productId}`);
-      const indicator = document.getElementById(`indicator-${productId}`);
-      
-      if (panel.classList.contains('hidden')) {
-        panel.classList.remove('hidden');
-        if(indicator) indicator.innerText = "Collapse Options ▴";
-      } else {
-        panel.classList.add('hidden');
-        if(indicator) indicator.innerText = "Tap for Sizes & Colors ▾";
-      }
-    };
-
     function renderCatalog() {
       const grid = document.getElementById('product-grid');
       grid.innerHTML = '';
@@ -425,79 +510,30 @@
 
         const state = activeSelections[product.id];
         const currentVariant = product.colorVariants[state.colorIndex];
-        const displayImage = (product.hasBackView && state.view === 'back') ? currentVariant.back : currentVariant.front;
+        const displayImage = currentVariant.front;
 
         const card = document.createElement('div');
-        card.className = "bg-[#141414] border border-gray-900 rounded p-2 md:p-5 flex flex-col justify-between smooth-transition hover:border-gray-800 shadow-2xl cursor-pointer";
-        card.setAttribute('onclick', `toggleProductPanel('${product.id}', event)`);
+        card.className = "bg-[#141414] border border-gray-900 rounded p-2 md:p-4 flex flex-col justify-between smooth-transition hover:border-gray-800 shadow-2xl cursor-pointer";
+        card.setAttribute('onclick', `openProductModal('${product.id}')`); // Har click par bada pop-up khulega
         
         card.innerHTML = `
           <div>
-            <div class="relative overflow-hidden bg-[#1a1a1a] mb-3 group border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-1">
+            <div class="relative overflow-hidden bg-[#1a1a1a] mb-2 group border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-1">
               ${product.badge ? `<span class="absolute top-1.5 left-1.5 bg-red-600 text-white text-[8px] uppercase tracking-widest font-bold px-1.5 py-0.5 rounded z-10 scale-90 md:scale-100">${product.badge}</span>` : ''}
-              <img id="img-${product.id}" src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition group-hover:scale-102">
-              ${product.hasBackView ? `
-                <button onclick="toggleView('${product.id}', event)" class="flip-btn absolute bottom-1.5 right-1.5 bg-black/85 text-gray-400 text-[8px] md:text-[9px] px-1.5 py-0.5 md:px-2 md:py-1 rounded uppercase tracking-widest border border-gray-800 hover:text-white smooth-transition">
-                  Flip ↺
-                </button>
-              ` : ''}
+              <img src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition group-hover:scale-102">
             </div>
 
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-baseline mb-1 gap-0.5">
-              <h3 class="text-xs md:text-base font-bold uppercase tracking-tight text-white line-clamp-1">${product.name}</h3>
+            <div class="flex flex-col justify-between items-start mb-1 gap-0.5">
+              <h3 class="text-[11px] md:text-base font-bold uppercase tracking-tight text-white line-clamp-1 w-full">${product.name}</h3>
               <p class="text-xs md:text-base font-bold text-red-500">₹${product.price}</p>
             </div>
             
-            <p id="indicator-${product.id}" class="text-[8px] md:text-[10px] text-red-400 uppercase tracking-widest font-bold mb-2">Tap for Sizes & Colors ▾</p>
-
-            <div id="panel-${product.id}" class="options-panel-container hidden border-t border-gray-900 pt-3 mt-2 smooth-transition">
-              
-              <p class="text-[9px] md:text-[11px] text-gray-400 font-bold uppercase tracking-widest mb-3 border-b border-gray-900 pb-1.5">
-                ✨ ${product.description}
-              </p>
-
-              <div class="mb-4">
-                <p class="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-wider mb-1.5">Color: <span class="text-white font-bold uppercase">${currentVariant.name}</span></p>
-                <div class="flex flex-wrap gap-1.5">
-                  ${product.colorVariants.map((v, idx) => `
-                    <button onclick="changeColor('${product.id}', ${idx}, event)" 
-                      class="w-5 h-5 md:w-6 md:h-6 rounded-full border smooth-transition ${state.colorIndex === idx ? 'border-white scale-110 shadow-lg' : 'border-gray-900 hover:scale-105'}" 
-                      style="background-color: ${v.hex};" title="${v.name}">
-                    </button>
-                  `).join('')}
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <p class="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-wider mb-1.5">Select Size</p>
-                <div class="grid grid-cols-5 gap-1">
-                  ${product.sizes.map(s => `
-                    <button onclick="selectSize('${product.id}', '${s}', event)" 
-                      class="border py-1 text-[9px] md:text-xs font-bold rounded smooth-transition ${state.selectedSize === s ? 'bg-white text-black border-white' : 'border-gray-800 text-gray-400 bg-[#0d0d0d] hover:border-gray-500 hover:text-white'}">
-                      ${s}
-                    </button>
-                  `).join('')}
-                </div>
-              </div>
-              
-              <div class="text-left mb-4">
-                 <button onclick="toggleSizeModal('${product.sizeChartType}')" class="text-[8px] md:text-[10px] uppercase text-gray-400 hover:text-red-400 underline tracking-widest font-bold smooth-transition">Size Guide 📏</button>
-              </div>
-
-              <button onclick="addItemToCart('${product.id}', event)" 
-                class="w-full bg-white text-black font-bold uppercase tracking-widest py-2 md:py-3 text-[10px] md:text-xs hover:bg-red-600 hover:text-white smooth-transition mt-1">
-                Add to Cart
-              </button>
-            </div>
+            <p class="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-widest font-bold">View Drop Details ⚡</p>
           </div>
         `;
         grid.appendChild(card);
       });
     }
-
-    window.changeColor = function(productId, index, event) { if(event) event.stopPropagation(); activeSelections[productId].colorIndex = index; renderCatalog(); document.getElementById(`panel-${productId}`).classList.remove('hidden'); };
-    window.toggleView = function(productId, event) { if(event) event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderCatalog(); };
-    window.selectSize = function(productId, size, event) { if(event) event.stopPropagation(); activeSelections[productId].selectedSize = size; renderCatalog(); document.getElementById(`panel-${productId}`).classList.remove('hidden'); };
 
     window.addItemToCart = function(productId, event) {
       if(event) event.stopPropagation();
