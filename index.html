@@ -79,9 +79,7 @@
         <button onclick="filterCategory('all')" id="btn-all" class="px-3 py-1.5 md:px-4 md:py-2 rounded bg-white text-black smooth-transition">All</button>
         <button onclick="filterCategory('plain-oversize')" id="btn-plain-oversize" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
         <button onclick="filterCategory('plain-polo')" id="btn-plain-polo" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Polo</button>
-        <button onclick="filterCategory('loofy')" id="btn-loofy" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Loofy</button>
-        <button onclick="filterCategory('caffein-happy')" id="btn-caffein-happy" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Caffein Happy</button>
-        <button onclick="filterCategory('gojo')" id="btn-gojo" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Gojo</button>
+        <button onclick="filterCategory('graphics')" id="btn-graphics" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Graphic Drops</button>
       </div>
     </div>
     
@@ -120,7 +118,7 @@
       <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl font-bold p-2">&times; Close</button>
     </div>
     <div id="cart-items-container" class="flex-1 p-4 space-y-4 overflow-y-auto"></div>
-    <div class="p-4 border-t border-t-gray-900 bg-[#141414] space-y-4">
+    <div class="p-4 border-t border-gray-900 bg-[#141414] space-y-4">
       <div class="space-y-1.5 text-xs uppercase tracking-wider text-gray-400">
         <div class="flex justify-between"><span>Items Subtotal:</span><span id="cart-subtotal" class="text-white font-bold">₹0</span></div>
         <div class="flex justify-between"><span>Delivery Charges:</span><span id="cart-shipping" class="text-red-500 font-bold">₹0</span></div>
@@ -157,7 +155,7 @@
   </footer>
 
   <script>
-    // ⚡ GLOBAL MASTER PALETTE: INME CHANGES KARTE HI PURI SITE UPDATE HO JAYEGI ⚡
+    // ⚡ GLOBAL INVENTORY PALETTE LOGIC ⚡
     const PLAIN_COLORS_PALETTE = [
       { name: "Army Green", hex: "#4B5320", allowedSizes: ["M", "L", "XL", "XXL"] },
       { name: "Beige", hex: "#F5F5DC", allowedSizes: ["S", "L", "XXL"] },
@@ -172,7 +170,7 @@
     ];
 
     const PRODUCTS_DATABASE = [
-      // ---------------- MALE PRODUCTS ----------------
+      // ---------------- 1. PLAIN ITEMS (ALWAYS ON TOP) ----------------
       {
         id: "m4",
         gender: "male",
@@ -209,59 +207,111 @@
           { name: "Charcoal", hex: "#36454F", front: "assets/male/plain-polo/charcoal.webp", allowedSizes: ["S", "M", "L", "XL", "XXL"] }
         ]
       },
+
+      // ---------------- 2. GRAPHIC TEES REGISTRY (NEW DESIGNS ADDED) ----------------
       {
-        id: "m1",
+        id: "n1",
         gender: "male",
-        category: "loofy",
-        name: "Loofy (Oversized Tee)",
+        category: "graphics",
+        name: "Born to slay",
         price: 549,
-        badge: "",
+        badge: "New Drop",
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
-        hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "White" && c.name !== "Off-White").map(c => ({
-          name: c.name, hex: c.hex, 
-          front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, 
-          back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`,
-          allowedSizes: c.allowedSizes
+        hasBackView: false, // Only Front
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Brown", "Lavender", "Off-White", "Powder Blue", "White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/born-to-slay/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
         }))
       },
       {
-        id: "m2",
+        id: "n2",
         gender: "male",
-        category: "caffein-happy",
-        name: "Caffein Happy (Oversized Tee)",
+        category: "graphics",
+        name: "BREAK RULES",
         price: 549,
-        badge: "",
+        badge: "New Drop",
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
-        hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, 
-          front: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} front.webp`, 
-          back: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} back.webp`,
-          allowedSizes: c.allowedSizes
+        hasBackView: true, // Both Sides
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/break-rules/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/break-rules/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
       },
       {
-        id: "m3",
+        id: "n3",
         gender: "male",
-        category: "gojo",
-        name: "Gojo (Oversized Tee)",
+        category: "graphics",
+        name: "CIGGERATE BOX",
         price: 549,
-        badge: "",
+        badge: "New Drop",
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
-        hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => !["Lavender", "Beige", "White", "Off-White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, 
-          front: `assets/male/gojo/colors/${c.name.toLowerCase()} front.webp`, 
-          back: `assets/male/gojo/colors/${c.name.toLowerCase()} back.webp`,
-          allowedSizes: c.allowedSizes
+        hasBackView: false, // Only Front
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Brown", "Lavender", "Off-White", "Powder Blue", "White", "Rose Pink"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/ciggerate-box/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
         }))
+      },
+      {
+        id: "n4",
+        gender: "male",
+        category: "graphics",
+        name: "DO I LOOK LIKE I CARE",
+        price: 549,
+        badge: "New Drop",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true, // Both Sides
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/do-i-look-like-i-care/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/do-i-look-like-i-care/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n5",
+        gender: "male",
+        category: "graphics",
+        name: "HOPE NEVER QUITS",
+        price: 549,
+        badge: "New Drop",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true, // Both Sides
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/hope-never-quits/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/hope-never-quits/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n6",
+        gender: "male",
+        category: "graphics",
+        name: "I'M CLASSIC",
+        price: 549,
+        badge: "New Drop",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true, // Both Sides
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/im-classic/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/im-classic/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+
+      // Puraani Graphic Tees (Loofy, Caffein Happy, Gojo mapped cleanly inside graphics filter block)
+      {
+        id: "m1", gender: "male", category: "graphics", name: "Loofy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "White" && c.name !== "Off-White").map(c => ({ name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
+      },
+      {
+        id: "m2", gender: "male", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
+      },
+      {
+        id: "m3", gender: "male", category: "graphics", name: "Gojo (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => !["Lavender", "Beige", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/gojo/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/gojo/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
       },
 
       // ---------------- FEMALE PRODUCTS ----------------
@@ -277,8 +327,7 @@
         sizeChartType: "oversized",
         hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
-          name: c.name, hex: c.hex, front: `assets/female/plain-oversize/${c.name.toLowerCase()}.webp`,
-          allowedSizes: c.allowedSizes.filter(s => s !== "XXL") 
+          name: c.name, hex: c.hex, front: `assets/female/plain-oversize/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") 
         }))
       }
     ];
@@ -411,8 +460,7 @@
                     } else {
                       return `
                         <button disabled 
-                          class="border border-dashed border-gray-900 py-1.5 text-xs font-bold rounded bg-black/20 text-gray-700 relative overflow-hidden cursor-not-allowed select-none opacity-20"
-                          title="Out of stock">
+                          class="border border-dashed border-gray-900 py-1.5 text-xs font-bold rounded bg-black/20 text-gray-700 relative overflow-hidden cursor-not-allowed select-none opacity-20">
                           ${s}
                           <div class="absolute inset-0 flex items-center justify-center text-red-600 font-bold pointer-events-none text-sm opacity-90">×</div>
                         </button>
