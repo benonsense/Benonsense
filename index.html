@@ -84,7 +84,7 @@
 
       <!-- PRODUCT CATEGORY FILTER CONTROLS -->
       <div id="filter-bar" class="flex flex-wrap justify-center gap-1.5 md:gap-2 text-[10px] md:text-xs uppercase tracking-widest font-bold">
-        <button onclick="filterCategory('all')" id="btn-all" class="px-3 py-1.5 md:px-4 md:py-2 rounded bg-white text-black smooth-transition">All</button>
+        <button onclick="filterCategory('all')" id="btn-all" class="px-3 py-1.5 md:px-4 md:py-2 rounded bg-white text-black smooth-transition">All Drops</button>
         <button onclick="filterCategory('plain-oversize')" id="btn-plain-oversize" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
         <button onclick="filterCategory('plain-polo')" id="btn-plain-polo" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Polo</button>
         <button onclick="filterCategory('graphics')" id="btn-graphics" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Graphic Drops</button>
@@ -170,6 +170,7 @@
 
   <!-- DYNAMIC CENTRAL INTELLIGENT DATABASE ENGINE -->
   <script>
+    // Global sheet availability configuration parameters
     const PLAIN_COLORS_PALETTE = [
       { name: "Army Green", hex: "#4B5320", allowedSizes: ["M", "L", "XL", "XXL"] },
       { name: "Beige", hex: "#F5F5DC", allowedSizes: ["S", "L", "XXL"] },
@@ -184,7 +185,7 @@
     ];
 
     const PRODUCTS_DATABASE = [
-      // ---------------- 1. PLAIN ITEMS ----------------
+      // ---------------- 1. PLAIN COLLECTION LAYER ----------------
       {
         id: "m4",
         gender: "male",
@@ -222,62 +223,101 @@
         ]
       },
 
-      // ---------------- 2. GRAPHIC TEES REGISTRY (Removed "New Drop" badges from graphics) ----------------
+      // ---------------- 2. STREETWEAR GRAPHIC TEES REGISTRY ----------------
       {
         id: "n1",
         gender: "male",
         category: "graphics",
         name: "Born to slay",
         price: 549,
-        badge: "", // Removed Badge
+        badge: "",
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
-        hasBackView: false,
+        hasBackView: false, // Front Only
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Brown", "Lavender", "Off-White", "Powder Blue", "White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, allowedSizes: c.allowedSizes
+          name: c.name, hex: c.hex, front: `assets/male/born-to-slay/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
         }))
       },
       {
-        id: "m2",
+        id: "n2",
         gender: "male",
-        category: "caffein-happy",
-        name: "Caffein Happy (Oversized Tee)",
+        category: "graphics",
+        name: "BREAK RULES",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true, // Both Sides
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/break-rules/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/break-rules/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n3",
+        gender: "male",
+        category: "graphics",
+        name: "CIGGERATE BOX",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: false, // Front Only
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Brown", "Lavender", "Off-White", "Powder Blue", "White", "Rose Pink"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/ciggerate-box/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n4",
+        gender: "male",
+        category: "graphics",
+        name: "DO I LOOK LIKE I CARE",
         price: 549,
         badge: "",
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, 
-          front: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} front.webp`, 
-          back: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} back.webp`,
-          allowedSizes: c.allowedSizes
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/do-i-look-like-i-care/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/do-i-look-like-i-care/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
       },
       {
-        id: "m3",
+        id: "n5",
         gender: "male",
-        category: "gojo",
-        name: "Gojo (Oversized Tee)",
+        category: "graphics",
+        name: "HOPE NEVER QUITS",
         price: 549,
         badge: "",
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => !["Lavender", "Beige", "White", "Off-White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, 
-          front: `assets/male/gojo/colors/${c.name.toLowerCase()} front.webp`, 
-          back: `assets/male/gojo/colors/${c.name.toLowerCase()} back.webp`,
-          allowedSizes: c.allowedSizes
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/hope-never-quits/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/hope-never-quits/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n6",
+        gender: "male",
+        category: "graphics",
+        name: "I'M CLASSIC",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/im-classic/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/im-classic/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
       },
       {
         id: "m1",
         gender: "male",
-        category: "loofy",
+        category: "graphics",
         name: "Loofy (Oversized Tee)",
         price: 549,
         badge: "",
@@ -286,10 +326,37 @@
         sizeChartType: "oversized",
         hasBackView: true,
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "White" && c.name !== "Off-White").map(c => ({
-          name: c.name, hex: c.hex, 
-          front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, 
-          back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`,
-          allowedSizes: c.allowedSizes
+          name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "m2",
+        gender: "male",
+        category: "graphics",
+        name: "Caffein Happy (Oversized Tee)",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "m3",
+        gender: "male",
+        category: "graphics",
+        name: "Gojo (Oversized Tee)",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => !["Lavender", "Beige", "White", "Off-White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/gojo/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/gojo/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
       },
 
@@ -306,8 +373,7 @@
         sizeChartType: "oversized",
         hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
-          name: c.name, hex: c.hex, front: `assets/female/plain-oversize/${c.name.toLowerCase()}.webp`,
-          allowedSizes: c.allowedSizes.filter(s => s !== "XXL") 
+          name: c.name, hex: c.hex, front: `assets/female/plain-oversize/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") 
         }))
       }
     ];
@@ -356,7 +422,7 @@
 
     window.handleGridHoverOut = function(productId) {
       const product = PRODUCTS_DATABASE.find(p => p.id === productId);
-      if (!product.hasBackView) return;
+      if (!product || !product.hasBackView) return;
       const state = activeSelections[productId];
       const currentVariant = product.colorVariants[state.colorIndex];
       const targetImgElement = document.getElementById(`img-grid-${productId}`);
@@ -440,8 +506,7 @@
                     } else {
                       return `
                         <button disabled 
-                          class="border border-dashed border-gray-900 py-1.5 text-xs font-bold rounded bg-black/20 text-gray-700 relative overflow-hidden cursor-not-allowed select-none opacity-20"
-                          title="Out of stock">
+                          class="border border-dashed border-gray-900 py-1.5 text-xs font-bold rounded bg-black/20 text-gray-700 relative overflow-hidden cursor-not-allowed select-none opacity-20">
                           ${s}
                           <div class="absolute inset-0 flex items-center justify-center text-red-600 font-bold pointer-events-none text-sm opacity-90">×</div>
                         </button>
@@ -459,6 +524,10 @@
         </div>
       `;
     }
+
+    window.changeColor = function(productId, index, event) { if(event) event.stopPropagation(); activeSelections[productId].colorIndex = index; renderCatalog(); };
+    window.toggleView = function(productId, event) { if(event) event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderCatalog(); };
+    window.selectSize = function(productId, size, event) { if(event) event.stopPropagation(); activeSelections[productId].selectedSize = size; renderCatalog(); };
 
     window.changeModalColor = function(productId, index, event) { event.stopPropagation(); activeSelections[productId].colorIndex = index; renderModalContent(); };
     window.toggleModalView = function(productId, event) { event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderModalContent(); };
