@@ -97,9 +97,8 @@
     </div>
   </main>
 
-  <!-- PRODUCT QUICK VIEW OVERLAY MODAL (Centralized Expanded Layout for Quick Swapping) -->
+  <!-- PRODUCT QUICK VIEW OVERLAY MODAL -->
   <div id="product-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-2 md:p-4 backdrop-blur-md overflow-y-auto">
-    <!-- Width extended to max-w-4xl to accommodate the new right animation slider option seamlessly -->
     <div class="bg-[#141414] border border-gray-800 max-w-4xl w-full rounded p-4 md:p-6 relative smooth-transition shadow-2xl my-auto">
       <button onclick="closeProductModal()" class="absolute top-3 right-3 bg-black/60 text-gray-400 hover:text-white text-xl font-bold w-8 h-8 rounded-full flex items-center justify-center z-50">&times;</button>
       <div id="modal-product-content" class="space-y-4"></div>
@@ -315,49 +314,16 @@
         }))
       },
       {
-        id: "m1",
-        gender: "male",
-        category: "graphics",
-        name: "Loofy (Oversized Tee)",
-        price: 549,
-        badge: "",
-        description: "Premium 240gsm Pure Cotton T",
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        sizeChartType: "oversized",
-        hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "White" && c.name !== "Off-White").map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
-        }))
+        id: "m1", gender: "male", category: "graphics", name: "Loofy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "White" && c.name !== "Off-White").map(c => ({ name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
       },
       {
-        id: "m2",
-        gender: "male",
-        category: "graphics",
-        name: "Caffein Happy (Oversized Tee)",
-        price: 549,
-        badge: "",
-        description: "Premium 240gsm Pure Cotton T",
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        sizeChartType: "oversized",
-        hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
-        }))
+        id: "m2", gender: "male", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
       },
       {
-        id: "m3",
-        gender: "male",
-        category: "graphics",
-        name: "Gojo (Oversized Tee)",
-        price: 549,
-        badge: "",
-        description: "Premium 240gsm Pure Cotton T",
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        sizeChartType: "oversized",
-        hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => !["Lavender", "Beige", "White", "Off-White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/gojo/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/gojo/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
-        }))
+        id: "m3", gender: "male", category: "graphics", name: "Gojo (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => !["Lavender", "Beige", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/gojo/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/gojo/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
       },
 
       // ---------------- FEMALE PRODUCTS ----------------
@@ -445,7 +411,6 @@
       renderCatalog();
     };
 
-    // ⚡ QUICK SWAP ENGINE: Change product instantly inside popup context ⚡
     window.swapModalProduct = function(productId) {
       currentModalProductId = productId;
       renderModalContent();
@@ -465,13 +430,12 @@
         state.selectedSize = null;
       }
 
-      // Generate items array for the Right Recommendation Slider (Excluding current item)
       const visibleSliderItems = PRODUCTS_DATABASE.filter(p => p.gender === product.gender && p.id !== product.id).slice(0, 5);
 
       contentContainer.innerHTML = `
         <div class="flex flex-col lg:flex-row gap-6">
           
-          <!-- LEFT LAYOUT: Large Main Image Presentation -->
+          <!-- LEFT LAYOUT: Main Frame Image Presentation -->
           <div class="relative overflow-hidden bg-[#1a1a1a] border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-2 w-full lg:w-[40%] max-h-[380px] lg:max-h-none">
             ${product.badge ? `<span class="absolute top-2 left-2 bg-red-600 text-white text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded z-10">${product.badge}</span>` : ''}
             <img src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition">
@@ -534,17 +498,29 @@
             <button onclick="addModalItemToCart('${product.id}', event)" class="w-full bg-white text-black font-bold uppercase tracking-widest py-3 text-xs hover:bg-red-600 hover:text-white smooth-transition mt-2">Add Drop to Cart</button>
           </div>
 
-          <!-- ⚡ RIGHT LAYOUT: NEW INTERACTIVE "VIEW MORE" COMPONENT PIPELINE ⚡ -->
+          <!-- RIGHT LAYOUT: EXPLORE SIDEBAR MAPPED WITH ADVANCED REPLACEMENT RULES -->
           <div class="w-full lg:w-[20%] border-t lg:border-t-0 lg:border-l border-gray-900 pt-4 lg:pt-0 lg:pl-4 flex flex-col">
             <p class="text-[10px] uppercase font-bold tracking-widest text-red-500 mb-3 block text-center lg:text-left">Explore More Drops</p>
             <div class="flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto pr-1 pb-2 lg:pb-0 h-auto lg:h-[340px]">
               ${visibleSliderItems.map(item => {
-                const itemSelection = activeSelections[item.id] || { colorIndex: 0 };
-                const thumbImage = item.colorVariants[itemSelection.colorIndex] ? item.colorVariants[itemSelection.colorIndex].front : '';
+                // Initialize default selections to black color first if empty
+                if (!activeSelections[item.id]) {
+                  let blackIdx = item.colorVariants.findIndex(v => v.name === "Black");
+                  if (blackIdx === -1) blackIdx = 0;
+                  activeSelections[item.id] = { colorIndex: blackIdx, view: 'front', selectedSize: null };
+                }
+                const itemSelection = activeSelections[item.id];
+                const variant = item.colorVariants[itemSelection.colorIndex];
+                
+                // ⚡ HOVER ENGINE LOGIC RE-ALIGNED: Shows back image if available, else front image ⚡
+                let thumbImage = '';
+                if (variant) {
+                  thumbImage = item.hasBackView ? (variant.back || variant.front) : variant.front;
+                }
+                
                 return `
                   <div onclick="swapModalProduct('${item.id}')" class="relative min-w-[85px] sm:min-w-[100px] lg:min-w-0 bg-[#1a1a1a] border border-gray-900 rounded aspect-[3/4] p-1 flex items-center justify-center cursor-pointer group overflow-hidden flex-shrink-0 smooth-transition hover:border-gray-700">
                     <img src="${thumbImage}" alt="" class="w-full h-full object-contain smooth-transition group-hover:scale-105">
-                    <!-- Premium 10% Blur View More Overlay layer -->
                     <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-100 lg:opacity-85 lg:group-hover:opacity-100 flex flex-col justify-end p-1.5 smooth-transition">
                       <p class="text-[8px] sm:text-[9px] text-white font-bold uppercase tracking-tighter line-clamp-1 w-full text-center mb-0.5">${item.name}</p>
                       <p class="text-[8px] text-red-500 font-bold uppercase tracking-widest text-center w-full border-t border-gray-900/40 pt-0.5 bg-black/40 rounded-[2px]">View More</p>
@@ -558,6 +534,10 @@
         </div>
       `;
     }
+
+    window.changeColor = function(productId, index, event) { if(event) event.stopPropagation(); activeSelections[productId].colorIndex = index; renderCatalog(); };
+    window.toggleView = function(productId, event) { if(event) event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderCatalog(); };
+    window.selectSize = function(productId, size, event) { if(event) event.stopPropagation(); activeSelections[productId].selectedSize = size; renderCatalog(); };
 
     window.changeModalColor = function(productId, index, event) { event.stopPropagation(); activeSelections[productId].colorIndex = index; renderModalContent(); };
     window.toggleModalView = function(productId, event) { event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderModalContent(); };
@@ -618,8 +598,11 @@
       }
 
       filteredProducts.forEach(product => {
+        // ⚡ DASHBOARD ENGINE: Automatically look for the Black variant index as initial default ⚡
         if (!activeSelections[product.id]) {
-          activeSelections[product.id] = { colorIndex: 0, view: 'front', selectedSize: null };
+          let blackIdx = product.colorVariants.findIndex(v => v.name === "Black");
+          if (blackIdx === -1) blackIdx = 0; // Fallback safely if black color variant is absent
+          activeSelections[product.id] = { colorIndex: blackIdx, view: 'front', selectedSize: null };
         }
 
         const state = activeSelections[product.id];
