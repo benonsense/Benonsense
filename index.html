@@ -99,13 +99,11 @@
     </div>
   </main>
 
-  <!-- NEW PREMIUM PRODUCT OVERLAY QUICK VIEW MODAL -->
+  <!-- PRODUCT QUICK VIEW OVERLAY MODAL -->
   <div id="product-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-2 md:p-4 backdrop-blur-md overflow-y-auto">
     <div class="bg-[#141414] border border-gray-800 max-w-xl w-full rounded p-4 md:p-6 relative smooth-transition shadow-2xl my-auto">
       <button onclick="closeProductModal()" class="absolute top-3 right-3 bg-black/60 text-gray-400 hover:text-white text-xl font-bold w-8 h-8 rounded-full flex items-center justify-center z-10">&times;</button>
-      <div id="modal-product-content" class="space-y-4">
-        <!-- Dynamic Premium Content via JavaScript -->
-      </div>
+      <div id="modal-product-content" class="space-y-4"></div>
     </div>
   </div>
 
@@ -174,6 +172,20 @@
 
   <!-- DYNAMIC CENTRAL INTELLIGENT DATABASE ENGINE -->
   <script>
+    // Master Full Palette Sync Configuration Array
+    const PLAIN_COLORS_PALETTE = [
+      { name: "Army Green", hex: "#4B5320" },
+      { name: "Beige", hex: "#F5F5DC" },
+      { name: "Black", hex: "#000000" },
+      { name: "Brown", hex: "#5C4033" },
+      { name: "Lavender", hex: "#B57EDC" },
+      { name: "Maroon", hex: "#800020" },
+      { name: "Off-White", hex: "#F4F0EA" },
+      { name: "Powder Blue", hex: "#B0E0E6" },
+      { name: "Rose Pink", hex: "#FF007F" },
+      { name: "White", hex: "#ffffff" }
+    ];
+
     const PRODUCTS_DATABASE = [
       // ---------------- MALE PRODUCTS ----------------
       {
@@ -187,18 +199,9 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: false,
-        colorVariants: [
-          { name: "Army Green", hex: "#4B5320", front: "assets/male/plain-oversize/army green.webp" },
-          { name: "Beige", hex: "#F5F5DC", front: "assets/male/plain-oversize/beige.webp" },
-          { name: "Black", hex: "#000000", front: "assets/male/plain-oversize/black.webp" },
-          { name: "Brown", hex: "#5C4033", front: "assets/male/plain-oversize/brown.webp" },
-          { name: "Lavender", hex: "#B57EDC", front: "assets/male/plain-oversize/lavender.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/male/plain-oversize/maroon.webp" },
-          { name: "Off-White", hex: "#F4F0EA", front: "assets/male/plain-oversize/off-white.webp" },
-          { name: "Powder Blue", hex: "#B0E0E6", front: "assets/male/plain-oversize/powder blue.webp" },
-          { name: "Rose Pink", hex: "#FF007F", front: "assets/male/plain-oversize/rose pink.webp" },
-          { name: "White", hex: "#ffffff", front: "assets/male/plain-oversize/white.webp" }
-        ]
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/plain-oversize/${c.name.toLowerCase()}.webp`
+        }))
       },
       {
         id: "m5",
@@ -232,11 +235,12 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        colorVariants: [
-          { name: "Lavender", hex: "#B57EDC", front: "assets/male/loofy/loofy lavender front.webp", back: "assets/male/loofy/loofy lavender back.webp" },
-          { name: "Black", hex: "#000000", front: "assets/male/loofy/loofy black front.webp", back: "assets/male/loofy/loofy black back.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/male/loofy/loofy maroon front.webp", back: "assets/male/loofy/loofy maroon back.webp" }
-        ]
+        // All 10 synchronized premium colors injected automatically
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, 
+          front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, 
+          back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`
+        }))
       },
       {
         id: "m2",
@@ -249,11 +253,11 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        colorVariants: [
-          { name: "White", hex: "#ffffff", front: "assets/male/caffein-happy/caffein happy white front.webp", back: "assets/male/caffein-happy/caffein happy white back.webp" },
-          { name: "Off-White", hex: "#F4F0EA", front: "assets/caffein-happy/caffein happy off-white front.webp", back: "assets/caffein-happy/caffein happy off-white back.webp" },
-          { name: "Lavender", hex: "#B57EDC", front: "assets/caffein-happy/caffein happy lavender front.webp", back: "assets/caffein-happy/caffein happy lavender back.webp" }
-        ]
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, 
+          front: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} front.webp`, 
+          back: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} back.webp`
+        }))
       },
       {
         id: "m3",
@@ -266,11 +270,11 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        colorVariants: [
-          { name: "Black", hex: "#000000", front: "assets/male/gojo/gojo black front.webp", back: "assets/male/gojo/gojo black back.webp" },
-          { name: "Brown", hex: "#5C4033", front: "assets/male/gojo/gojo brown front.webp", back: "assets/male/gojo/gojo brown back.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/male/gojo/gojo maroon front.webp", back: "assets/male/gojo/gojo maroon back.webp" }
-        ]
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, 
+          front: `assets/male/gojo/colors/${c.name.toLowerCase()} front.webp`, 
+          back: `assets/male/gojo/colors/${c.name.toLowerCase()} back.webp`
+        }))
       },
 
       // ---------------- FEMALE PRODUCTS ----------------
@@ -285,18 +289,9 @@
         sizes: ["S", "M", "L", "XL"],
         sizeChartType: "oversized",
         hasBackView: false,
-        colorVariants: [
-          { name: "Army Green", hex: "#4B5320", front: "assets/female/plain-oversize/army green.webp" },
-          { name: "Beige", hex: "#F5F5DC", front: "assets/female/plain-oversize/beige.webp" },
-          { name: "Black", hex: "#000000", front: "assets/female/plain-oversize/black.webp" },
-          { name: "Brown", hex: "#5C4033", front: "assets/female/plain-oversize/brown.webp" },
-          { name: "Lavender", hex: "#B57EDC", front: "assets/female/plain-oversize/lavender.webp" },
-          { name: "Maroon", hex: "#800020", front: "assets/female/plain-oversize/maroon.webp" },
-          { name: "Off-White", hex: "#F4F0EA", front: "assets/female/plain-oversize/off-white.webp" },
-          { name: "Powder Blue", hex: "#B0E0E6", front: "assets/female/plain-oversize/powder blue.webp" },
-          { name: "Rose Pink", hex: "#FF007F", front: "assets/female/plain-oversize/rose pink.webp" },
-          { name: "White", hex: "#ffffff", front: "assets/female/plain-oversize/white.webp" }
-        ]
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, front: `assets/female/plain-oversize/${c.name.toLowerCase()}.webp`
+        }))
       }
     ];
 
@@ -333,31 +328,22 @@
       renderCatalog();
     };
 
-    // AUTOMATIC CURSOR PREVIEW TRIGGERS (ONLY FOR GRAPHICS)
     window.handleGridHoverIn = function(productId) {
       const product = PRODUCTS_DATABASE.find(p => p.id === productId);
-      if (!product.hasBackView) return; // Skip logic for plain elements
-      
+      if (!product.hasBackView) return;
       const state = activeSelections[productId];
       const currentVariant = product.colorVariants[state.colorIndex];
       const targetImgElement = document.getElementById(`img-grid-${productId}`);
-      
-      if(targetImgElement && currentVariant.back) {
-        targetImgElement.src = currentVariant.back; // Switch instantly to back print
-      }
+      if(targetImgElement && currentVariant.back) { targetImgElement.src = currentVariant.back; }
     };
 
     window.handleGridHoverOut = function(productId) {
       const product = PRODUCTS_DATABASE.find(p => p.id === productId);
       if (!product.hasBackView) return;
-      
       const state = activeSelections[productId];
       const currentVariant = product.colorVariants[state.colorIndex];
       const targetImgElement = document.getElementById(`img-grid-${productId}`);
-      
-      if(targetImgElement) {
-        targetImgElement.src = currentVariant.front; // Return instantly to front look
-      }
+      if(targetImgElement) { targetImgElement.src = currentVariant.front; }
     };
 
     window.openProductModal = function(productId) {
@@ -389,7 +375,6 @@
           <div class="relative overflow-hidden bg-[#1a1a1a] border border-gray-900 rounded aspect-[3/4] flex items-center justify-center p-2 w-full md:w-1/2 max-h-[400px] md:max-h-none">
             ${product.badge ? `<span class="absolute top-2 left-2 bg-red-600 text-white text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded z-10">${product.badge}</span>` : ''}
             <img src="${displayImage}" alt="${product.name}" class="w-full h-full object-contain smooth-transition">
-            <!-- Manual Flip Button Kept Safely Intact inside Modal View -->
             ${product.hasBackView ? `
               <button onclick="toggleModalView('${product.id}', event)" class="absolute bottom-2 right-2 bg-black/85 text-gray-400 text-[10px] px-2.5 py-1 rounded uppercase tracking-widest border border-gray-800 hover:text-white smooth-transition">
                 Flip View ↺
@@ -509,7 +494,6 @@
         card.className = "bg-[#141414] border border-gray-900 rounded p-2 md:p-4 flex flex-col justify-between smooth-transition hover:border-gray-800 shadow-2xl cursor-pointer";
         card.setAttribute('onclick', `openProductModal('${product.id}')`);
         
-        // Attached dynamic custom cursor hover event triggers
         card.setAttribute('onmouseenter', `handleGridHoverIn('${product.id}')`);
         card.setAttribute('onmouseleave', `handleGridHoverOut('${product.id}')`);
         
@@ -610,7 +594,10 @@
       const fixedShippingCharge = 80; 
       const finalEstimatedTotal = subtotalPrice + fixedShippingCharge;
       badge.innerText = totalQty; badge.style.display = 'flex'; drawerCount.innerText = totalQty;
-      subtotalEl.innerText = `₹${subtotalPrice}`; shippingEl.innerText = `₹${fixedShippingCharge}`; totalEl.innerText = `₹${finalEstimatedTotal}`; checkoutBtn.disabled = false;
+      subtotalPrice === 0 ? subtotalEl.innerText = '₹0' : subtotalEl.innerText = `₹${subtotalPrice}`;
+      subtotalPrice === 0 ? shippingEl.innerText = '₹0' : shippingEl.innerText = `₹${fixedShippingCharge}`;
+      subtotalPrice === 0 ? totalEl.innerText = '₹0' : totalEl.innerText = `₹${finalEstimatedTotal}`;
+      checkoutBtn.disabled = false;
     }
 
     window.checkoutCartToWhatsApp = function() {
