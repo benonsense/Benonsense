@@ -120,7 +120,7 @@
       <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl font-bold p-2">&times; Close</button>
     </div>
     <div id="cart-items-container" class="flex-1 p-4 space-y-4 overflow-y-auto"></div>
-    <div class="p-4 border-t border-gray-900 bg-[#141414] space-y-4">
+    <div class="p-4 border-t border-t-gray-900 bg-[#141414] space-y-4">
       <div class="space-y-1.5 text-xs uppercase tracking-wider text-gray-400">
         <div class="flex justify-between"><span>Items Subtotal:</span><span id="cart-subtotal" class="text-white font-bold">₹0</span></div>
         <div class="flex justify-between"><span>Delivery Charges:</span><span id="cart-shipping" class="text-red-500 font-bold">₹0</span></div>
@@ -157,7 +157,7 @@
   </footer>
 
   <script>
-    // ⚡ GLOBAL MASTER PALETTE: CONFIGURING EXACT SIZE MAPS EXTRACTED FROM VERIFIED SHEET DATA ⚡
+    // ⚡ GLOBAL MASTER PALETTE: INME CHANGES KARTE HI PURI SITE UPDATE HO JAYEGI ⚡
     const PLAIN_COLORS_PALETTE = [
       { name: "Army Green", hex: "#4B5320", allowedSizes: ["M", "L", "XL", "XXL"] },
       { name: "Beige", hex: "#F5F5DC", allowedSizes: ["S", "L", "XXL"] },
@@ -166,7 +166,7 @@
       { name: "Lavender", hex: "#B57EDC", allowedSizes: ["S", "M", "L", "XXL"] },
       { name: "Maroon", hex: "#800020", allowedSizes: ["L", "XL", "XXL"] },
       { name: "Off-White", hex: "#F4F0EA", allowedSizes: ["M", "L", "XL"] },
-      { name: "Powder Blue", hex: "#B0E0E6", allowedSizes: ["XXL"] }, // 👈 Fixed: Only XXL is available!
+      { name: "Powder Blue", hex: "#B0E0E6", allowedSizes: ["XXL"] },
       { name: "Rose Pink", hex: "#FF007F", allowedSizes: ["M", "L", "XL"] },
       { name: "White", hex: "#ffffff", allowedSizes: ["S"] }
     ];
@@ -199,7 +199,6 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "polo",
         hasBackView: false,
-        // Polo shirts configurations remain safely unchanged
         colorVariants: [
           { name: "Black", hex: "#000000", front: "assets/male/plain-polo/black.webp", allowedSizes: ["S", "M", "L", "XL", "XXL"] },
           { name: "Grey", hex: "#808080", front: "assets/male/plain-polo/grey.webp", allowedSizes: ["S", "M", "L", "XL", "XXL"] },
@@ -279,7 +278,6 @@
         hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
           name: c.name, hex: c.hex, front: `assets/female/plain-oversize/${c.name.toLowerCase()}.webp`,
-          // Filter out XXL safely for female stock parameters
           allowedSizes: c.allowedSizes.filter(s => s !== "XXL") 
         }))
       }
@@ -360,10 +358,8 @@
       const currentVariant = product.colorVariants[state.colorIndex];
       const displayImage = (product.hasBackView && state.view === 'back') ? currentVariant.back : currentVariant.front;
 
-      // Active dynamic sizing vector alignment mapping
       const validSizes = currentVariant.allowedSizes || product.sizes;
 
-      // Safe fallback interface resetting if selected dimensions clip
       if(state.selectedSize && !validSizes.includes(state.selectedSize)) {
         state.selectedSize = null;
       }
