@@ -249,7 +249,8 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+        // Removed Black
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "Black").map(c => ({
           name: c.name, hex: c.hex, front: `assets/male/katana-girl/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/katana-girl/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
       },
@@ -264,7 +265,8 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+        // Removed Black
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "Black").map(c => ({
           name: c.name, hex: c.hex, front: `assets/male/red-moon/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/red-moon/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
       },
@@ -279,7 +281,8 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Maroon", "Lavender", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
+        // Removed Army Green
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Maroon", "Lavender", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
           name: c.name, hex: c.hex, front: `assets/male/the-last-smoke/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/the-last-smoke/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
       },
@@ -293,7 +296,7 @@
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
-        hasBackView: false, // Back side print only modeled as front variable configuration for slider logic
+        hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
           name: c.name, hex: c.hex, front: `assets/male/neo-back/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
         }))
@@ -388,11 +391,20 @@
           name: c.name, hex: c.hex, front: `assets/male/stay-humble/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/stay-humble/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
       },
-
-      // Purani Graphic Tees
       {
-        id: "n1", gender: "male", category: "graphics", name: "Born to slay", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: false,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Brown", "Lavender", "Off-White", "Powder Blue", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/born-to-slay/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes }))
+        id: "n1",
+        gender: "male",
+        category: "graphics",
+        name: "Born to slay",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: false,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Brown", "Lavender", "Off-White", "Powder Blue", "White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/born-to-slay/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
+        }))
       },
       {
         id: "m2", gender: "male", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
@@ -502,8 +514,14 @@
       const contentContainer = document.getElementById('modal-product-content');
       const product = PRODUCTS_DATABASE.find(p => p.id === currentModalProductId);
       const state = activeSelections[product.id];
+      
+      // Safety bounds reconfiguration on quick swaps
+      if (state.colorIndex >= product.colorVariants.length) {
+        state.colorIndex = 0;
+      }
+      
       const currentVariant = product.colorVariants[state.colorIndex];
-      const displayImage = (product.hasBackView && state.view === 'back') ? currentVariant.back : currentVariant.front;
+      const displayImage = (product.hasBackView && state.view === 'back' && currentVariant) ? currentVariant.back : (currentVariant ? currentVariant.front : '');
 
       const validSizes = currentVariant ? (currentVariant.allowedSizes || product.sizes) : product.sizes;
 
@@ -587,6 +605,11 @@
                   activeSelections[item.id] = { colorIndex: blackIdx, view: 'front', selectedSize: null };
                 }
                 const itemSelection = activeSelections[item.id];
+                
+                if (itemSelection.colorIndex >= item.colorVariants.length) {
+                  itemSelection.colorIndex = 0;
+                }
+                
                 const variant = item.colorVariants[itemSelection.colorIndex];
                 
                 let thumbImage = '';
@@ -681,6 +704,12 @@
         }
 
         const state = activeSelections[product.id];
+        
+        // Safety lock check if dynamic array shrinks
+        if (state.colorIndex >= product.colorVariants.length) {
+          state.colorIndex = 0;
+        }
+        
         const currentVariant = product.colorVariants[state.colorIndex];
         const displayImage = currentVariant ? currentVariant.front : '';
 
