@@ -121,7 +121,7 @@
     </div>
   </div>
 
-  <!-- SLIDE OUT CART DRAWER SIDEBAR -->
+  <!-- SLIDE OUT CART DRAWER SIDEBAR (Form Pipeline Injected) -->
   <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] bg-[#0d0d0d] border-l border-gray-900 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between shadow-2xl">
     <div class="p-4 border-b border-gray-900 flex justify-between items-center bg-[#141414]">
       <div class="flex items-center space-x-2">
@@ -130,14 +130,33 @@
       </div>
       <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl font-bold p-2">&times; Close</button>
     </div>
+
+    <!-- Items Frame Container -->
     <div id="cart-items-container" class="flex-1 p-4 space-y-4 overflow-y-auto"></div>
+
+    <!-- ⚡ INJECTED MANDATORY SHIPPING DATA INPUT MATRIX FORM ⚡ -->
+    <div id="cart-shipping-form-wrapper" class="px-4 py-3 bg-[#111] border-t border-gray-900 hidden space-y-2">
+      <p class="text-[10px] uppercase font-bold tracking-widest text-red-500">Shipping Delivery Address</p>
+      <div class="grid grid-cols-1 gap-1.5 text-xs">
+        <input type="text" id="cust-name" oninput="validateShippingForm()" placeholder="Full Name" class="w-full bg-[#0d0d0d] border border-gray-900 rounded p-2 text-white placeholder-gray-600 focus:outline-none focus:border-gray-700">
+        <input type="text" id="cust-addr" oninput="validateShippingForm()" placeholder="House No / Colony / Street Area Address" class="w-full bg-[#0d0d0d] border border-gray-900 rounded p-2 text-white placeholder-gray-600 focus:outline-none focus:border-gray-700">
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="cust-city" oninput="validateShippingForm()" placeholder="City & State" class="w-full bg-[#0d0d0d] border border-gray-900 rounded p-2 text-white placeholder-gray-600 focus:outline-none focus:border-gray-700">
+          <input type="number" id="cust-pin" oninput="validateShippingForm()" placeholder="Pincode" class="w-full bg-[#0d0d0d] border border-gray-900 rounded p-2 text-white placeholder-gray-600 focus:outline-none focus:border-gray-700">
+        </div>
+        <input type="number" id="cust-phone" oninput="validateShippingForm()" placeholder="Phone Number" class="w-full bg-[#0d0d0d] border border-gray-900 rounded p-2 text-white placeholder-gray-600 focus:outline-none focus:border-gray-700">
+      </div>
+    </div>
+
+    <!-- Checkout Processing Dashboard Widget -->
     <div class="p-4 border-t border-gray-900 bg-[#141414] space-y-4">
       <div class="space-y-1.5 text-xs uppercase tracking-wider text-gray-400">
         <div class="flex justify-between"><span>Items Subtotal:</span><span id="cart-subtotal" class="text-white font-bold">₹0</span></div>
         <div class="flex justify-between"><span>Delivery Charges:</span><span id="cart-shipping" class="text-red-500 font-bold">₹0</span></div>
         <div class="flex justify-between text-sm text-white font-bold border-t border-gray-900 pt-3 mt-1"><span class="text-red-500">Estimated Total:</span><span id="cart-total" class="text-red-500">₹0</span></div>
       </div>
-      <button onclick="checkoutCartToWhatsApp()" id="checkout-btn" disabled class="w-full bg-white text-black font-bold uppercase tracking-widest py-3 text-xs hover:bg-red-600 hover:text-white smooth-transition disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-black">
+      
+      <button onclick="checkoutCartToWhatsApp()" id="checkout-btn" disabled class="w-full bg-white text-black font-bold uppercase tracking-widest py-3 text-xs hover:bg-red-600 hover:text-white smooth-transition disabled:opacity-20 disabled:hover:bg-white disabled:hover:text-black disabled:cursor-not-allowed">
         Checkout Drop via WhatsApp
       </button>
     </div>
@@ -249,7 +268,6 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        // Removed Black
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "Black").map(c => ({
           name: c.name, hex: c.hex, front: `assets/male/katana-girl/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/katana-girl/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
@@ -265,7 +283,6 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        // Removed Black
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "Black").map(c => ({
           name: c.name, hex: c.hex, front: `assets/male/red-moon/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/red-moon/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
@@ -281,7 +298,6 @@
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        // Removed Army Green
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Maroon", "Lavender", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
           name: c.name, hex: c.hex, front: `assets/male/the-last-smoke/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/the-last-smoke/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
@@ -515,7 +531,6 @@
       const product = PRODUCTS_DATABASE.find(p => p.id === currentModalProductId);
       const state = activeSelections[product.id];
       
-      // Safety bounds reconfiguration on quick swaps
       if (state.colorIndex >= product.colorVariants.length) {
         state.colorIndex = 0;
       }
@@ -705,7 +720,6 @@
 
         const state = activeSelections[product.id];
         
-        // Safety lock check if dynamic array shrinks
         if (state.colorIndex >= product.colorVariants.length) {
           state.colorIndex = 0;
         }
@@ -774,6 +788,22 @@
       updateCartUiState();
     };
 
+    // ⚡ FORM PIPELINE VALIDATION ENGINE: Activates button only when input fields are full ⚡
+    window.validateShippingForm = function() {
+      const name = document.getElementById('cust-name').value.trim();
+      const addr = document.getElementById('cust-addr').value.trim();
+      const city = document.getElementById('cust-city').value.trim();
+      const pin = document.getElementById('cust-pin').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      const checkoutBtn = document.getElementById('checkout-btn');
+
+      if (CART_STORAGE.length > 0 && name && addr && city && pin && phone) {
+        checkoutBtn.disabled = false;
+      } else {
+        checkoutBtn.disabled = true;
+      }
+    };
+
     function updateCartUiState() {
       const container = document.getElementById('cart-items-container');
       const badge = document.getElementById('cart-badge-count');
@@ -781,7 +811,7 @@
       const subtotalEl = document.getElementById('cart-subtotal');
       const shippingEl = document.getElementById('cart-shipping');
       const totalEl = document.getElementById('cart-total');
-      const checkoutBtn = document.getElementById('checkout-btn');
+      const formWrapper = document.getElementById('cart-shipping-form-wrapper');
 
       container.innerHTML = '';
       let totalQty = 0;
@@ -789,8 +819,14 @@
 
       if (CART_STORAGE.length === 0) {
         container.innerHTML = `<div class="h-64 flex flex-col items-center justify-center text-center space-y-3 opacity-40"><p class="text-xs uppercase tracking-widest font-bold">Your cart layout is completely empty.</p></div>`;
-        badge.style.display = 'none'; drawerCount.innerText = '0'; subtotalEl.innerText = '₹0'; shippingEl.innerText = '₹0'; totalEl.innerText = '₹0'; checkoutBtn.disabled = true; return;
+        badge.style.display = 'none'; drawerCount.innerText = '0'; subtotalEl.innerText = '₹0'; shippingEl.innerText = '₹0'; totalEl.innerText = '₹0';
+        formWrapper.classList.add('hidden'); // Hide form if cart is empty
+        validateShippingForm();
+        return;
       }
+
+      // Show address input container when drops are active in storage
+      formWrapper.classList.remove('hidden');
 
       CART_STORAGE.forEach(item => {
         totalQty += item.quantity; subtotalPrice += (item.price * item.quantity);
@@ -817,22 +853,55 @@
       const fixedShippingCharge = 80; 
       const finalEstimatedTotal = subtotalPrice + fixedShippingCharge;
       badge.innerText = totalQty; badge.style.display = 'flex'; drawerCount.innerText = totalQty;
-      subtotalPrice === 0 ? subtotalEl.innerText = '₹0' : subtotalEl.innerText = `₹${subtotalPrice}`;
-      subtotalPrice === 0 ? shippingEl.innerText = '₹0' : shippingEl.innerText = `₹${fixedShippingCharge}`;
-      subtotalPrice === 0 ? totalEl.innerText = '₹0' : totalEl.innerText = `₹${finalEstimatedTotal}`;
-      checkoutBtn.disabled = false;
+      subtotalEl.innerText = `₹${subtotalPrice}`;
+      shippingEl.innerText = `₹${fixedShippingCharge}`;
+      totalEl.innerText = `₹${finalEstimatedTotal}`;
+      
+      // Perform automated live validation processing pass
+      validateShippingForm();
     }
 
     window.checkoutCartToWhatsApp = function() {
       if(CART_STORAGE.length === 0) return;
+      
+      // Extraction of address variables from the secure DOM layout fields
+      const name = document.getElementById('cust-name').value.trim();
+      const addr = document.getElementById('cust-addr').value.trim();
+      const city = document.getElementById('cust-city').value.trim();
+      const pin = document.getElementById('cust-pin').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+
+      if (!name || !addr || !city || !pin || !phone) {
+        alert("Kindly fill out all address fields before checking out!");
+        return;
+      }
+
       const targetPhone = "918462003505";
       let subtotalPrice = 0; let itemsListText = '';
+      
       CART_STORAGE.forEach((item, idx) => {
         subtotalPrice += (item.price * item.quantity);
         itemsListText += `${idx + 1}. ${item.name}\n   - Variant: [ ${item.color} ]\n   - Size: [ Size ${item.size} ]\n   - Qty: [ ${item.quantity} Nos ]\n   - Price: ₹${item.price * item.quantity}\n\n`;
       });
+      
       const deliveryFee = 80; const absoluteFinalTotal = subtotalPrice + deliveryFee;
-      const whatsappMessage = `⚡ NEW DROPS COMPOSITE ORDER | beNoNseNse ⚡\n\n--- ITEMS LISTED ---\n${itemsListText}--- BILLING SUMMARY ---\nSubtotal Amount: ₹${subtotalPrice}\nFixed Delivery Fee: ₹${deliveryFee}\nTotal Final Amount: ₹${absoluteFinalTotal}\n\n--- MANDATORY CUSTOMER DATA PARAMS ---\n🏠 Delivery Address:\n   [ Full Name: ]\n   [ House No / Colony / Area: ]\n   [ City & State: ]\n   [ Pincode: ]\n   [ Phone Number: ]\n\n🔍 Pipeline Check:\nKindly verify fabric pipeline availability and confirm checkout parameters for swift fulfillment!`;
+      
+      // ⚡ RE-ENGINEERED COMPOSITE WHATSAPP PUSH TEXT STRING InJECTED WITH LIVE ADDRESS ⚡
+      const whatsappMessage = `⚡ NEW DROPS COMPOSITE ORDER | beNoNseNse ⚡\n\n` +
+                              `--- ITEMS LISTED ---\n${itemsListText}` +
+                              `--- BILLING SUMMARY ---\n` +
+                              `Subtotal Amount: ₹${subtotalPrice}\n` +
+                              `Fixed Delivery Fee: ₹${deliveryFee}\n` +
+                              `Total Final Amount: ₹${absoluteFinalTotal}\n\n` +
+                              `--- CUSTOMER SHIPPING DATA ---\n` +
+                              `🏠 Full Name: ${name}\n` +
+                              `🏠 Address: ${addr}\n` +
+                              `🏠 City & State: ${city}\n` +
+                              `🏠 Pincode: ${pin}\n` +
+                              `🏠 Contact Phone: ${phone}\n\n` +
+                              `🔍 Pipeline Check:\n` +
+                              `Fulfillment data packed successfully. Ready for prompt logistics dispatch sync!`;
+
       window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
     };
 
