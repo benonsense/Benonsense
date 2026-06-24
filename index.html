@@ -15,10 +15,13 @@
       -webkit-text-stroke: 1.5px #3a3d40;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
+    .neon-stroke {
+      -webkit-text-stroke: 1.2px #ff0000;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
     @media (max-width: 768px) {
-      .gunmetal-stroke {
-        -webkit-text-stroke: 1px #3a3d40;
-      }
+      .gunmetal-stroke { -webkit-text-stroke: 1px #3a3d40; }
+      .neon-stroke { -webkit-text-stroke: 0.8px #ff0000; }
     }
     /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
@@ -51,13 +54,17 @@
     </div>
     
     <!-- Aligned Content Block -->
-    <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-64 md:pt-80">
+    <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-48 md:pt-64 flex flex-col items-center">
       <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed">
         "Being in sense is not always practical so beNoNseNse"
       </p>
       <a href="#catalog" class="mt-8 inline-block bg-white text-black px-8 py-3.5 uppercase tracking-widest font-bold text-xs md:text-sm hover:bg-red-600 hover:text-white smooth-transition shadow-2xl">
         Explore Drops
       </a>
+      <!-- ⚡ ATTRACTIVE promotional layer block loaded strictly underneath explore button drop ⚡ -->
+      <p class="mt-4 neon-stroke text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-wider text-white select-none animate-pulse">
+        BUY 3 FOR 1299RS
+      </p>
     </div>
     <div></div>
   </header>
@@ -121,7 +128,7 @@
     </div>
   </div>
 
-  <!-- SLIDE OUT CART DRAWER SIDEBAR (Form Pipeline Injected) -->
+  <!-- SLIDE OUT CART DRAWER SIDEBAR -->
   <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] bg-[#0d0d0d] border-l border-gray-900 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between shadow-2xl">
     <div class="p-4 border-b border-gray-900 flex justify-between items-center bg-[#141414]">
       <div class="flex items-center space-x-2">
@@ -134,7 +141,7 @@
     <!-- Items Frame Container -->
     <div id="cart-items-container" class="flex-1 p-4 space-y-4 overflow-y-auto"></div>
 
-    <!-- ⚡ INJECTED MANDATORY SHIPPING DATA INPUT MATRIX FORM ⚡ -->
+    <!-- SHIPPING DATA INPUT MATRIX FORM -->
     <div id="cart-shipping-form-wrapper" class="px-4 py-3 bg-[#111] border-t border-gray-900 hidden space-y-2">
       <p class="text-[10px] uppercase font-bold tracking-widest text-red-500">Shipping Delivery Address</p>
       <div class="grid grid-cols-1 gap-1.5 text-xs">
@@ -752,6 +759,7 @@
       });
     }
 
+    // ⚡ SEPARATED STORAGE MAPPER: Cart unique rows now explicitly mapped by signature variant logic ⚡
     window.addItemToCart = function(productId, event) {
       if(event) event.stopPropagation();
       const product = PRODUCTS_DATABASE.find(p => p.id === productId);
@@ -788,7 +796,6 @@
       updateCartUiState();
     };
 
-    // ⚡ FORM PIPELINE VALIDATION ENGINE: Activates button only when input fields are full ⚡
     window.validateShippingForm = function() {
       const name = document.getElementById('cust-name').value.trim();
       const addr = document.getElementById('cust-addr').value.trim();
@@ -820,12 +827,11 @@
       if (CART_STORAGE.length === 0) {
         container.innerHTML = `<div class="h-64 flex flex-col items-center justify-center text-center space-y-3 opacity-40"><p class="text-xs uppercase tracking-widest font-bold">Your cart layout is completely empty.</p></div>`;
         badge.style.display = 'none'; drawerCount.innerText = '0'; subtotalEl.innerText = '₹0'; shippingEl.innerText = '₹0'; totalEl.innerText = '₹0';
-        formWrapper.classList.add('hidden'); // Hide form if cart is empty
+        formWrapper.classList.add('hidden'); 
         validateShippingForm();
         return;
       }
 
-      // Show address input container when drops are active in storage
       formWrapper.classList.remove('hidden');
 
       CART_STORAGE.forEach(item => {
@@ -850,21 +856,21 @@
         container.appendChild(itemRow);
       });
 
+      // ⚡ GLOBAL FLAT BILLING LOGIC: Delivery charges are strictly locked at flat ₹80 across all counts ⚡
       const fixedShippingCharge = 80; 
       const finalEstimatedTotal = subtotalPrice + fixedShippingCharge;
+      
       badge.innerText = totalQty; badge.style.display = 'flex'; drawerCount.innerText = totalQty;
       subtotalEl.innerText = `₹${subtotalPrice}`;
       shippingEl.innerText = `₹${fixedShippingCharge}`;
       totalEl.innerText = `₹${finalEstimatedTotal}`;
       
-      // Perform automated live validation processing pass
       validateShippingForm();
     }
 
     window.checkoutCartToWhatsApp = function() {
       if(CART_STORAGE.length === 0) return;
       
-      // Extraction of address variables from the secure DOM layout fields
       const name = document.getElementById('cust-name').value.trim();
       const addr = document.getElementById('cust-addr').value.trim();
       const city = document.getElementById('cust-city').value.trim();
@@ -886,7 +892,6 @@
       
       const deliveryFee = 80; const absoluteFinalTotal = subtotalPrice + deliveryFee;
       
-      // ⚡ RE-ENGINEERED COMPOSITE WHATSAPP PUSH TEXT STRING InJECTED WITH LIVE ADDRESS ⚡
       const whatsappMessage = `⚡ NEW DROPS COMPOSITE ORDER | beNoNseNse ⚡\n\n` +
                               `--- ITEMS LISTED ---\n${itemsListText}` +
                               `--- BILLING SUMMARY ---\n` +
