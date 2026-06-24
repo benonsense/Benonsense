@@ -29,7 +29,9 @@
 </head>
 <body>
 
+  <!-- HERO HEADER LAYER -->
   <header class="relative h-screen flex flex-col justify-between p-4 md:p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.2), #0d0d0d), url('assets/hero-bg.webp');">
+    <!-- Top Brand Navbar Layer -->
     <div class="flex justify-between items-center w-full z-10">
       <a href="#">
         <img src="assets/logo.webp" alt="beNoNseNse" class="h-8 md:h-10 object-contain smooth-transition hover:scale-105">
@@ -38,6 +40,7 @@
         <nav class="space-x-4 md:space-x-6 text-xs md:text-sm uppercase tracking-widest">
           <a href="#catalog" class="hover:text-red-500 smooth-transition font-bold tracking-widest text-white">Shop Drops</a>
         </nav>
+        <!-- Floating Cart Indicator Widget -->
         <button onclick="toggleCartDrawer()" class="relative bg-white text-black p-2 rounded-full hover:bg-red-600 hover:text-white smooth-transition flex items-center justify-center w-8 h-8 md:w-9 md:h-9">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 md:w-5 md:h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
@@ -47,6 +50,7 @@
       </div>
     </div>
     
+    <!-- Aligned Content Block -->
     <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-64 md:pt-80">
       <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed">
         "Being in sense is not always practical so beNoNseNse"
@@ -58,6 +62,7 @@
     <div></div>
   </header>
 
+  <!-- PRODUCT CATALOG SECTION -->
   <main id="catalog" class="max-w-7xl mx-auto px-2 md:px-4 py-8 md:py-16">
     <div class="w-full bg-[#141414] border border-gray-900 py-2.5 text-center px-4 rounded mb-8 md:mb-12">
         <p class="text-red-500 text-[11px] md:text-sm font-bold tracking-widest uppercase">
@@ -65,7 +70,9 @@
         </p>
     </div>
 
+    <!-- FILTER ENGINE INTERFACE NAVIGATION BAR -->
     <div class="flex flex-col items-center border-b border-gray-900 pb-6 mb-8 md:mb-12 gap-6">
+      <!-- GENDER SPLIT FILTER -->
       <div class="flex bg-[#141414] p-1 rounded-full border border-gray-800 w-full max-w-[280px] sm:max-w-[320px]">
         <button onclick="filterGender('male')" id="gender-male" class="flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full bg-white text-black smooth-transition">
           Male
@@ -75,6 +82,7 @@
         </button>
       </div>
 
+      <!-- PRODUCT CATEGORY FILTER CONTROLS -->
       <div id="filter-bar" class="flex flex-wrap justify-center gap-1.5 md:gap-2 text-[10px] md:text-xs uppercase tracking-widest font-bold">
         <button onclick="filterCategory('all')" id="btn-all" class="px-3 py-1.5 md:px-4 md:py-2 rounded bg-white text-black smooth-transition">All Drops</button>
         <button onclick="filterCategory('plain-oversize')" id="btn-plain-oversize" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
@@ -83,10 +91,13 @@
       </div>
     </div>
     
+    <!-- Mobile responsive grid view -->
     <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-12">
-      </div>
+      <!-- Generated dynamic product layout target block -->
+    </div>
   </main>
 
+  <!-- PRODUCT QUICK VIEW OVERLAY MODAL -->
   <div id="product-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-2 md:p-4 backdrop-blur-md overflow-y-auto">
     <div class="bg-[#141414] border border-gray-800 max-w-4xl w-full rounded p-4 md:p-6 relative smooth-transition shadow-2xl my-auto">
       <button onclick="closeProductModal()" class="absolute top-3 right-3 bg-black/60 text-gray-400 hover:text-white text-xl font-bold w-8 h-8 rounded-full flex items-center justify-center z-50">&times;</button>
@@ -94,6 +105,7 @@
     </div>
   </div>
 
+  <!-- MULTI-SIZE CHART POPUP MODAL -->
   <div id="size-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-[#141414] border border-gray-800 max-w-md w-full rounded p-6 relative smooth-transition shadow-2xl">
       <button onclick="toggleSizeModal(null)" class="absolute top-4 right-4 text-gray-500 hover:text-white text-lg font-bold p-1">&times;</button>
@@ -109,6 +121,7 @@
     </div>
   </div>
 
+  <!-- SLIDE OUT CART DRAWER SIDEBAR -->
   <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] bg-[#0d0d0d] border-l border-gray-900 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between shadow-2xl">
     <div class="p-4 border-b border-gray-900 flex justify-between items-center bg-[#141414]">
       <div class="flex items-center space-x-2">
@@ -130,6 +143,7 @@
     </div>
   </div>
 
+  <!-- FOOTER CHANNEL CONNECTOR -->
   <footer class="bg-[#141414] border-t border-gray-900 px-4 py-12 mt-20">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-900 pb-10 mb-8">
         <div class="space-y-2 border-l-2 border-red-600 pl-4">
@@ -154,6 +168,7 @@
     </div>
   </footer>
 
+  <!-- DYNAMIC CENTRAL INTELLIGENT DATABASE ENGINE -->
   <script>
     const PLAIN_COLORS_PALETTE = [
       { name: "Army Green", hex: "#4B5320", allowedSizes: ["M", "L", "XL", "XXL"] },
@@ -209,98 +224,175 @@
 
       // ---------------- 2. STREETWEAR GRAPHIC TEES REGISTRY ----------------
       {
-        id: "n1",
+        id: "n7",
         gender: "male",
         category: "graphics",
-        name: "Born to slay",
+        name: "never look back",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Maroon", "Lavender", "Powder Blue", "Rose Pink"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/never-look-back/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/never-look-back/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n8",
+        gender: "male",
+        category: "graphics",
+        name: "katana girl",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/katana-girl/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/katana-girl/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n9",
+        gender: "male",
+        category: "graphics",
+        name: "red moon",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/red-moon/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/red-moon/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n10",
+        gender: "male",
+        category: "graphics",
+        name: "the last smoke",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Maroon", "Lavender", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/the-last-smoke/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/the-last-smoke/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n11",
+        gender: "male",
+        category: "graphics",
+        name: "neo back",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: false, // Back side print only modeled as front variable configuration for slider logic
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/neo-back/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n12",
+        gender: "male",
+        category: "graphics",
+        name: "hulk",
         price: 549,
         badge: "",
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: false,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Brown", "Lavender", "Off-White", "Powder Blue", "White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/born-to-slay/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "Black").map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/hulk/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
         }))
       },
       {
-        id: "n2",
+        id: "n13",
         gender: "male",
         category: "graphics",
-        name: "BREAK RULES",
-        price: 549,
-        badge: "",
-        description: "Premium 240gsm Pure Cotton T",
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        sizeChartType: "oversized",
-        hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/break-rules/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/break-rules/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
-        }))
-      },
-      {
-        id: "n3",
-        gender: "male",
-        category: "graphics",
-        name: "CIGGERATE BOX",
+        name: "curse-mark",
         price: 549,
         badge: "",
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: false,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Brown", "Lavender", "Off-White", "Powder Blue", "White", "Rose Pink"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/ciggerate-box/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/curse-mark/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
         }))
       },
       {
-        id: "n4",
+        id: "n14",
         gender: "male",
         category: "graphics",
-        name: "DO I LOOK LIKE I CARE",
+        name: "neo dragon",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: false,
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/neo-dragon/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n15",
+        gender: "male",
+        category: "graphics",
+        name: "one step",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: false,
+        colorVariants: PLAIN_COLORS_PALETTE.map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/one-step/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n16",
+        gender: "male",
+        category: "graphics",
+        name: "toji",
+        price: 549,
+        badge: "",
+        description: "Premium 240gsm Pure Cotton T",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeChartType: "oversized",
+        hasBackView: false,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "Army Green").map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/toji/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes
+        }))
+      },
+      {
+        id: "n17",
+        gender: "male",
+        category: "graphics",
+        name: "stay humble",
         price: 549,
         badge: "",
         description: "Premium 240gsm Pure Cotton T",
         sizes: ["S", "M", "L", "XL", "XXL"],
         sizeChartType: "oversized",
         hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/do-i-look-like-i-care/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/do-i-look-like-i-care/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "White", "Off-White"].includes(c.name)).map(c => ({
+          name: c.name, hex: c.hex, front: `assets/male/stay-humble/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/stay-humble/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
         }))
       },
+
+      // Purani Graphic Tees
       {
-        id: "n5",
-        gender: "male",
-        category: "graphics",
-        name: "HOPE NEVER QUITS",
-        price: 549,
-        badge: "",
-        description: "Premium 240gsm Pure Cotton T",
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        sizeChartType: "oversized",
-        hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/hope-never-quits/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/hope-never-quits/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
-        }))
-      },
-      {
-        id: "n6",
-        gender: "male",
-        category: "graphics",
-        name: "I'M CLASSIC",
-        price: 549,
-        badge: "",
-        description: "Premium 240gsm Pure Cotton T",
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        sizeChartType: "oversized",
-        hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Army Green", "Beige", "Black", "Brown", "Lavender", "Maroon", "Powder Blue", "Rose Pink", "White", "Off-White"].includes(c.name)).map(c => ({
-          name: c.name, hex: c.hex, front: `assets/male/im-classic/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/im-classic/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes
-        }))
-      },
-      {
-        id: "m1", gender: "male", category: "graphics", name: "Loofy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "White" && c.name !== "Off-White").map(c => ({ name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
+        id: "n1", gender: "male", category: "graphics", name: "Born to slay", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: false,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Brown", "Lavender", "Off-White", "Powder Blue", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/born-to-slay/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes }))
       },
       {
         id: "m2", gender: "male", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
@@ -309,6 +401,10 @@
       {
         id: "m3", gender: "male", category: "graphics", name: "Gojo (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => !["Lavender", "Beige", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/gojo/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/gojo/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
+      },
+      {
+        id: "m1", gender: "male", category: "graphics", name: "Loofy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: true,
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "White" && c.name !== "Off-White").map(c => ({ name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
       },
 
       // ---------------- FEMALE PRODUCTS ----------------
