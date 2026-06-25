@@ -32,10 +32,9 @@
 </head>
 <body>
 
-  <!-- HERO HEADER LAYER (Fixed Overlap Bug) -->
-  <header class="relative min-h-screen flex flex-col justify-between p-4 md:p-6 pb-16 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.2), #0d0d0d), url('assets/hero-bg.webp');">
-    <!-- Top Brand Navbar Layer -->
-    <div class="flex justify-between items-center w-full z-10">
+  <header class="relative min-h-screen flex flex-col justify-start p-4 md:p-6 pb-20 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.1), #0d0d0d), url('assets/hero-bg.webp');">
+    
+    <div class="flex justify-between items-center w-full z-20 mb-12">
       <a href="#">
         <img src="assets/logo.webp" alt="beNoNseNse" class="h-8 md:h-10 object-contain smooth-transition hover:scale-105">
       </a>
@@ -43,7 +42,6 @@
         <nav class="space-x-4 md:space-x-6 text-xs md:text-sm uppercase tracking-widest">
           <a href="#catalog" class="hover:text-red-500 smooth-transition font-bold tracking-widest text-white">Shop Drops</a>
         </nav>
-        <!-- Floating Cart Indicator Widget -->
         <button onclick="toggleCartDrawer()" class="relative bg-white text-black p-2 rounded-full hover:bg-red-600 hover:text-white smooth-transition flex items-center justify-center w-8 h-8 md:w-9 md:h-9">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 md:w-5 md:h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
@@ -53,8 +51,11 @@
       </div>
     </div>
     
-    <!-- Aligned Content Block: Kept shifted downwards safely without bleeding -->
-    <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-48 md:pt-[18rem] pb-8 flex flex-col items-center">
+    <div class="w-full max-w-5xl mx-auto z-10 text-center flex items-center justify-center pt-8 md:pt-16">
+       <img src="assets/hero-logo.webp" alt="" class="max-w-[90%] md:max-w-[80%] h-auto object-contain pointer-events-none select-none">
+    </div>
+
+    <div class="text-center w-full max-w-4xl mx-auto px-4 z-10 pt-16 md:pt-24 mt-auto flex flex-col items-center">
       <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed">
         "Being in sense is not always practical so beNoNseNse"
       </p>
@@ -65,10 +66,9 @@
         BUY 3 FOR 1299RS
       </p>
     </div>
-    <div></div>
+
   </header>
 
-  <!-- PRODUCT CATALOG SECTION -->
   <main id="catalog" class="max-w-7xl mx-auto px-2 md:px-4 py-8 md:py-16">
     <div class="w-full bg-[#141414] border border-gray-900 py-2.5 text-center px-4 rounded mb-8 md:mb-12">
         <p class="text-red-500 text-[11px] md:text-sm font-bold tracking-widest uppercase">
@@ -76,9 +76,7 @@
         </p>
     </div>
 
-    <!-- FILTER ENGINE INTERFACE NAVIGATION BAR -->
     <div class="flex flex-col items-center border-b border-gray-900 pb-6 mb-8 md:mb-12 gap-6">
-      <!-- GENDER SPLIT FILTER -->
       <div class="flex bg-[#141414] p-1 rounded-full border border-gray-800 w-full max-w-[280px] sm:max-w-[320px]">
         <button onclick="filterGender('male')" id="gender-male" class="flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full bg-white text-black smooth-transition">
           Male
@@ -88,7 +86,6 @@
         </button>
       </div>
 
-      <!-- PRODUCT CATEGORY FILTER CONTROLS -->
       <div id="filter-bar" class="flex flex-wrap justify-center gap-1.5 md:gap-2 text-[10px] md:text-xs uppercase tracking-widest font-bold">
         <button onclick="filterCategory('all')" id="btn-all" class="px-3 py-1.5 md:px-4 md:py-2 rounded bg-white text-black smooth-transition">All Drops</button>
         <button onclick="filterCategory('plain-oversize')" id="btn-plain-oversize" class="px-3 py-1.5 md:px-4 md:py-2 rounded border border-gray-800 text-gray-400 bg-[#141414] hover:border-gray-500 smooth-transition">Plain Oversize</button>
@@ -97,13 +94,10 @@
       </div>
     </div>
     
-    <!-- Mobile responsive grid view -->
     <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-12">
-      <!-- Generated dynamic product layout target block -->
-    </div>
+      </div>
   </main>
 
-  <!-- PRODUCT QUICK VIEW OVERLAY MODAL -->
   <div id="product-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-2 md:p-4 backdrop-blur-md overflow-y-auto">
     <div class="bg-[#141414] border border-gray-800 max-w-4xl w-full rounded p-4 md:p-6 relative smooth-transition shadow-2xl my-auto">
       <button onclick="closeProductModal()" class="absolute top-3 right-3 bg-black/60 text-gray-400 hover:text-white text-xl font-bold w-8 h-8 rounded-full flex items-center justify-center z-50">&times;</button>
@@ -111,7 +105,6 @@
     </div>
   </div>
 
-  <!-- MULTI-SIZE CHART POPUP MODAL -->
   <div id="size-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-[#141414] border border-gray-800 max-w-md w-full rounded p-6 relative smooth-transition shadow-2xl">
       <button onclick="toggleSizeModal(null)" class="absolute top-4 right-4 text-gray-500 hover:text-white text-lg font-bold p-1">&times;</button>
@@ -127,7 +120,6 @@
     </div>
   </div>
 
-  <!-- SLIDE OUT CART DRAWER SIDEBAR -->
   <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] bg-[#0d0d0d] border-l border-gray-900 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between shadow-2xl">
     <div class="p-4 border-b border-gray-900 flex justify-between items-center bg-[#141414]">
       <div class="flex items-center space-x-2">
@@ -137,10 +129,8 @@
       <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl font-bold p-2">&times; Close</button>
     </div>
 
-    <!-- Items Frame Container -->
     <div id="cart-items-container" class="flex-1 p-4 space-y-4 overflow-y-auto"></div>
 
-    <!-- SHIPPING DATA INPUT MATRIX FORM -->
     <div id="cart-shipping-form-wrapper" class="px-4 py-3 bg-[#111] border-t border-gray-900 hidden space-y-2">
       <p class="text-[10px] uppercase font-bold tracking-widest text-red-500">Shipping Delivery Address</p>
       <div class="grid grid-cols-1 gap-1.5 text-xs">
@@ -154,7 +144,6 @@
       </div>
     </div>
 
-    <!-- Checkout Processing Dashboard Widget -->
     <div class="p-4 border-t border-gray-900 bg-[#141414] space-y-4">
       <div class="space-y-1.5 text-xs uppercase tracking-wider text-gray-400">
         <div class="flex justify-between"><span>Items Subtotal:</span><span id="cart-subtotal" class="text-white font-bold">₹0</span></div>
@@ -168,7 +157,6 @@
     </div>
   </div>
 
-  <!-- FOOTER CHANNEL CONNECTOR -->
   <footer class="bg-[#141414] border-t border-gray-900 px-4 py-12 mt-20">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-900 pb-10 mb-8">
         <div class="space-y-2 border-l-2 border-red-600 pl-4">
@@ -193,7 +181,6 @@
     </div>
   </footer>
 
-  <!-- DYNAMIC CENTRAL INTELLIGENT DATABASE ENGINE -->
   <script>
     const PLAIN_COLORS_PALETTE = [
       { name: "Army Green", hex: "#4B5320", allowedSizes: ["M", "L", "XL", "XXL"] },
