@@ -15,9 +15,11 @@
       -webkit-text-stroke: 1.5px #3a3d40;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
+    /* Banner opacity set to 90% (10% less) */
     .neon-stroke {
       -webkit-text-stroke: 1.2px #ff0000;
       text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      opacity: 0.9;
     }
     @media (max-width: 768px) {
       .gunmetal-stroke { -webkit-text-stroke: 1px #3a3d40; }
@@ -32,11 +34,11 @@
 </head>
 <body>
 
-  <!-- HERO HEADER LAYER -->
-  <header class="relative min-h-screen flex flex-col justify-start p-4 md:p-6 pb-20 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.1), #0d0d0d), url('assets/hero-bg.webp');">
+  <!-- HERO HEADER LAYER (Restored original positioning) -->
+  <header class="relative h-screen flex flex-col justify-between p-4 md:p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.2), #0d0d0d), url('assets/hero-bg.webp');">
     
-    <!-- Top Brand Navbar Navigation Framework Layer -->
-    <div class="flex justify-between items-center w-full z-20 mb-8">
+    <!-- Top Brand Navbar Layer -->
+    <div class="flex justify-between items-center w-full z-10">
       <a href="#">
         <img src="assets/logo.webp" alt="beNoNseNse" class="h-8 md:h-10 object-contain smooth-transition hover:scale-105">
       </a>
@@ -54,29 +56,19 @@
       </div>
     </div>
     
-    <!-- CENTRAL OVERLAY BLOCK FOR LARGE HERO LOGO PRESENTATION -->
-    <div class="w-full max-w-5xl mx-auto z-10 text-center flex items-center justify-center pt-4 md:pt-8">
-       <img src="assets/hero-logo.webp" alt="" class="max-w-[90%] md:max-w-[80%] h-auto object-contain pointer-events-none select-none">
-    </div>
-
-    <!-- BOTTOM SEPARATE BLOCK FOR TEXT & INTERACTION -->
-    <div class="text-center w-full max-w-4xl mx-auto px-4 z-10 pt-0 flex flex-col items-center mt-auto">
-      <!-- ⚡ ONLY QUOTE SHIFTED 3CM ABOVE VIA NEGATIVE MARGINS ⚡ -->
-      <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed -mt-10 md:-mt-14">
+    <!-- Aligned Content Block: Restored to original position -->
+    <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-64 md:pt-80">
+      <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed">
         "Being in sense is not always practical so beNoNseNse"
       </p>
-      
-      <!-- Explore Drops and Buy 3 Promo Text kept completely untouched at baseline positions -->
-      <div class="mt-16 md:mt-24 flex flex-col items-center w-full">
-        <a href="#catalog" class="inline-block bg-white text-black px-8 py-3.5 uppercase tracking-widest font-bold text-xs md:text-sm hover:bg-red-600 hover:text-white smooth-transition shadow-2xl">
-          Explore Drops
-        </a>
-        <p class="mt-4 neon-stroke text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-wider text-white select-none animate-pulse">
-          BUY 3 FOR 1299RS
-        </p>
-      </div>
+      <a href="#catalog" class="mt-8 inline-block bg-white text-black px-8 py-3.5 uppercase tracking-widest font-bold text-xs md:text-sm hover:bg-red-600 hover:text-white smooth-transition shadow-2xl">
+        Explore Drops
+      </a>
+      <p class="mt-4 neon-stroke text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-wider text-white select-none animate-pulse">
+        BUY 3 FOR 1299RS
+      </p>
     </div>
-
+    <div></div>
   </header>
 
   <!-- PRODUCT CATALOG SECTION -->
@@ -312,7 +304,8 @@
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/break-rules/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/break-rules/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
-        id: "fg3", gender: "female", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: false,
+        id: "fg3", gender: "female", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", 
+        hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/caffein-happy/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
