@@ -32,8 +32,8 @@
 </head>
 <body>
 
-  <!-- HERO HEADER LAYER -->
-  <header class="relative h-screen flex flex-col justify-between p-4 md:p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.2), #0d0d0d), url('assets/hero-bg.webp');">
+  <!-- HERO HEADER LAYER (Fixed Overlap Bug) -->
+  <header class="relative min-h-screen flex flex-col justify-between p-4 md:p-6 pb-16 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.2), #0d0d0d), url('assets/hero-bg.webp');">
     <!-- Top Brand Navbar Layer -->
     <div class="flex justify-between items-center w-full z-10">
       <a href="#">
@@ -53,8 +53,8 @@
       </div>
     </div>
     
-    <!-- Aligned Content Block -->
-    <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-72 md:pt-[26rem] flex flex-col items-center">
+    <!-- Aligned Content Block: Kept shifted downwards safely without bleeding -->
+    <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-48 md:pt-[18rem] pb-8 flex flex-col items-center">
       <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed">
         "Being in sense is not always practical so beNoNseNse"
       </p>
@@ -287,7 +287,7 @@
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "White" && c.name !== "Off-White").map(c => ({ name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
       },
 
-      // ---------------- 3. FEMALE GRAPHICS ----------------
+      // ---------------- FEMALE GRAPHICS ----------------
       {
         id: "f4", gender: "female", category: "plain-oversize", name: "Plain Oversize T-shirts (Female)", price: 399, badge: "Premium Oversize", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.map(c => ({ name: c.name, hex: c.hex, front: `assets/female/plain-oversize/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
@@ -302,7 +302,7 @@
       },
       {
         id: "fg3", gender: "female", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", 
-        hasBackView: false, // 👈 Corrected: Only front side print!
+        hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/caffein-happy/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
@@ -351,7 +351,6 @@
       },
       {
         id: "fg15", gender: "female", category: "graphics", name: "the last smoke", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        // 👈 Corrected: Removed Army Green!
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/the-last-smoke/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/the-last-smoke/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       }
     ];
@@ -518,7 +517,6 @@
             <div class="flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto pr-1 pb-2 lg:pb-0 h-auto lg:h-[340px]">
               ${visibleSliderItems.map(item => {
                 if (!activeSelections[item.id]) {
-                  // Fallback engine prioritisation: Black -> Beige -> First Non-Army Color
                   let bestIdx = item.colorVariants.findIndex(v => v.name === "Black");
                   if (bestIdx === -1) bestIdx = item.colorVariants.findIndex(v => v.name === "Beige");
                   if (bestIdx === -1) bestIdx = item.colorVariants.findIndex(v => v.name !== "Army Green");
@@ -618,7 +616,6 @@
       }
 
       filteredProducts.forEach(product => {
-        // ⚡ DASHBOARD ENGINE: Fallback algorithm matching priorities explicitly ⚡
         if (!activeSelections[product.id]) {
           let bestIdx = product.colorVariants.findIndex(v => v.name === "Black");
           if (bestIdx === -1) bestIdx = product.colorVariants.findIndex(v => v.name === "Beige");
