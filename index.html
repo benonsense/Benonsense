@@ -20,7 +20,7 @@
       text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     }
     @media (max-width: 768px) {
-      .gunmetal-stroke { ... -webkit-text-stroke: 1px #3a3d40; }
+      .gunmetal-stroke { -webkit-text-stroke: 1px #3a3d40; }
       .neon-stroke { -webkit-text-stroke: 0.8px #ff0000; }
     }
     /* Custom Scrollbar */
@@ -209,7 +209,7 @@
     ];
 
     const PRODUCTS_DATABASE = [
-      // ---------------- MALE PRODUCTS (MAPPED AS USUAL) ----------------
+      // ---------------- MALE PRODUCTS ----------------
       {
         id: "m4", gender: "male", category: "plain-oversize", name: "Plain Oversize T-shirts (Male)", price: 399, badge: "Premium Oversize", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL", "XXL"], sizeChartType: "oversized", hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.map(c => ({ name: c.name, hex: c.hex, front: `assets/male/plain-oversize/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes }))
@@ -287,70 +287,70 @@
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => c.name !== "White" && c.name !== "Off-White").map(c => ({ name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes }))
       },
 
-      // ---------------- 3. FEMALE PRODUCTS (FULLY LOADED 15 GRAPHICS INJECTED CLEANLY) ----------------
+      // ---------------- 3. FEMALE GRAPHICS (STRICTLY SYNCHRONIZED TO FEMALE FOLDERS PATH PIPELINE) ----------------
       {
         id: "f4", gender: "female", category: "plain-oversize", name: "Plain Oversize T-shirts (Female)", price: 399, badge: "Premium Oversize", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.map(c => ({ name: c.name, hex: c.hex, front: `assets/female/plain-oversize/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg1", gender: "female", category: "graphics", name: "Born to slay", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: false,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Off-White", "White", "Rose Pink"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/born-to-slay/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Off-White", "White", "Rose Pink"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/born-to-slay/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg2", gender: "female", category: "graphics", name: "BREAK RULES", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/break-rules/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/break-rules/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/break-rules/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/break-rules/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg3", gender: "female", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/caffein-happy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/caffein-happy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/caffein-happy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg4", gender: "female", category: "graphics", name: "CIGGERATE BOX", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: false,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Off-White", "White", "Rose Pink"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/ciggerate-box/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Off-White", "White", "Rose Pink"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/ciggerate-box/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg5", gender: "female", category: "graphics", name: "curse mark", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: false,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Off-White", "White", "Rose Pink"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/curse-mark/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Off-White", "White", "Rose Pink"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/curse-mark/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg6", gender: "female", category: "graphics", name: "DO I LOOK LIKE I CARE", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/do-i-look-like-i-care/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/do-i-look-like-i-care/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/do-i-look-like-i-care/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/do-i-look-like-i-care/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg7", gender: "female", category: "graphics", name: "Gojo (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/gojo/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/gojo/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/gojo/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/gojo/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg8", gender: "female", category: "graphics", name: "hulk", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: false,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/hulk/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/hulk/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg9", gender: "female", category: "graphics", name: "I'M CLASSIC", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/im-classic/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/im-classic/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/im-classic/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/im-classic/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg10", gender: "female", category: "graphics", name: "katana girl", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Off-White", "White", "Rose Pink"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/katana-girl/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/katana-girl/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Off-White", "White", "Rose Pink"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/katana-girl/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/katana-girl/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg11", gender: "female", category: "graphics", name: "Loofy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/loofy/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/loofy/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg12", gender: "female", category: "graphics", name: "never look back", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/never-look-back/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/never-look-back/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/never-look-back/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/never-look-back/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg13", gender: "female", category: "graphics", name: "one step", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: false,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/one-step/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/one-step/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg14", gender: "female", category: "graphics", name: "stay humble", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Off-White", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/stay-humble/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/stay-humble/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Off-White", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/stay-humble/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/stay-humble/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
         id: "fg15", gender: "female", category: "graphics", name: "the last smoke", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: true,
-        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/male/the-last-smoke/colors/${c.name.toLowerCase()} front.webp`, back: `assets/male/the-last-smoke/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
+        colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Army Green", "Maroon", "White", "Off-White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/the-last-smoke/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/the-last-smoke/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       }
     ];
 
@@ -806,4 +806,4 @@
     renderCatalog();
   </script>
 </body>
-</html>
+</html>	
