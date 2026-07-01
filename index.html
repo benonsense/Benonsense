@@ -15,7 +15,6 @@
       -webkit-text-stroke: 1.5px #3a3d40;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
-    /* Banner opacity set to 90% (10% less) */
     .neon-stroke {
       -webkit-text-stroke: 1.2px #ff0000;
       text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
@@ -34,9 +33,8 @@
 </head>
 <body>
 
-  <!-- HERO HEADER LAYER (Restored original positioning) -->
+  <!-- HERO HEADER LAYER -->
   <header class="relative h-screen flex flex-col justify-between p-4 md:p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(13,13,13,0.2), #0d0d0d), url('assets/hero-bg.webp');">
-    
     <!-- Top Brand Navbar Layer -->
     <div class="flex justify-between items-center w-full z-10">
       <a href="#">
@@ -56,7 +54,7 @@
       </div>
     </div>
     
-    <!-- Aligned Content Block: Restored to original position -->
+    <!-- Aligned Content Block -->
     <div class="text-center my-auto w-full max-w-4xl mx-auto px-4 z-10 pt-64 md:pt-80">
       <p class="gunmetal-stroke text-base md:text-2xl lg:text-3xl uppercase tracking-widest text-white font-bold max-w-3xl mx-auto leading-relaxed">
         "Being in sense is not always practical so beNoNseNse"
@@ -304,8 +302,7 @@
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Beige", "Lavender", "Powder Blue", "Rose Pink", "Black", "Brown", "Army Green", "Maroon"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/break-rules/colors/${c.name.toLowerCase()} front.webp`, back: `assets/female/break-rules/colors/${c.name.toLowerCase()} back.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
-        id: "fg3", gender: "female", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", 
-        hasBackView: false,
+        id: "fg3", gender: "female", category: "graphics", name: "Caffein Happy (Oversized Tee)", price: 549, badge: "", description: "Premium 240gsm Pure Cotton T", sizes: ["S", "M", "L", "XL"], sizeChartType: "oversized", hasBackView: false,
         colorVariants: PLAIN_COLORS_PALETTE.filter(c => ["Lavender", "Off-White", "White"].includes(c.name)).map(c => ({ name: c.name, hex: c.hex, front: `assets/female/caffein-happy/${c.name.toLowerCase()}.webp`, allowedSizes: c.allowedSizes.filter(s => s !== "XXL") }))
       },
       {
@@ -415,6 +412,8 @@
       renderModalContent();
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
+      // Sync URL hash with shared signature sequence parameters
+      window.location.hash = `product-${productId}`;
     };
 
     window.closeProductModal = function() {
@@ -422,12 +421,38 @@
       modal.classList.add('hidden');
       currentModalProductId = null;
       document.body.style.overflow = '';
+      // Clean browser address vector string securely
+      history.replaceState(null, null, ' ');
       renderCatalog();
     };
 
     window.swapModalProduct = function(productId) {
       currentModalProductId = productId;
       renderModalContent();
+      window.location.hash = `product-${productId}`;
+    };
+
+    // ⚡ UNIQUE CLIPBOARD SHARING ENGINE LAYER INJECTED ⚡
+    window.shareProductLink = function(productId, btnEvent) {
+      btnEvent.stopPropagation();
+      const secureSharedUrl = `${window.location.origin}${window.location.pathname}#product-${productId}`;
+      
+      navigator.clipboard.writeText(secureSharedUrl).then(() => {
+        const shareBtn = document.getElementById(`share-btn-${productId}`);
+        if(shareBtn) {
+          const originalText = shareBtn.innerHTML;
+          shareBtn.innerHTML = "✓ Link Copied! ⚡";
+          shareBtn.classList.remove('text-gray-400', 'border-gray-800');
+          shareBtn.classList.add('text-green-500', 'border-green-500');
+          setTimeout(() => {
+            shareBtn.innerHTML = originalText;
+            shareBtn.classList.remove('text-green-500', 'border-green-500');
+            shareBtn.classList.add('text-gray-400', 'border-gray-800');
+          }, 2000);
+        }
+      }).catch(err => {
+        console.error("Link translation compilation fail engine alert: ", err);
+      });
     };
 
     function renderModalContent() {
@@ -466,9 +491,15 @@
 
           <div class="w-full lg:w-[40%] flex flex-col justify-between">
             <div>
-              <div class="border-b border-gray-900 pb-3 mb-3">
-                <h3 class="text-base md:text-xl font-bold uppercase tracking-wide text-white mb-1">${product.name}</h3>
-                <p class="text-lg md:text-xl font-bold text-red-500">₹${product.price}</p>
+              <div class="border-b border-gray-900 pb-3 mb-3 flex justify-between items-start">
+                <div>
+                  <h3 class="text-base md:text-xl font-bold uppercase tracking-wide text-white mb-1">${product.name}</h3>
+                  <p class="text-lg md:text-xl font-bold text-red-500">₹${product.price}</p>
+                </div>
+                <!-- ⚡ SOCIAL SHARE PIPELINE BUTTON COMPILER INJECTED ⚡ -->
+                <button id="share-btn-${product.id}" onclick="shareProductLink('${product.id}', event)" class="text-[10px] border border-gray-800 text-gray-400 uppercase tracking-widest font-bold py-1.5 px-2.5 rounded hover:text-white hover:border-gray-500 smooth-transition bg-[#0d0d0d]">
+                  Share Drop 🔗
+                </button>
               </div>
               <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-4">✨ ${product.description}</p>
 
@@ -555,10 +586,6 @@
         </div>
       `;
     }
-
-    window.changeColor = function(productId, index, event) { if(event) event.stopPropagation(); activeSelections[productId].colorIndex = index; renderCatalog(); };
-    window.toggleView = function(productId, event) { if(event) event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderCatalog(); };
-    window.selectSize = function(productId, size, event) { if(event) event.stopPropagation(); activeSelections[productId].selectedSize = size; renderCatalog(); };
 
     window.changeModalColor = function(productId, index, event) { event.stopPropagation(); activeSelections[productId].colorIndex = index; renderModalContent(); };
     window.toggleModalView = function(productId, event) { event.stopPropagation(); const state = activeSelections[productId]; state.view = state.view === 'front' ? 'back' : 'front'; renderModalContent(); };
@@ -810,7 +837,38 @@
       window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
     };
 
-    renderCatalog();
+    // ⚡ INTERACTIVE INCOMING DEEP LINKING PARSER ENGINE ⚡
+    function parseIncomingSharedDeepLinks() {
+      const currentHash = window.location.hash;
+      if (currentHash && currentHash.startsWith('#product-')) {
+        const targetProductId = currentHash.replace('#product-', '');
+        const targetProduct = PRODUCTS_DATABASE.find(p => p.id === targetProductId);
+        if (targetProduct) {
+          // Sync internal state to render correct catalog segment underneath popup grid contextually
+          currentGender = targetProduct.gender;
+          const maleBtn = document.getElementById('gender-male');
+          const femaleBtn = document.getElementById('gender-female');
+          if(currentGender === 'male') {
+            maleBtn.className = "flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full bg-white text-black smooth-transition";
+            femaleBtn.className = "flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full text-gray-400 hover:text-white smooth-transition";
+          } else {
+            femaleBtn.className = "flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full bg-white text-black smooth-transition";
+            maleBtn.className = "flex-1 text-center py-2 text-xs md:text-sm uppercase tracking-widest font-bold rounded-full text-gray-400 hover:text-white smooth-transition";
+          }
+          // Safely execute catalog compile baseline
+          renderCatalog();
+          // Directly load the target quick view modal context safely without delay
+          setTimeout(() => {
+            openProductModal(targetProductId);
+          }, 100);
+        }
+      } else {
+        renderCatalog();
+      }
+    }
+
+    // Initialize deep linking routerpass on lifecycle hook entry points
+    parseIncomingSharedDeepLinks();
   </script>
 </body>
 </html>
